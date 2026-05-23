@@ -32,15 +32,15 @@ pub fn NotFound() -> impl IntoView {
                     404
                 </h1>
                 <h1 class="block text-2xl font-bold text-white"></h1>
-                <p class="mt-3 text-gray-600 dark:text-gray-400">Oops, something went wrong.</p>
-                <p class="text-gray-600 dark:text-gray-400">Sorry, we could not find your page.</p>
+                <p class="mt-3 text-gray-600 dark:text-gray-400">出错了。</p>
+                <p class="text-gray-600 dark:text-gray-400">抱歉，找不到您请求的页面。</p>
                 <div class="mt-5 flex flex-col justify-center items-center gap-2 sm:flex-row sm:gap-3">
                     <a
                         class="w-full sm:w-auto py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                         href="/manage/directory/accounts"
                     >
                         <IconArrowLeft/>
-                        Back to manage
+                        返回管理
                     </a>
                 </div>
             </div>

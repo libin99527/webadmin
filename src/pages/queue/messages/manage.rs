@@ -161,7 +161,7 @@ pub fn QueueManage() -> impl IntoView {
             }
 
             fetch_message.refetch();
-            alert.set(Alert::success("Successfully requested cancellation."));
+            alert.set(Alert::success("已成功请求取消。"));
         }
     });
     let retry_action = create_action(move |items: &Vec<String>| {
@@ -186,7 +186,7 @@ pub fn QueueManage() -> impl IntoView {
             }
 
             fetch_message.refetch();
-            alert.set(Alert::success("Successfully requested immediate delivery."));
+            alert.set(Alert::success("已成功请求立即投递。"));
         }
     });
     let selected = create_rw_signal::<ItemSelection>(ItemSelection::None);

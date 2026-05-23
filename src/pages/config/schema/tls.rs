@@ -131,7 +131,7 @@ impl Builder<Schemas, ()> {
             // Secret
             .new_field("secret")
             .typ(Type::Secret)
-            .label("Secret")
+            .label("密钥")
             .help("The TSIG secret or token used to authenticate with the DNS provider")
             .input_check([], [Validator::Required])
             .display_if_eq("challenge", ["dns-01"])
@@ -139,7 +139,7 @@ impl Builder<Schemas, ()> {
             // Request timeout (DNS-01)
             .new_field("timeout")
             .typ(Type::Duration)
-            .label("Timeout")
+            .label("超时")
             .help("Request timeout for the DNS provider")
             .display_if_eq("provider", ["cloudflare", "digitalocean", "desec", "ovh"])
             .input_check([], [Validator::Required])
@@ -173,13 +173,13 @@ impl Builder<Schemas, ()> {
                 source: Source::Static(&[("udp", "UDP"), ("tcp", "TCP")]),
                 typ: SelectType::Single,
             })
-            .label("Protocol")
+            .label("协议")
             .help("The protocol used to communicate with the DNS server")
             .default("udp")
             // Port
             .new_field("port")
             .typ(Type::Input)
-            .label("Port")
+            .label("端口")
             .help("The port used to communicate with the DNS server")
             .input_check(
                 [Transformer::Trim],
@@ -257,7 +257,7 @@ impl Builder<Schemas, ()> {
             .list_fields(["_id", "contact", "renew-before", "default"])
             // Form
             .new_form_section()
-            .title("ACME provider")
+            .title("ACME 提供商")
             .fields([
                 "_id",
                 "directory",
@@ -292,7 +292,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Certificate")
+            .title("证书")
             .fields(["account-key", "cert"])
             .build()
             .build()
@@ -318,14 +318,14 @@ impl Builder<Schemas, ()> {
             .build()
             // Cert
             .new_field("cert")
-            .label("Certificate")
+            .label("证书")
             .typ(Type::Text)
             .help("TLS certificate in PEM format")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             // PK
             .new_field("private-key")
-            .label("Private Key")
+            .label("私钥")
             .typ(Type::Text)
             .help("Private key in PEM format")
             .input_check([Transformer::Trim], [Validator::Required])

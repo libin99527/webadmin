@@ -108,13 +108,13 @@ pub fn ManageCrypto() -> impl IntoView {
                     show_totp.set(false);
 
                     if !is_disable {
-                        Alert::success("Encryption-at-rest enabled").with_details(concat!(
+                        Alert::success("静态加密已启用").with_details(concat!(
                             "Automatic encryption of plain text messages has been enabled. ",
                             "From now on all incoming plain-text messages will be encrypted ",
                             "before they reach your mailbox."
                         ))
                     } else {
-                        Alert::success("Encryption-at-rest disabled").with_details(concat!(
+                        Alert::success("静态加密已禁用").with_details(concat!(
                             "Automatic encryption of plain text messages has been disabled. ",
                             "From now on all incoming messages will be stored ",
                             "in their original form."
@@ -122,8 +122,8 @@ pub fn ManageCrypto() -> impl IntoView {
                     }
                     .without_timeout()
                 }
-                Err(Error::Unauthorized) => Alert::warning("Incorrect password")
-                    .with_details("The password you entered is incorrect"),
+                Err(Error::Unauthorized) => Alert::warning("密码错误")
+                    .with_details("您输入的密码不正确"),
                 Err(Error::TotpRequired) => {
                     show_totp.set(true);
                     return;

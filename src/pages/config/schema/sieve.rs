@@ -79,7 +79,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("sieve.trusted.from-name")
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Default name to use for the from field in email notifications ",
                 "sent from a Sieve script"
@@ -91,7 +91,7 @@ impl Builder<Schemas, ()> {
                 [Validator::Required, Validator::IsValidExpression(rcpt_vars)],
             )
             .new_field("sieve.trusted.from-addr")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Default email address to use for the from field in email ",
                 "notifications sent from a Sieve script"
@@ -115,7 +115,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("sieve.trusted.hostname")
-            .label("Hostname")
+            .label("主机名")
             .help(concat!(
                 "Override the default local hostname to use when generating ",
                 "a Message-Id header"
@@ -240,7 +240,7 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum number CPU cycles a script can use"))
             .default("5000")
             .new_field("sieve.untrusted.limits.received-headers")
-            .label("Received Headers")
+            .label("接收头部")
             .help(concat!("Maximum number of received headers"))
             .default("10")
             .new_field("sieve.untrusted.limits.redirects")
@@ -261,7 +261,7 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum number of outgoing messages"))
             .default("5")
             .new_field("sieve.trusted.limits.received-headers")
-            .label("Received Headers")
+            .label("接收头部")
             .help(concat!("Maximum number of received headers"))
             .default("50")
             .input_check([], [Validator::Required, Validator::MinValue(1.into())])
@@ -314,11 +314,11 @@ impl Builder<Schemas, ()> {
             .suffix("contents")
             .names("script", "scripts")
             .new_id_field()
-            .label("Script Id")
+            .label("脚本 ID")
             .help("Unique identifier for the script")
             .build()
             .new_field("name")
-            .label("Description")
+            .label("描述")
             .help("Brief description of the Sieve script")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
@@ -343,11 +343,11 @@ impl Builder<Schemas, ()> {
             .suffix("contents")
             .names("script", "scripts")
             .new_id_field()
-            .label("Script Id")
+            .label("脚本 ID")
             .help("Unique identifier for the script")
             .build()
             .new_field("name")
-            .label("Description")
+            .label("描述")
             .help("Brief description of the Sieve script")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])

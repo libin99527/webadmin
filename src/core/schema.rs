@@ -447,7 +447,7 @@ impl Builder<Schemas, Schema> {
                 ..Default::default()
             },
         }
-        .label("Id")
+        .label("ID")
         .typ(Type::Input)
         .input_check(
             [Transformer::Trim, Transformer::Lowercase],
@@ -464,7 +464,7 @@ impl Builder<Schemas, Schema> {
                 ..Default::default()
             },
         }
-        .label("Value")
+        .label("值")
         .typ(Type::Input)
         .input_check([Transformer::Trim], [])
     }

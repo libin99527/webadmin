@@ -14,7 +14,7 @@ impl Builder<Schemas, ()> {
         self.new_schema("network")
             // Default hostname
             .new_field("server.hostname")
-            .label("Hostname")
+            .label("主机名")
             .help("The default fully-qualified system hostname")
             .placeholder("mail.example.com")
             .typ(Type::Input)
@@ -165,7 +165,7 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum size of the effective permissions cache"))
             .default("5242880")
             .new_field("cache.message.size")
-            .label("Emails")
+            .label("邮箱")
             .help(concat!("Maximum size of the e-mail data cache"))
             .default("52428800")
             .new_field("cache.files.size")
@@ -173,7 +173,7 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum size of the file storage data cache"))
             .default("10485760")
             .new_field("cache.events.size")
-            .label("Calendars")
+            .label("日历")
             .help(concat!("Maximum size of the calendar and events cache"))
             .default("10485760")
             .new_field("cache.contacts.size")
@@ -193,7 +193,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Authorization Cache")
+            .title("授权缓存")
             .fields([
                 "cache.access-token.size",
                 "cache.http-auth.size",
@@ -316,7 +316,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("Automatic banning")
+            .title("自动封禁")
             .fields([
                 "server.auto-ban.auth.rate",
                 "server.auto-ban.abuse.rate",
@@ -387,7 +387,7 @@ impl Builder<Schemas, ()> {
                 "List of node ids that are responsible for pushing metrics"
             ))
             .new_field("cluster.roles.push-notifications")
-            .label("Push Notifications")
+            .label("推送通知")
             .help(concat!(
                 "List of node ids that are responsible for sending push notifications"
             ))
@@ -443,14 +443,14 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for this webhook")
             .build()
             .new_field("url")
-            .label("Endpoint URL")
+            .label("端点 URL")
             .help(concat!("URL of the webhook endpoint"))
             .placeholder("https://127.0.0.1/webhook")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
             .build()
             .new_field("allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help(concat!(
                 "Whether Stalwart should connect to a webhook ",
                 "endpoint that has an invalid TLS certificate"
@@ -460,7 +460,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Maximum amount of time that Stalwart will wait for a response ",
                 "from this webhook"
@@ -470,7 +470,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("throttle")
-            .label("Throttle")
+            .label("限流")
             .help(concat!(
                 "The minimum amount of time that must pass between ",
                 "each request to the webhook endpoint"
@@ -480,7 +480,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("signature-key")
-            .label("Signature Key")
+            .label("签名密钥")
             .help(concat!(
                 "The HMAC key used to sign the webhook request body ",
                 "to prevent tampering"
@@ -489,11 +489,11 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("headers")
             .typ(Type::Array(ArrayType::Text))
-            .label("HTTP Headers")
+            .label("HTTP 头部")
             .help("The headers to be sent with webhook requests")
             .build()
             .new_field("auth.username")
-            .label("Username")
+            .label("用户名")
             .help(concat!(
                 "The username to use when authenticating with the webhook endpoint"
             ))
@@ -501,7 +501,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("auth.secret")
-            .label("Secret")
+            .label("密钥")
             .help(concat!(
                 "The secret to use when authenticating with the webhook endpoint"
             ))
@@ -520,7 +520,7 @@ impl Builder<Schemas, ()> {
             .fields(["_id", "url", "signature-key", "allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .fields(["auth.username", "auth.secret"])
             .build()
             .new_form_section()
@@ -572,7 +572,7 @@ impl Builder<Schemas, ()> {
             .fields(["enterprise.license-key", "enterprise.api-key"])
             .build()
             .new_form_section()
-            .title("Branding")
+            .title("品牌")
             .fields(["enterprise.logo-url"])
             .build()
             .build()
@@ -587,7 +587,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("url")
-            .label("Endpoint URL")
+            .label("端点 URL")
             .help(concat!("URL of the OpenAI compatible endpoint"))
             .placeholder("https://api.openai.com/v1/chat/completions")
             .typ(Type::Input)
@@ -595,7 +595,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help(concat!(
                 "Whether Stalwart should connect to an ",
                 "endpoint that has an invalid TLS certificate"
@@ -606,7 +606,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Maximum amount of time that Stalwart will wait for a response ",
                 "from this endpoint"
@@ -626,12 +626,12 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("headers")
             .typ(Type::Array(ArrayType::Text))
-            .label("HTTP Headers")
+            .label("HTTP 头部")
             .help("The headers to be sent with requests")
             .enterprise_feature()
             .build()
             .new_field("default-temperature")
-            .label("Temperature")
+            .label("温度")
             .help(concat!(
                 "The temperature of the AI model, which controls the randomness ",
                 "of the output. A higher temperature will produce more random output."
@@ -648,7 +648,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("model")
-            .label("Model")
+            .label("模型")
             .help(concat!("The name of the AI model to use.",))
             .typ(Type::Input)
             .placeholder("gpt-4")
@@ -656,7 +656,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("type")
-            .label("Type")
+            .label("类型")
             .help("API type")
             .typ(Type::Select {
                 typ: SelectType::Single,
@@ -666,15 +666,15 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_form_section()
-            .title("AI Endpoint settings")
+            .title("AI 端点设置")
             .fields(["_id", "url", "allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Model")
+            .title("模型")
             .fields(["type", "model"])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .fields(["auth.token"])
             .build()
             .new_form_section()

@@ -42,7 +42,7 @@ impl Builder<Schemas, ()> {
             // Type
             .new_field("type")
             .readonly()
-            .label("Type")
+            .label("类型")
             .help("Storage backend type")
             .default("rocksdb")
             .typ(Type::Select {
@@ -88,7 +88,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Host
             .new_field("host")
-            .label("Hostname")
+            .label("主机名")
             .help("Hostname of the database server")
             .display_if_eq("type", ["postgresql", "mysql"])
             .typ(Type::Input)
@@ -99,7 +99,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Port
             .new_field("port")
-            .label("Port")
+            .label("端口")
             .help("Port of the database server")
             .display_if_eq("type", ["postgresql", "mysql"])
             .default_if_eq("type", ["postgresql"], "5432")
@@ -146,7 +146,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Username
             .new_field("user")
-            .label("Username")
+            .label("用户名")
             .help("Username to connect to the database")
             .default("stalwart")
             .display_if_eq("type", ["postgresql", "mysql", "nats"])
@@ -156,7 +156,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Password
             .new_field("password")
-            .label("Password")
+            .label("密码")
             .help("Password to connect to the database")
             .display_if_eq("type", ["postgresql", "mysql", "nats"])
             .display_if_eq("redis-type", ["cluster"])
@@ -164,7 +164,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Username
             .new_field("auth.username")
-            .label("Username")
+            .label("用户名")
             .help("Username to connect to the store")
             .default("stalwart")
             .display_if_eq("type", ["elasticsearch", "meilisearch"])
@@ -173,7 +173,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Password
             .new_field("auth.secret")
-            .label("Password")
+            .label("密码")
             .help("Password to connect to the store")
             .display_if_eq("type", ["elasticsearch", "meilisearch"])
             .typ(Type::Secret)
@@ -187,7 +187,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Timeout
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help("Connection timeout to the database")
             .display_if_eq("type", ["postgresql", "mysql", "redis", "s3", "azure"])
             .typ(Type::Duration)
@@ -248,14 +248,14 @@ impl Builder<Schemas, ()> {
             .build()
             // TLS
             .new_field("tls.enable")
-            .label("Enable TLS")
+            .label("启用 TLS")
             .help("Use TLS to connect to the store")
             .display_if_eq("type", ["postgresql", "mysql", "nats"])
             .default("false")
             .typ(Type::Boolean)
             .build()
             .new_field("tls.allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help("Allow invalid TLS certificates when connecting to the store")
             .display_if_eq(
                 "type",
@@ -276,7 +276,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Maximum number of retries
             .new_field("max-retries")
-            .label("Retry limit")
+            .label("重试限制")
             .help(concat!(
                 "The maximum number of times to retry failed requests. ",
                 "Set to 0 to disable retries"
@@ -388,7 +388,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .new_field("transaction.timeout")
-            .label("Timeout")
+            .label("超时")
             .help("Transaction timeout")
             .placeholder("5s")
             .typ(Type::Duration)
@@ -398,7 +398,7 @@ impl Builder<Schemas, ()> {
             .placeholder("1s")
             .typ(Type::Duration)
             .new_field("transaction.retry-limit")
-            .label("Retry limit")
+            .label("重试限制")
             .help("Transaction retry limit")
             .placeholder("10")
             .typ(Type::Input)
@@ -473,7 +473,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("task.poll-retries")
-            .label("Retries")
+            .label("重试次数")
             .help("Number of times to poll for task status before giving up")
             .display_if_eq("type", ["meilisearch"])
             .default("60")
@@ -497,7 +497,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
             .build()
             .new_field("retry.total")
-            .label("Retries")
+            .label("重试次数")
             .help("Number of retries to connect to the Redis cluster")
             .display_if_eq("redis-type", ["cluster"])
             .placeholder("3")
@@ -611,7 +611,7 @@ impl Builder<Schemas, ()> {
             // S3 specific
             .new_field("bucket")
             .typ(Type::Input)
-            .label("Name")
+            .label("名称")
             .help("The S3 bucket where blobs (e-mail messages, Sieve scripts, etc.) will be stored")
             .input_check([Transformer::Trim], [Validator::Required])
             .placeholder("stalwart")
@@ -627,7 +627,7 @@ impl Builder<Schemas, ()> {
                 "be left blank, and the endpoint will be derived from the region. For ",
                 "S3-compatible services, you will need to specify the endpoint explicitly"
             ))
-            .label("Endpoint")
+            .label("端点")
             .new_field("access-key")
             .label("Access Key")
             .help("Identifies the S3 account")
@@ -777,7 +777,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Bucket")
+            .title("存储桶")
             .display_if_eq("type", ["s3"])
             .fields(["bucket", "key-prefix"])
             .build()
@@ -797,7 +797,7 @@ impl Builder<Schemas, ()> {
             .fields(["storage-account", "container", "key-prefix"])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .display_if_eq(
                 "type",
                 [
@@ -875,7 +875,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Cluster Settings")
+            .title("集群设置")
             .display_if_eq("redis-type", ["cluster"])
             .fields([
                 "read-from-replicas",
@@ -885,7 +885,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Cluster Ids")
+            .title("集群 ID")
             .display_if_eq("type", ["foundationdb"])
             .fields(["ids.machine", "ids.datacenter"])
             .build()
@@ -954,7 +954,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("separator")
-            .label("Separator")
+            .label("分隔符")
             .help(concat!(
                 "The separator character used to parse the HTTP list.",
             ))
@@ -995,11 +995,11 @@ impl Builder<Schemas, ()> {
             .typ(Type::Duration)
             .input_check([], [Validator::Required])
             .new_field("refresh")
-            .label("Refresh")
+            .label("刷新")
             .help("How often to refresh the list")
             .default("12h")
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help("How long to wait for the list to download before timing out")
             .default("30s")
             .build()
@@ -1010,7 +1010,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("limits.size")
-            .label("Size")
+            .label("大小")
             .help(concat!(
                 "Maximum size of the list. ",
                 "The list is truncated if it exceeds this size."
@@ -1062,7 +1062,7 @@ impl Builder<Schemas, ()> {
             .fields(["_id", "url", "format", "gzipped", "enable"])
             .build()
             .new_form_section()
-            .title("CSV Parsing")
+            .title("CSV 解析")
             .fields(["separator", "index.key", "index.value", "skip-first"])
             .display_if_eq("format", ["csv"])
             .build()
@@ -1071,7 +1071,7 @@ impl Builder<Schemas, ()> {
             .fields(["retry", "refresh", "timeout"])
             .build()
             .new_form_section()
-            .title("Limits")
+            .title("限制")
             .fields(["limits.size", "limits.entries", "limits.entry-size"])
             .build()
             .list_title("HTTP Lists")

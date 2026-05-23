@@ -145,7 +145,7 @@ pub fn Login() -> impl IntoView {
                                 <Show when=move || has_remote.get()>
                                     <div>
                                         <label class="block text-sm mb-2 dark:text-white">
-                                            Host
+                                            主机
                                         </label>
                                         <InputText
                                             placeholder="https://mail.example.org"
@@ -156,7 +156,7 @@ pub fn Login() -> impl IntoView {
                                 <Show when=move || !show_totp.get()>
                                     <div>
                                         <label class="block text-sm mb-2 dark:text-white">
-                                            Login
+                                            登录
                                         </label>
                                         <InputText
                                             placeholder="user@example.org"
@@ -166,7 +166,7 @@ pub fn Login() -> impl IntoView {
                                     <div>
                                         <div class="flex justify-between items-center">
                                             <label class="block text-sm mb-2 dark:text-white">
-                                                Password
+                                                密码
                                             </label>
 
                                         </div>
@@ -176,7 +176,7 @@ pub fn Login() -> impl IntoView {
                                 <Show when=move || show_totp.get()>
                                     <div>
                                         <label class="block text-sm mb-2 dark:text-white">
-                                            TOTP Token
+                                            TOTP 验证码
                                         </label>
                                         <InputText element=FormElement::new("totp-code", data)/>
                                     </div>
@@ -200,7 +200,7 @@ pub fn Login() -> impl IntoView {
                                     </div>
                                     <div class="ms-3">
                                         <label for="remember-me" class="text-sm dark:text-white">
-                                            Remember me
+                                            记住我
                                         </label>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@ pub fn Login() -> impl IntoView {
                                     }
                                 >
 
-                                    Sign in
+                                    登录
                                 </button>
                             </div>
                         </form>

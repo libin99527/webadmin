@@ -37,7 +37,7 @@ impl Builder<Schemas, ()> {
             ))
             .default("4")
             .new_field("jmap.protocol.request.max-size")
-            .label("Size")
+            .label("大小")
             .help(concat!(
                 "Defines the maximum size of a single request, in bytes, that the ",
                 "server will accept"
@@ -57,7 +57,7 @@ impl Builder<Schemas, ()> {
             ))
             .default("5000")
             .new_field("jmap.protocol.upload.max-size")
-            .label("Max Size")
+            .label("最大大小")
             .help(concat!(
                 "Defines the maximum file size for file uploads to the server"
             ))
@@ -111,14 +111,14 @@ impl Builder<Schemas, ()> {
             .help(concat!("Determines the maximum size for an email message"))
             .default("75000000")
             .new_field("jmap.email.parse.max-items")
-            .label("Emails")
+            .label("邮箱")
             .help(concat!(
                 "Limits the maximum number of e-mail message that can be parsed in ",
                 "a single request"
             ))
             .default("10")
             .new_field("jmap.calendar.parse.max-items")
-            .label("Calendars")
+            .label("日历")
             .help(concat!(
                 "Limits the maximum number of iCalendar items that can be parsed in ",
                 "a single request"
@@ -194,7 +194,7 @@ impl Builder<Schemas, ()> {
             // Push & EventSource
             .new_schema("jmap-push")
             .new_field("jmap.push.throttle")
-            .label("Throttle")
+            .label("限流")
             .help("Time to wait before sending a new request to the push service")
             .default("1ms")
             .typ(Type::Duration)
@@ -208,7 +208,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.push.attempts.max")
-            .label("Max Attempts")
+            .label("最大尝试次数")
             .help("Maximum number of push attempts before a notification is discarded")
             .default("3")
             .typ(Type::Input)
@@ -239,7 +239,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.event-source.throttle")
-            .label("Throttle")
+            .label("限流")
             .help("Specifies the minimum time between two event source notifications")
             .default("1s")
             .typ(Type::Duration)
@@ -266,14 +266,14 @@ impl Builder<Schemas, ()> {
             // Web Sockets
             .new_schema("jmap-web-sockets")
             .new_field("jmap.web-sockets.throttle")
-            .label("Throttle")
+            .label("限流")
             .help("Amount of time to wait before sending a batch of notifications to a WS client")
             .default("1s")
             .typ(Type::Duration)
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.web-sockets.timeout")
-            .label("Timeout")
+            .label("超时")
             .help("Time before an inactive WebSocket connection times out")
             .default("10m")
             .typ(Type::Duration)

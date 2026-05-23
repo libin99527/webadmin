@@ -158,7 +158,7 @@ pub async fn oauth_authenticate(
             })
         }
         Ok(OAuthResponse::Error { error }) => AuthenticationResult::Error(
-            Alert::error("OAuth failure")
+            Alert::error("OAuth 失败")
                 .with_details(format!("Server returned error code {error:?}")),
         ),
         Err(err) => AuthenticationResult::Error(Alert::from(err)),
@@ -190,7 +190,7 @@ pub async fn oauth_user_authentication(
                 AuthenticationResult::Success(response.legacy_admin())
             } else if server_version.is_valid() {
                 AuthenticationResult::Error(
-                    Alert::error("Unsupported server version").with_details(format!(
+                    Alert::error("不支持的服务器版本").with_details(format!(
                         concat!(
                             "This webadmin release requires Stalwart Mail Server version {} ",
                             "or later. Your server is running version {}. ",
@@ -200,7 +200,7 @@ pub async fn oauth_user_authentication(
                 )
             } else {
                 AuthenticationResult::Error(
-                    Alert::error("Unsupported server version").with_details(format!(
+                    Alert::error("不支持的服务器版本").with_details(format!(
                         concat!(
                             "This webadmin release requires Stalwart Mail Server version {} ",
                             "or later. Your server is running an unknown version. ",
@@ -221,7 +221,7 @@ pub async fn oauth_user_authentication(
             AuthenticationResult::TotpRequired
         }
         Err(http::Error::Serializer { .. }) => AuthenticationResult::Error(
-            Alert::error("Invalid server response").with_details(format!(
+            Alert::error("无效的服务器响应").with_details(format!(
                 concat!(
                     "This error could be to an incompatible server version. ",
                     "Make sure you are running Stalwart Mail Server version {} or later. ",

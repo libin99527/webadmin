@@ -150,7 +150,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Calendar Settings")
+            .title("日历设置")
             .fields([
                 "calendar.max-size",
                 "calendar.max-recurrence-expansions",
@@ -236,7 +236,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required, Validator::MinValue(100.into())])
             .build()
             .new_field("calendar.scheduling.outbound.max-recipients")
-            .label("Max Recipients")
+            .label("最大收件人数")
             .help(concat!(
                 "Sets the maximum number of ",
                 "recipients for outbound iTIP messages."
@@ -306,7 +306,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Text)
             .build()
             .new_form_section()
-            .title("Calendar Scheduling")
+            .title("日历调度")
             .fields([
                 "calendar.scheduling.inbound.max-size",
                 "calendar.scheduling.inbox.auto-expunge",
@@ -401,7 +401,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.alarms.from.name")
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Specifies the name that will appear in the 'From' field of ",
                 "calendar alarm e-mails, ",
@@ -432,7 +432,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_form_section()
-            .title("Calendar Alarms")
+            .title("日历提醒")
             .fields([
                 "calendar.alarms.minimum-interval",
                 "calendar.alarms.allow-external-recipients",

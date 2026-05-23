@@ -78,11 +78,11 @@ pub fn ManageMfa() -> impl IntoView {
                 set_pending.set(false);
 
                 alert.set(match result {
-                    Ok(_) => Alert::success("2FA Settings Updated")
-                        .with_details("Your 2FA settings has been updated successfully")
+                    Ok(_) => Alert::success("双因素认证设置已更新")
+                        .with_details("您的双因素认证设置已成功更新")
                         .without_timeout(),
-                    Err(Error::Unauthorized) => Alert::warning("Incorrect password")
-                        .with_details("The password you entered is incorrect"),
+                    Err(Error::Unauthorized) => Alert::warning("密码错误")
+                        .with_details("您输入的密码不正确"),
                     Err(err) => Alert::from(err),
                 });
             }
@@ -184,7 +184,7 @@ pub fn ManageMfa() -> impl IntoView {
                                                             alert
                                                                 .set(
                                                                     Alert::warning("Invalid OTP code")
-                                                                        .with_details("The OTP code you entered is invalid"),
+                                                                        .with_details("您输入的 OTP 验证码无效"),
                                                                 );
                                                         }
                                                     }

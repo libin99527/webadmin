@@ -251,10 +251,10 @@ impl Alert {
 impl From<http::Error> for Alert {
     fn from(value: http::Error) -> Self {
         match value {
-            http::Error::Network(details) => Alert::error("Network error").with_details(details),
+            http::Error::Network(details) => Alert::error("网络错误").with_details(details),
             http::Error::Serializer { error, response } => {
                 log::debug!("Failed to deserialize request: {}", response);
-                Alert::error("Failed to deserialize response").with_details(error)
+                Alert::error("反序列化响应失败").with_details(error)
             }
             http::Error::Server(error) => {
                 let (alert, title, details) = match error {
@@ -316,10 +316,10 @@ impl From<http::Error> for Alert {
 
                 Alert::new(alert, title).with_details(details)
             }
-            http::Error::NotFound => Alert::error("Not found"),
-            http::Error::Forbidden | http::Error::TotpRequired => Alert::error("Forbidden")
-                .with_details("You are not authorized to perform this action."),
-            http::Error::Unauthorized => Alert::error("Unauthorized"),
+            http::Error::NotFound => Alert::error("未找到"),
+            http::Error::Forbidden | http::Error::TotpRequired => Alert::error("禁止访问")
+                .with_details("您无权执行此操作。"),
+            http::Error::Unauthorized => Alert::error("未授权"),
         }
     }
 }
@@ -327,7 +327,7 @@ impl From<http::Error> for Alert {
 impl From<ReloadSettings> for Alert {
     fn from(value: ReloadSettings) -> Self {
         if value.errors.is_empty() && value.warnings.is_empty() {
-            Alert::success("Settings successfully reloaded")
+            Alert::success("设置已成功重新加载")
         } else {
             let messages = value
                 .errors

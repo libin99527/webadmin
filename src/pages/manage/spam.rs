@@ -250,7 +250,7 @@ pub fn SpamTrain() -> impl IntoView {
                     data.update(|data| {
                         data.reset();
                     });
-                    alert.set(Alert::success("Upload successful"));
+                    alert.set(Alert::success("上传成功"));
                 }
                 Err(Error::Unauthorized) => {
                     use_navigate()("/login", Default::default());

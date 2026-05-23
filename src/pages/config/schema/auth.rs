@@ -24,11 +24,11 @@ impl Builder<Schemas, ()> {
             .suffix("algorithm")
             .names("signature", "signatures")
             .new_id_field()
-            .label("Signature ID")
+            .label("签名 ID")
             .help("Unique identifier for the signature")
             .build()
             .new_field("algorithm")
-            .label("Algorithm")
+            .label("算法")
             .help(concat!("Encryption algorithm used for the DKIM signature"))
             .default("ed25519-sha256")
             .typ(Type::Select {
@@ -41,7 +41,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("private-key")
-            .label("Private Key")
+            .label("私钥")
             .help(concat!(
                 "Contents of the private key PEM used to sign messages"
             ))
@@ -49,7 +49,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("domain")
-            .label("Domain Name")
+            .label("域名")
             .help(concat!("Domain name associated with the DKIM signature"))
             .placeholder("example.com")
             .typ(Type::Input)
@@ -59,21 +59,21 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("selector")
-            .label("Selector")
+            .label("选择器")
             .help(concat!("Selector used to identify the DKIM public key"))
             .default("stalwart")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsId])
             .build()
             .new_field("headers")
-            .label("Headers")
+            .label("头部")
             .help(concat!("List of headers to be signed"))
             .default(&["From", "To", "Date", "Subject", "Message-ID"][..])
             .typ(Type::Array(ArrayType::Text))
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("canonicalization")
-            .label("Canonicalization")
+            .label("规范化")
             .help(concat!(
                 "Method used to canonicalize the signed headers ",
                 "and body of the message"
@@ -91,19 +91,19 @@ impl Builder<Schemas, ()> {
             .input_check([], [])
             .build()
             .new_field("expire")
-            .label("Expiration")
+            .label("过期时间")
             .help(concat!("Amount of time this DKIM signature is valid for"))
             .typ(Type::Duration)
             .build()
             .new_field("third-party")
-            .label("Authorized Party")
+            .label("授权方")
             .help(concat!("Authorized third-party signature value"))
             .default("")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("third-party-algo")
-            .label("Hash Algorithm")
+            .label("哈希算法")
             .help(concat!(
                 "Hashing algorithm used to verify third-party ",
                 "signature DNS records"
@@ -120,13 +120,13 @@ impl Builder<Schemas, ()> {
             .input_check([], [])
             .build()
             .new_field("auid")
-            .label("Agent User ID")
+            .label("代理用户 ID")
             .help(concat!("Agent user identifier"))
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("report")
-            .label("Request Reports")
+            .label("请求报告")
             .help(concat!(
                 "Whether to request reports when the signature ",
                 "verification fails"
@@ -160,7 +160,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Authorized Third-Party Signatures")
+            .title("授权第三方签名")
             .fields(["third-party", "third-party-algo"])
             .build()
             .list_title("DKIM Signatures")
@@ -170,7 +170,7 @@ impl Builder<Schemas, ()> {
             // DKIM Settings
             .new_schema("dkim")
             .new_field("auth.dkim.strict")
-            .label("Ignore insecure DKIM signatures")
+            .label("忽略不安全的 DKIM 签名")
             .default("true")
             .typ(Type::Boolean)
             .help(concat!(
@@ -179,7 +179,7 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_field("auth.dkim.verify")
-            .label("Strategy")
+            .label("策略")
             .help(concat!(
                 "Whether DKIM verification is strict, relaxed or disabled"
             ))
@@ -193,7 +193,7 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("auth.dkim.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!("List of DKIM signatures to use for signing"))
             .input_check(
                 [],
@@ -219,7 +219,7 @@ impl Builder<Schemas, ()> {
             // ARC Settings
             .new_schema("arc")
             .new_field("auth.arc.verify")
-            .label("Strategy")
+            .label("策略")
             .help(concat!(
                 "Whether ARC verification is strict, relaxed or disabled"
             ))
@@ -234,7 +234,7 @@ impl Builder<Schemas, ()> {
             )
             .new_field("auth.arc.seal")
             .default(Expression::new([], "'rsa-' + config_get('report.domain')"))
-            .label("Signature")
+            .label("签名")
             .help(concat!("List of DKIM signatures to use for sealing"))
             .input_check(
                 [],
@@ -242,11 +242,11 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("ARC Verification")
+            .title("ARC 验证")
             .fields(["auth.arc.verify"])
             .build()
             .new_form_section()
-            .title("ARC Sealing")
+            .title("ARC 签封")
             .fields(["auth.arc.seal"])
             .build()
             .build()
@@ -287,7 +287,7 @@ impl Builder<Schemas, ()> {
             // DMARC Settings
             .new_schema("dmarc")
             .new_field("auth.dmarc.verify")
-            .label("Strategy")
+            .label("策略")
             .help(concat!(
                 "Whether DMARC verification is strict, relaxed or disabled"
             ))
@@ -312,7 +312,7 @@ impl Builder<Schemas, ()> {
             // Inbound Report Analysis
             .new_schema("report-analysis")
             .new_field("report.analysis.addresses")
-            .label("Report Addresses")
+            .label("报告地址")
             .help(concat!(
                 "List of addresses (which may include wildcards) from which ",
                 "reports will be intercepted and analyzed"
@@ -321,7 +321,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("report.analysis.forward")
-            .label("Forward")
+            .label("转发")
             .help(concat!(
                 "Whether reports should be forwarded to their final recipient ",
                 "after analysis"
@@ -330,7 +330,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("report.analysis.store")
-            .label("Store duration")
+            .label("存储时长")
             .help(concat!(
                 "The duration for which reports should be stored before being ",
                 "deleted, of None to disable storage"
@@ -350,7 +350,7 @@ impl Builder<Schemas, ()> {
             // Outbound Report Settings
             .new_schema("report-outbound")
             .new_field("report.domain")
-            .label("Default Domain")
+            .label("默认域名")
             .help(concat!(
                 "The default domain name used for DSNs and other reports. ",
                 "If left empty, the server hostname's domain will be used."
@@ -360,7 +360,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::IsDomain])
             .build()
             .new_field("report.submitter")
-            .label("Submitter")
+            .label("提交者")
             .help(concat!(
                 "Report submitter address or leave empty to use the default hostname"
             ))
@@ -382,7 +382,7 @@ impl Builder<Schemas, ()> {
             // DSN Reports
             .new_schema("report-dsn")
             .new_field("report.dsn.from-name")
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Name that will be used in the From header of Delivery Status ",
                 "Notifications (DSN) reports"
@@ -397,14 +397,14 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("report.dsn.from-address")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Email address that will be used in the From header of ",
                 "Delivery Status Notifications (DSN) reports"
             ))
             .default("'MAILER-DAEMON@' + config_get('report.domain')")
             .new_field("report.dsn.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!(
                 "List of DKIM signatures to use when signing Delivery Status ",
                 "Notifications"
@@ -425,7 +425,7 @@ impl Builder<Schemas, ()> {
             // TLS Reporting
             .new_schema("report-tls")
             .new_field("report.tls.aggregate.from-name")
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Name that will be used in the From header of the TLS ",
                 "aggregate report email"
@@ -440,20 +440,20 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("report.tls.aggregate.from-address")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Email address that will be used in the From header of ",
                 "the TLS aggregate report email"
             ))
             .default("'noreply-tls@' + config_get('report.domain')")
             .new_field("report.tls.aggregate.subject")
-            .label("Subject")
+            .label("主题")
             .help(concat!(
                 "Subject name that will be used in the TLS aggregate report email"
             ))
             .default("'TLS Aggregate Report'")
             .new_field("report.tls.aggregate.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!(
                 "List of DKIM signatures to use when signing the TLS ",
                 "aggregate report"
@@ -462,21 +462,21 @@ impl Builder<Schemas, ()> {
                 "['rsa-' + config_get('report.domain'), 'ed25519-' + config_get('report.domain')]",
             )
             .new_field("report.tls.aggregate.org-name")
-            .label("Organization")
+            .label("组织")
             .help(concat!(
                 "Name of the organization to be included in the report"
             ))
             .default("config_get('report.domain')")
             .new_field("report.tls.aggregate.contact-info")
-            .label("Contact")
+            .label("联系方式")
             .help(concat!("Contact information to be included in the report"))
             .default("")
             .new_field("report.tls.aggregate.max-size")
-            .label("Max Report Size")
+            .label("最大报告大小")
             .help(concat!("Maximum size of the TLS aggregate report in bytes"))
             .default("26214400")
             .new_field("report.tls.aggregate.send")
-            .label("Frequency")
+            .label("频率")
             .help(concat!(
                 "Frequency at which the TLS aggregate reports will be sent. The options ",
                 "are hourly, daily, weekly, or never to disable reporting"
@@ -512,27 +512,27 @@ impl Builder<Schemas, ()> {
                 [],
                 [Validator::Required, Validator::IsValidExpression(rcpt_vars)],
             )
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Name that will be used in the From header of the DKIM ",
                 "report email"
             ))
             .default("'Report Subsystem'")
             .new_field("report.dkim.from-address")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Email address that will be used in the From header of ",
                 "the DKIM report email"
             ))
             .default("'noreply-dkim@' + config_get('report.domain')")
             .new_field("report.dkim.subject")
-            .label("Subject")
+            .label("主题")
             .help(concat!(
                 "Subject name that will be used in the DKIM report email"
             ))
             .default("'DKIM Authentication Failure Report'")
             .new_field("report.dkim.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!(
                 "List of DKIM signatures to use when signing the DKIM ",
                 "report"
@@ -541,7 +541,7 @@ impl Builder<Schemas, ()> {
                 "['rsa-' + config_get('report.domain'), 'ed25519-' + config_get('report.domain')]",
             )
             .new_field("report.dkim.send")
-            .label("Send rate")
+            .label("发送速率")
             .help(concat!(
                 "Rate at which DKIM reports will be sent to a given email ",
                 "address. When this rate is exceeded, no further DKIM failure reports",
@@ -563,7 +563,7 @@ impl Builder<Schemas, ()> {
             // SPF Reports
             .new_schema("report-spf")
             .new_field("report.spf.from-name")
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Name that will be used in the From header of the SPF authentication failure ",
                 "report email"
@@ -577,20 +577,20 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("report.spf.from-address")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Email address that will be used in the From header of ",
                 "the SPF authentication failure report email"
             ))
             .default("'noreply-spf@' + config_get('report.domain')")
             .new_field("report.spf.subject")
-            .label("Subject")
+            .label("主题")
             .help(concat!(
                 "Subject name that will be used in the SPF authentication failure report email"
             ))
             .default("'SPF Authentication Failure Report'")
             .new_field("report.spf.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!(
                 "List of DKIM signatures to use when signing the SPF ",
                 "authentication failure report"
@@ -599,7 +599,7 @@ impl Builder<Schemas, ()> {
                 "['rsa-' + config_get('report.domain'), 'ed25519-' + config_get('report.domain')]",
             )
             .new_field("report.spf.send")
-            .label("Send rate")
+            .label("发送速率")
             .help(concat!(
                 "Rate at which SPF reports will be sent to a given email ",
                 "address. When this rate is exceeded, no further SPF failure reports",
@@ -629,27 +629,27 @@ impl Builder<Schemas, ()> {
                     Validator::IsValidExpression(rcpt_vars.constants(VERIFY_CONSTANTS)),
                 ],
             )
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Name that will be used in the From header of the DMARC ",
                 "report email"
             ))
             .default("'Report Subsystem'")
             .new_field("report.dmarc.from-address")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Email address that will be used in the From header of ",
                 "the DMARC authentication failure report email"
             ))
             .default("'noreply-dmarc@' + config_get('report.domain')")
             .new_field("report.dmarc.subject")
-            .label("Subject")
+            .label("主题")
             .help(concat!(
                 "Subject name that will be used in the DMARC authentication failure report email"
             ))
             .default("'DMARC Authentication Failure Report'")
             .new_field("report.dmarc.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!(
                 "List of DKIM signatures to use when signing the DMARC ",
                 "authentication failure report"
@@ -658,7 +658,7 @@ impl Builder<Schemas, ()> {
                 "['rsa-' + config_get('report.domain'), 'ed25519-' + config_get('report.domain')]",
             )
             .new_field("report.dmarc.send")
-            .label("Send rate")
+            .label("发送速率")
             .help(concat!(
                 "Rate at which DMARC reports will be sent to a given email ",
                 "address. When this rate is exceeded, no further DMARC failure reports",
@@ -673,27 +673,27 @@ impl Builder<Schemas, ()> {
                     Validator::IsValidExpression(rcpt_domain),
                 ],
             )
-            .label("From Name")
+            .label("发件人名称")
             .help(concat!(
                 "Name that will be used in the From header of the DMARC ",
                 "aggregate report email"
             ))
             .default("'Report Subsystem'")
             .new_field("report.dmarc.aggregate.from-address")
-            .label("From Address")
+            .label("发件人地址")
             .help(concat!(
                 "Email address that will be used in the From header of ",
                 "the DMARC aggregate report email"
             ))
             .default("'noreply-dmarc@' + config_get('report.domain')")
             .new_field("report.dmarc.aggregate.subject")
-            .label("Subject")
+            .label("主题")
             .help(concat!(
                 "Subject name that will be used in the DMARC aggregate report email"
             ))
             .default("'DMARC Aggregate Report'")
             .new_field("report.dmarc.aggregate.sign")
-            .label("Signature")
+            .label("签名")
             .help(concat!(
                 "List of DKIM signatures to use when signing the DMARC ",
                 "aggregate report"
@@ -702,23 +702,23 @@ impl Builder<Schemas, ()> {
                 "['rsa-' + config_get('report.domain'), 'ed25519-' + config_get('report.domain')]",
             )
             .new_field("report.dmarc.aggregate.org-name")
-            .label("Organization")
+            .label("组织")
             .help(concat!(
                 "Name of the organization to be included in the report"
             ))
             .default("config_get('report.domain')")
             .new_field("report.dmarc.aggregate.contact-info")
-            .label("Contact")
+            .label("联系方式")
             .help(concat!("Contact information to be included in the report"))
             .default("")
             .new_field("report.dmarc.aggregate.max-size")
-            .label("Max Report Size")
+            .label("最大报告大小")
             .help(concat!(
                 "Maximum size of the DMARC aggregate report in bytes"
             ))
             .default("26214400")
             .new_field("report.dmarc.aggregate.send")
-            .label("Frequency")
+            .label("频率")
             .help(concat!(
                 "Frequency at which the DMARC aggregate reports will be sent. The options ",
                 "are hourly, daily, weekly, or never to disable reporting"

@@ -11,7 +11,7 @@ impl Builder<Schemas, ()> {
     pub fn build_storage(self) -> Self {
         self.new_schema("storage")
             .new_field("storage.data")
-            .label("Store")
+            .label("存储")
             .help(concat!(
                 "Core storage unit where email metadata, folders, and various settings ",
                 "are stored. Essentially, it contains all the data except for ",
@@ -36,7 +36,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("storage.blob")
-            .label("Store")
+            .label("存储")
             .help(concat!(
                 "Used for storing large binary objects such as emails, sieve scripts, ",
                 "and other files"
@@ -64,7 +64,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("storage.fts")
-            .label("Store")
+            .label("存储")
             .help(concat!(
                 "Dedicated to indexing for full-text search, enhancing the speed and ",
                 "efficiency of text-based queries"
@@ -90,7 +90,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("storage.lookup")
-            .label("Store")
+            .label("存储")
             .help(concat!(
                 "Key-value storage used primarily by the SMTP server and anti-spam ",
                 "components"
@@ -180,7 +180,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("account.purge.frequency")
-            .label("Frequency")
+            .label("频率")
             .help(concat!(
                 "Specifies how often tombstoned messages are deleted ",
                 "from the database"
@@ -227,7 +227,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Blob Store")
+            .title("Blob 存储")
             .fields(["storage.blob", "storage.undelete.retention"])
             .build()
             .new_form_section()
@@ -247,7 +247,7 @@ impl Builder<Schemas, ()> {
             .fields(["storage.lookup"])
             .build()
             .new_form_section()
-            .title("Cleanup")
+            .title("清理")
             .fields([
                 "account.purge.frequency",
                 "changes.max-history",
@@ -265,7 +265,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.email")
-            .label("Emails")
+            .label("邮箱")
             .help("The default maximum number of emails a user can create")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
@@ -292,7 +292,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.sieve-script")
-            .label("Sieve Scripts")
+            .label("Sieve 脚本")
             .help("The default maximum number of sieve scripts a user can create")
             .default("100")
             .typ(Type::Input)
@@ -313,7 +313,7 @@ impl Builder<Schemas, ()> {
             // E-mail Storage Quotas
             .new_schema("groupware-storage-quota")
             .new_field("object-quota.calendar")
-            .label("Calendars")
+            .label("日历")
             .help("The default maximum number of calendars a user can create")
             .default("250")
             .typ(Type::Input)

@@ -11,7 +11,7 @@ impl Builder<Schemas, ()> {
         // Authentication
         self.new_schema("authentication")
             .new_field("storage.directory")
-            .label("Directory")
+            .label("目录")
             .help("The directory to use for authentication and authorization")
             .typ(Type::Select {
                 source: Source::Dynamic {
@@ -25,7 +25,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Fallback admin
             .new_field("authentication.fallback-admin.user")
-            .label("Username")
+            .label("用户名")
             .help(concat!(
                 "A rescue admin user can access the server in case the ",
                 "directory becomes unavailable"
@@ -34,7 +34,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("authentication.fallback-admin.secret")
-            .label("Password")
+            .label("密码")
             .help(concat!(
                 "A rescue admin secret that can access the server ",
                 "in case the directory becomes unavailable"
@@ -44,7 +44,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Master user
             .new_field("authentication.master.user")
-            .label("Username")
+            .label("用户名")
             .help(concat!(
                 "The master user can access any user account ",
                 "using 'user-login%master-user' as the login name. ",
@@ -54,13 +54,13 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("authentication.master.secret")
-            .label("Password")
+            .label("密码")
             .help("The master user secret to access any user account ")
             .typ(Type::Secret)
             .input_check([Transformer::Trim, Transformer::HashSecret], [])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .fields(["storage.directory"])
             .build()
             .new_form_section()
@@ -177,7 +177,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("oauth.oidc.signature-key")
-            .label("Signature Key")
+            .label("签名密钥")
             .help("Contents of the private key PEM used to sign JWTs for OpenID Connect.")
             .typ(Type::Text)
             .input_check([], [Validator::Required])

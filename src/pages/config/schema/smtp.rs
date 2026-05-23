@@ -23,7 +23,7 @@ impl Builder<Schemas, ()> {
         // Strategies
         self.new_schema("smtp-out-strategy")
             .new_field("queue.strategy.route")
-            .label("Routing")
+            .label("路由")
             .help(concat!(
                 "An expression that returns the route name to use ",
                 "when delivering queued messages"
@@ -56,7 +56,7 @@ impl Builder<Schemas, ()> {
                 [Validator::Required, Validator::IsValidExpression(rcpt_vars)],
             )
             .new_field("queue.strategy.connection")
-            .label("Connection")
+            .label("连接")
             .help(concat!(
                 "An expression that returns the connection strategy to use ",
                 "when delivering messages to remote SMTP servers"
@@ -149,7 +149,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("resolver.timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Time after which a resolution request will be timed out if ",
                 "no response is received"
@@ -159,7 +159,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("resolver.attempts")
-            .label("Max Attempts")
+            .label("最大尝试次数")
             .help(concat!(
                 "Number of times a resolution request will be retried before ",
                 "it is considered failed"
@@ -203,7 +203,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("type")
             .readonly()
-            .label("Type")
+            .label("类型")
             .help("Route type")
             .default("mx")
             .typ(Type::Select {
@@ -216,7 +216,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("description")
-            .label("Description")
+            .label("描述")
             .help(concat!(
                 "A short description of the route, which can be used to ",
                 "identify it in the list of routes"
@@ -273,7 +273,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("port")
             .display_if_eq("type", ["relay"])
-            .label("Port")
+            .label("端口")
             .help(concat!(
                 "The port number of the remote server, which is typically ",
                 "25 for SMTP and 11200 for LMTP"
@@ -284,7 +284,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("protocol")
             .display_if_eq("type", ["relay"])
-            .label("Protocol")
+            .label("协议")
             .help(concat!(
                 "The protocol to use when delivering messages to the remote ",
                 "server, which can be either SMTP or LMTP"
@@ -307,7 +307,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("tls.allow-invalid-certs")
             .display_if_eq("type", ["relay"])
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help(concat!(
                 "Whether to allow connections to servers with invalid TLS certificates"
             ))
@@ -316,7 +316,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("auth.username")
             .display_if_eq("type", ["relay"])
-            .label("Username")
+            .label("用户名")
             .help(concat!(
                 "The username to use when authenticating with the remote server"
             ))
@@ -324,7 +324,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("auth.secret")
             .display_if_eq("type", ["relay"])
-            .label("Secret")
+            .label("密钥")
             .help(concat!(
                 "The secret to use when authenticating with the remote server"
             ))
@@ -350,7 +350,7 @@ impl Builder<Schemas, ()> {
             .fields(["tls.implicit", "tls.allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .display_if_eq("type", ["relay"])
             .fields(["auth.username", "auth.secret"])
             .build()
@@ -364,7 +364,7 @@ impl Builder<Schemas, ()> {
             .suffix("threads-per-node")
             .names("queue", "queues")
             .new_id_field()
-            .label("Name")
+            .label("名称")
             .help("Unique identifier for the queue, max 8 characters")
             .input_check(
                 [Transformer::Trim],
@@ -386,7 +386,7 @@ impl Builder<Schemas, ()> {
             .default("25")
             .build()
             .new_field("description")
-            .label("Description")
+            .label("描述")
             .help(concat!(
                 "A short description of the queue, which can be used to ",
                 "identify it in the list of queues"
@@ -408,7 +408,7 @@ impl Builder<Schemas, ()> {
             .suffix("queue-name")
             .names("schedule", "schedules")
             .new_id_field()
-            .label("Name")
+            .label("名称")
             .help("Unique identifier for the schedule")
             .build()
             .new_field("queue-name")
@@ -427,7 +427,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("description")
-            .label("Description")
+            .label("描述")
             .help(concat!(
                 "A short description of the schedule, which can be used to ",
                 "identify it in the list of schedules"
@@ -477,7 +477,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("max-attempts")
             .display_if_eq("expire-type", ["attempts"])
-            .label("Max Attempts")
+            .label("最大尝试次数")
             .help(concat!(
                 "Maximum number of delivery attempts before the message is ",
                 "considered failed"
@@ -512,7 +512,7 @@ impl Builder<Schemas, ()> {
             .suffix("allow-invalid-certs")
             .names("TLS strategy", "TLS strategies")
             .new_id_field()
-            .label("Name")
+            .label("名称")
             .help("Unique identifier for the TLS strategy")
             .build()
             .new_field("dane")
@@ -550,7 +550,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help(concat!(
                 "Whether to allow connections to servers with invalid TLS certificates"
             ))
@@ -576,7 +576,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("description")
-            .label("Description")
+            .label("描述")
             .help(concat!(
                 "A short description of the TLS strategy, which can be used to ",
                 "identify it in the list of strategies"
@@ -606,7 +606,7 @@ impl Builder<Schemas, ()> {
             .suffix("timeout.connect")
             .names("Connection strategy", "Connection strategies")
             .new_id_field()
-            .label("Name")
+            .label("名称")
             .help("Unique identifier for the connection strategy")
             .build()
             .new_field("source-ips")
@@ -683,7 +683,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("description")
-            .label("Description")
+            .label("描述")
             .help("Short description of the connection strategy")
             .typ(Type::Input)
             .build()
@@ -720,13 +720,13 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the throttle")
             .build()
             .new_field("enable")
-            .label("Enabled")
+            .label("已启用")
             .help("Whether to enable this throttle")
             .typ(Type::Boolean)
             .default("true")
             .build()
             .new_field("key")
-            .label("Keys")
+            .label("密钥")
             .help(concat!(
                 "Optional list of context variables that determine ",
                 "where this throttle should be applied"
@@ -744,7 +744,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("match")
-            .label("Match condition")
+            .label("匹配条件")
             .help(concat!(
                 "Enable the imposition of concurrency and rate limits only ",
                 "when a specific condition is met"
@@ -762,7 +762,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("rate")
-            .label("Rate limit")
+            .label("速率限制")
             .help(concat!(
                 "Number of incoming requests over a period of time ",
                 "that the rate limiter will allow"
@@ -788,13 +788,13 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the quota")
             .build()
             .new_field("enable")
-            .label("Enabled")
+            .label("已启用")
             .help("Whether to enable this quota")
             .typ(Type::Boolean)
             .default("true")
             .build()
             .new_field("key")
-            .label("Keys")
+            .label("密钥")
             .help(concat!(
                 "Optional list of context variables that determine ",
                 "where this quota should be applied"
@@ -810,7 +810,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("match")
-            .label("Match condition")
+            .label("匹配条件")
             .help(concat!(
                 "Enable the imposition of concurrency and rate limits only ",
                 "when a specific condition is met"
@@ -837,7 +837,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("size")
-            .label("Max Size")
+            .label("最大大小")
             .help(concat!(
                 "Maximum total size of messages in the queue that ",
                 "this quota will allow"
@@ -864,7 +864,7 @@ impl Builder<Schemas, ()> {
         self.new_schema("smtp-in-connect")
             .new_field("session.connect.script")
             .typ(Type::Expression)
-            .label("Run Script")
+            .label("运行脚本")
             .help("Which Sieve script to run when a client connects")
             .input_check([], [Validator::IsValidExpression(has_conn_vars)])
             .new_field("session.connect.greeting")
@@ -944,7 +944,7 @@ impl Builder<Schemas, ()> {
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .build()
             .new_field("session.ehlo.script")
-            .label("Run Script")
+            .label("运行脚本")
             .typ(Type::Expression)
             .input_check([], [Validator::IsValidExpression(has_conn_vars)])
             .help("Which Sieve script to run after the client sends an EHLO command")
@@ -961,7 +961,7 @@ impl Builder<Schemas, ()> {
             // Limits
             .new_schema("smtp-in-limits")
             .new_field("session.timeout")
-            .label("Timeout")
+            .label("超时")
             .typ(Type::Expression)
             .input_check(
                 [],
@@ -1159,7 +1159,7 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("session.auth.directory")
-            .label("Directory")
+            .label("目录")
             .help("Specifies the directory to use for authentication")
             .default(Expression::new([("local_port != 25", "'*'")], "false"))
             .input_check(
@@ -1205,7 +1205,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("AUTH Stage")
+            .title("AUTH 阶段")
             .fields([
                 "session.auth.directory",
                 "session.auth.require",
@@ -1214,7 +1214,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Authentication Errors")
+            .title("认证错误")
             .fields(["session.auth.errors.total", "session.auth.errors.wait"])
             .build()
             .build()
@@ -1233,7 +1233,7 @@ impl Builder<Schemas, ()> {
             )
             .default("false")
             .new_field("session.mail.script")
-            .label("Run Script")
+            .label("运行脚本")
             .help("Which Sieve script to run after the client sends a MAIL command")
             .input_check([], [Validator::IsValidExpression(has_sender_vars)])
             .new_field("session.mail.is-allowed")
@@ -1257,7 +1257,7 @@ impl Builder<Schemas, ()> {
             // RCPT stage
             .new_schema("smtp-in-rcpt")
             .new_field("session.rcpt.directory")
-            .label("Directory")
+            .label("目录")
             .help("Directory to use to validate local recipients")
             .default("\"*\"")
             .typ(Type::Expression)
@@ -1276,7 +1276,7 @@ impl Builder<Schemas, ()> {
                 "false",
             ))
             .new_field("session.rcpt.max-recipients")
-            .label("Max Recipients")
+            .label("最大收件人数")
             .help("Maximum number of recipients per message")
             .default("100")
             .new_field("session.rcpt.rewrite")
@@ -1295,7 +1295,7 @@ impl Builder<Schemas, ()> {
             .help("Amount of time to wait after a recipient error")
             .default("5s")
             .new_field("session.rcpt.script")
-            .label("Run Script")
+            .label("运行脚本")
             .help("Which Sieve script to run after the client sends a RCPT command")
             .input_check([], [Validator::IsValidExpression(has_rcpt_vars)])
             .build()
@@ -1320,7 +1320,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Address Handling")
+            .title("地址处理")
             .fields([
                 "session.rcpt.rewrite",
                 "session.rcpt.catch-all",
@@ -1335,7 +1335,7 @@ impl Builder<Schemas, ()> {
             // DATA stage
             .new_schema("smtp-in-data")
             .new_field("session.data.script")
-            .label("Run Script")
+            .label("运行脚本")
             .help("Which Sieve script to run after the client sends a DATA command")
             .typ(Type::Expression)
             .input_check([], [Validator::IsValidExpression(has_rcpt_vars)])
@@ -1346,7 +1346,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Expression)
             .input_check([], [Validator::IsValidExpression(has_rcpt_vars)])
             .new_field("session.data.limits.messages")
-            .label("Messages")
+            .label("消息")
             .help("Maximum number of messages that can be submitted per SMTP session")
             .default("10")
             .input_check(
@@ -1357,11 +1357,11 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("session.data.limits.size")
-            .label("Size")
+            .label("大小")
             .help("Maximum size of a message in bytes")
             .default("104857600")
             .new_field("session.data.limits.received-headers")
-            .label("Received Headers")
+            .label("接收头部")
             .help(concat!(
                 "Maximum limit on the number of Received headers, ",
                 "which helps to prevent message loops"
@@ -1401,7 +1401,7 @@ impl Builder<Schemas, ()> {
             .fields(["session.data.spam-filter", "session.data.script"])
             .build()
             .new_form_section()
-            .title("Limits")
+            .title("限制")
             .fields([
                 "session.data.limits.messages",
                 "session.data.limits.size",
@@ -1409,7 +1409,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Add Headers")
+            .title("添加头部")
             .fields([
                 "session.data.add-headers.received",
                 "session.data.add-headers.received-spf",
@@ -1431,13 +1431,13 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the throttle")
             .build()
             .new_field("enable")
-            .label("Enabled")
+            .label("已启用")
             .help("Whether to enable this throttle")
             .typ(Type::Boolean)
             .default("true")
             .build()
             .new_field("key")
-            .label("Keys")
+            .label("密钥")
             .help(concat!(
                 "Optional list of context variables that determine ",
                 "where this throttle should be applied"
@@ -1458,7 +1458,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("match")
-            .label("Match condition")
+            .label("匹配条件")
             .help(concat!(
                 "Enable the imposition of concurrency and rate limits only ",
                 "when a specific condition is met"
@@ -1473,7 +1473,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("rate")
-            .label("Rate limit")
+            .label("速率限制")
             .help(concat!(
                 "Number of incoming requests over a period of time ",
                 "that the rate limiter will allow"
@@ -1499,7 +1499,7 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for this milter")
             .build()
             .new_field("enable")
-            .label("Enable")
+            .label("启用")
             .help("Expression that determines whether to enable this milter")
             .default("true")
             .typ(Type::Expression)
@@ -1512,7 +1512,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("hostname")
-            .label("Hostname")
+            .label("主机名")
             .help(concat!(
                 "Hostname or IP address of the server where the Milter ",
                 "filter is running"
@@ -1525,7 +1525,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("port")
-            .label("Port")
+            .label("端口")
             .help("Network port on the Milter filter host server")
             .placeholder("11332")
             .typ(Type::Input)
@@ -1535,7 +1535,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("tls")
-            .label("Enable TLS")
+            .label("启用 TLS")
             .help(concat!(
                 "Whether to use Transport Layer Security (TLS) for the connection ",
                 "between Stalwart SMTP and the Milter filter"
@@ -1545,7 +1545,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help(concat!(
                 "Whether Stalwart SMTP should connect to a Milter filter ",
                 "server that has an invalid TLS certificate"
@@ -1555,7 +1555,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("timeout.connect")
-            .label("Connection")
+            .label("连接")
             .help(concat!(
                 "Maximum amount of time that Stalwart SMTP will wait to establish ",
                 "a connection with this Milter server"
@@ -1575,7 +1575,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("timeout.data")
-            .label("Data")
+            .label("数据")
             .help(concat!(
                 "Maximum amount of time Stalwart SMTP will wait for a response",
                 " from the Milter server"
@@ -1585,7 +1585,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("options.tempfail-on-error")
-            .label("TempFail on Error")
+            .label("错误时临时失败")
             .help(concat!(
                 "Whether to respond with a temporary failure (typically a 4xx ",
                 "SMTP status code) when Stalwart encounters an error while ",
@@ -1619,7 +1619,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("stages")
-            .label("Run on stages")
+            .label("运行阶段")
             .help("Which SMTP stages to run the milter on")
             .typ(Type::Select {
                 typ: SelectType::Many,
@@ -1665,7 +1665,7 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for this hook")
             .build()
             .new_field("enable")
-            .label("Enable")
+            .label("启用")
             .help("Expression that determines whether to enable this hook")
             .default("true")
             .typ(Type::Expression)
@@ -1678,14 +1678,14 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("url")
-            .label("Endpoint URL")
+            .label("端点 URL")
             .help(concat!("URL of the hook endpoint"))
             .placeholder("https://127.0.0.1/filter")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
             .build()
             .new_field("allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help(concat!(
                 "Whether Stalwart SMTP should connect to a hook ",
                 "server that has an invalid TLS certificate"
@@ -1695,7 +1695,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Maximum amount of time that Stalwart SMTP will wait for a response ",
                 "from this hook server"
@@ -1705,7 +1705,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("options.tempfail-on-error")
-            .label("TempFail on Error")
+            .label("错误时临时失败")
             .help(concat!(
                 "Whether to respond with a temporary failure (typically a 4xx ",
                 "SMTP status code) when Stalwart encounters an error while ",
@@ -1716,7 +1716,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("options.max-response-size")
-            .label("Max Size")
+            .label("最大大小")
             .help(concat!(
                 "Maximum size, in bytes, of a response that Stalwart will accept",
                 " from this MTA Hook server"
@@ -1727,11 +1727,11 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("headers")
             .typ(Type::Array(ArrayType::Text))
-            .label("HTTP Headers")
+            .label("HTTP 头部")
             .help("The headers to be sent with hook requests")
             .build()
             .new_field("auth.username")
-            .label("Username")
+            .label("用户名")
             .help(concat!(
                 "The username to use when authenticating with the hook server"
             ))
@@ -1739,7 +1739,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("auth.secret")
-            .label("Secret")
+            .label("密钥")
             .help(concat!(
                 "The secret to use when authenticating with the hook server"
             ))
@@ -1747,7 +1747,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("stages")
-            .label("Run on stages")
+            .label("运行阶段")
             .help("Which SMTP stages to run this hook on")
             .typ(Type::Select {
                 typ: SelectType::Many,
@@ -1760,7 +1760,7 @@ impl Builder<Schemas, ()> {
             .fields(["_id", "url", "enable", "allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .fields(["auth.username", "auth.secret"])
             .build()
             .new_form_section()
@@ -1855,7 +1855,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_field("asn.timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Time after which the ASN/Geo resource fetch is considered failed.",
             ))
@@ -1873,7 +1873,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_field("asn.max-size")
-            .label("Max Size")
+            .label("最大大小")
             .help(concat!("Maximum size of the ASN/Geo data file.",))
             .typ(Type::Size)
             .input_check([], [Validator::Required])
@@ -1882,7 +1882,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("asn.headers")
             .typ(Type::Array(ArrayType::Text))
-            .label("HTTP Headers")
+            .label("HTTP 头部")
             .help(concat!(
                 "Headers to send with the ASN/Geo resource fetch request.",
             ))
@@ -1907,7 +1907,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["dns"])
             .build()
             .new_field("asn.separator")
-            .label("Separator")
+            .label("分隔符")
             .help(concat!(
                 "The separator character used in the DNS TXT record.",
             ))
@@ -1943,7 +1943,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["dns"])
             .build()
             .new_form_section()
-            .title("ASN & GeoIP Settings")
+            .title("ASN 和 GeoIP 设置")
             .fields(["asn.type"])
             .build()
             .new_form_section()
@@ -1957,7 +1957,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_form_section()
-            .title("Authentication")
+            .title("认证")
             .fields(["asn.headers"])
             .display_if_eq("asn.type", ["resource"])
             .build()

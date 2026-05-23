@@ -84,13 +84,13 @@ pub fn Authorize() -> impl IntoView {
                         .await
                         {
                             AuthenticationResult::Success(true) => {
-                                Alert::success("Device authenticated")
-                                    .with_details("You have successfully authenticated your device")
+                                Alert::success("设备已认证")
+                                    .with_details("您已成功认证设备")
                                     .without_timeout()
                             }
                             AuthenticationResult::Success(false) => {
-                                Alert::warning("Device authentication failed")
-                                    .with_details("The code you entered is invalid or has expired")
+                                Alert::warning("设备认证失败")
+                                    .with_details("您输入的验证码无效或已过期")
                             }
                             AuthenticationResult::TotpRequired => {
                                 show_totp.set(true);
@@ -136,7 +136,7 @@ pub fn Authorize() -> impl IntoView {
                                 <Show when=move || !show_totp.get()>
                                     <div>
                                         <label class="block text-sm mb-2 dark:text-white">
-                                            Login
+                                            登录
                                         </label>
                                         <InputText
                                             placeholder="user@example.org"
@@ -146,7 +146,7 @@ pub fn Authorize() -> impl IntoView {
                                     <div>
                                         <div class="flex justify-between items-center">
                                             <label class="block text-sm mb-2 dark:text-white">
-                                                Password
+                                                密码
                                             </label>
 
                                         </div>
@@ -157,7 +157,7 @@ pub fn Authorize() -> impl IntoView {
                                 <Show when=move || show_totp.get()>
                                     <div>
                                         <label class="block text-sm mb-2 dark:text-white">
-                                            TOTP Token
+                                            TOTP 验证码
                                         </label>
                                         <InputText element=FormElement::new("totp-code", data)/>
                                     </div>
@@ -166,7 +166,7 @@ pub fn Authorize() -> impl IntoView {
                                 <Show when=move || is_device_auth.get() && !show_totp.get()>
                                     <div>
                                         <label class="block text-sm mb-2 dark:text-white">
-                                            Code
+                                            验证码
                                         </label>
                                         <InputText
                                             placeholder="Enter the device code"
@@ -193,7 +193,7 @@ pub fn Authorize() -> impl IntoView {
                                             None if is_auth_flow => {
                                                 alert
                                                     .set(
-                                                        Alert::error("Missing redirect_uri in query parameters"),
+                                                        Alert::error("查询参数中缺少 redirect_uri"),
                                                     );
                                                 return;
                                             }
@@ -233,7 +233,7 @@ pub fn Authorize() -> impl IntoView {
                                     }
                                 >
 
-                                    Authorize
+                                    授权
                                 </button>
                             </div>
                         </form>

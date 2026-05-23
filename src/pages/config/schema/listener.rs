@@ -30,7 +30,7 @@ impl Builder<Schemas, ()> {
                     ("managesieve", "ManageSieve"),
                 ]),
             })
-            .label("Protocol")
+            .label("协议")
             .help("The protocol used by the listener")
             .input_check([], [Validator::Required])
             .default("smtp")

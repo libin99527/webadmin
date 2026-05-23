@@ -188,7 +188,7 @@ impl Builder<Schemas, ()> {
             // Spam classifier settings
             .new_schema("spam-classifier")
             .new_field("spam-filter.classifier.model")
-            .label("Model")
+            .label("模型")
             .help(concat!("The algorithm used for the spam classifier"))
             .default("ftrl-fh")
             .typ(Type::Select {
@@ -452,7 +452,7 @@ impl Builder<Schemas, ()> {
             .fields(["spam-filter.classifier.samples.reservoir-capacity"])
             .build()
             .new_form_section()
-            .title("Auto-learn")
+            .title("自动学习")
             .display_if_eq("spam-filter.classifier.model", ["ftrl-fh", "ftrl-ccfh"])
             .fields([
                 "spam-filter.classifier.auto-learn.spam-rbl-count",
@@ -480,14 +480,14 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.pyzor.host")
-            .label("Hostname")
+            .label("主机名")
             .help("The hostname of the Pyzor server")
             .default("public.pyzor.org")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("spam-filter.pyzor.port")
-            .label("Port")
+            .label("端口")
             .help("The port to connect to the Pyzor server")
             .default("24441")
             .typ(Type::Input)
@@ -501,7 +501,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.pyzor.timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "The timeout for the Pyzor server. ",
                 "If the server does not respond within this time, the check is considered failed."
@@ -565,7 +565,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Classification")
+            .title("分类")
             .fields([
                 "spam-filter.pyzor.count",
                 "spam-filter.pyzor.wl-count",
@@ -583,7 +583,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.model")
-            .label("Model")
+            .label("模型")
             .help("The AI model to use for the LLM classifier")
             .typ(Type::Select {
                 source: Source::Dynamic {
@@ -596,7 +596,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.temperature")
-            .label("Temperature")
+            .label("温度")
             .help("The temperature to use for the LLM classifier")
             .default("0.5")
             .typ(Type::Input)
@@ -617,7 +617,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.separator")
-            .label("Separator")
+            .label("分隔符")
             .help(concat!(
                 "The separator character used to parse the LLM response.",
             ))
@@ -694,7 +694,7 @@ impl Builder<Schemas, ()> {
             .prefix("spam-filter.rule")
             .suffix("scope")
             .new_id_field()
-            .label("Rule ID")
+            .label("规则 ID")
             .help("Unique identifier for the rule")
             .build()
             .new_field("enable")
@@ -704,7 +704,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("condition")
-            .label("Rule")
+            .label("规则")
             .help(concat!(
                 "Expression that returns the tag to assign to the message.",
             ))
@@ -731,7 +731,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("scope")
-            .label("Scope")
+            .label("范围")
             .help("Where to apply the rule")
             .default("any")
             .typ(Type::Select {
@@ -753,7 +753,7 @@ impl Builder<Schemas, ()> {
             .prefix("spam-filter.dnsbl.server")
             .suffix("scope")
             .new_id_field()
-            .label("Rule ID")
+            .label("规则 ID")
             .help("Unique identifier for the DNSBL server")
             .build()
             .new_field("enable")
@@ -789,7 +789,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("scope")
-            .label("Scope")
+            .label("范围")
             .help("Where to use the DNSBL server")
             .default("any")
             .typ(Type::Select {
@@ -811,7 +811,7 @@ impl Builder<Schemas, ()> {
             .names("domain", "domains")
             .prefix("lookup.url-redirectors")
             .new_id_field()
-            .label("Domain Name")
+            .label("域名")
             .help("The domain name to be added to the URL redirectors list")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
@@ -829,7 +829,7 @@ impl Builder<Schemas, ()> {
             .names("domain", "domains")
             .prefix("lookup.trusted-domains")
             .new_id_field()
-            .label("Domain Name")
+            .label("域名")
             .help("The domain name to be added to the trusted domains list")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
@@ -847,7 +847,7 @@ impl Builder<Schemas, ()> {
             .names("domain", "domains")
             .prefix("lookup.blocked-domains")
             .new_id_field()
-            .label("Domain Name")
+            .label("域名")
             .help("The domain name to be added to the blocked domains list")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
@@ -915,7 +915,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_value_field()
-            .label("Rule")
+            .label("规则")
             .help("The mime-type rule for this file name extension")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()

@@ -29,7 +29,7 @@ impl Builder<Schemas, ()> {
                     ("open-telemetry", "Open Telemetry"),
                 ]),
             })
-            .label("Method")
+            .label("方法")
             .help("The type of tracer")
             .input_check([], [Validator::Required])
             .default("log")
@@ -145,7 +145,7 @@ impl Builder<Schemas, ()> {
                 typ: SelectType::Single,
                 source: Source::Static(&[("http", "HTTP"), ("grpc", "gRPC")]),
             })
-            .label("Transport")
+            .label("传输")
             .help("The transport protocol for Open Telemetry")
             .input_check([], [Validator::Required])
             .display_if_eq("type", ["open-telemetry"])
@@ -154,7 +154,7 @@ impl Builder<Schemas, ()> {
             // OT Endpoint
             .new_field("endpoint")
             .typ(Type::Input)
-            .label("Endpoint")
+            .label("端点")
             .help("The endpoint for Open Telemetry")
             .placeholder("https://tracing.example.com/v1/otel")
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
@@ -163,13 +163,13 @@ impl Builder<Schemas, ()> {
             // OT Headers
             .new_field("headers")
             .typ(Type::Array(ArrayType::Text))
-            .label("HTTP Headers")
+            .label("HTTP 头部")
             .help("The headers to be sent with OpenTelemetry requests")
             .display_if_eq("transport", ["http"])
             .build()
             // OT Timeout
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Maximum amount of time that Stalwart will wait for a response ",
                 "from the OpenTelemetry endpoint"
@@ -181,7 +181,7 @@ impl Builder<Schemas, ()> {
             .build()
             // OT Throttle
             .new_field("throttle")
-            .label("Throttle")
+            .label("限流")
             .help(concat!(
                 "The minimum amount of time that must pass between ",
                 "each request to the OpenTelemetry endpoint"
@@ -290,7 +290,7 @@ impl Builder<Schemas, ()> {
                     ("grpc", "gRPC"),
                 ]),
             })
-            .label("Transport")
+            .label("传输")
             .help("The transport protocol for Open Telemetry")
             .input_check([], [Validator::Required])
             .default("disabled")
@@ -298,7 +298,7 @@ impl Builder<Schemas, ()> {
             // OT Endpoint
             .new_field("metrics.open-telemetry.endpoint")
             .typ(Type::Input)
-            .label("Endpoint")
+            .label("端点")
             .help("The endpoint for Open Telemetry")
             .placeholder("https://tracing.example.com/v1/otel")
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
@@ -307,13 +307,13 @@ impl Builder<Schemas, ()> {
             // OT Headers
             .new_field("metrics.open-telemetry.headers")
             .typ(Type::Array(ArrayType::Text))
-            .label("HTTP Headers")
+            .label("HTTP 头部")
             .help("The headers to be sent with OpenTelemetry requests")
             .display_if_eq("metrics.open-telemetry.transport", ["http"])
             .build()
             // OT Timeout
             .new_field("metrics.open-telemetry.timeout")
-            .label("Timeout")
+            .label("超时")
             .help(concat!(
                 "Maximum amount of time that Stalwart will wait for a response ",
                 "from the OpenTelemetry endpoint"
@@ -343,7 +343,7 @@ impl Builder<Schemas, ()> {
             .default("false")
             .build()
             .new_field("metrics.prometheus.auth.username")
-            .label("Username")
+            .label("用户名")
             .help(concat!(
                 "The Prometheus endpoint's username for Basic authentication"
             ))
@@ -351,7 +351,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("metrics.prometheus.auth.secret")
-            .label("Secret")
+            .label("密钥")
             .help(concat!(
                 "The Prometheus endpoint's secret for Basic authentication"
             ))
@@ -415,7 +415,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("tracing.history.retention")
-            .label("Retention period")
+            .label("保留期限")
             .help(concat!(
                 "How long to keep message delivery history before it is permanently deleted.",
                 "(Enterprise feature)"
@@ -457,7 +457,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("metrics.history.retention")
-            .label("Retention period")
+            .label("保留期限")
             .help(concat!(
                 "How long to keep metrics history before it is permanently deleted.",
                 "(Enterprise feature)"
@@ -515,7 +515,7 @@ impl Builder<Schemas, ()> {
             // Enable
             .new_field("enable")
             .typ(Type::Boolean)
-            .label("Enable")
+            .label("启用")
             .help("Enable or disable the alert (Enterprise feature)")
             .default("true")
             .enterprise_feature()
@@ -563,7 +563,7 @@ impl Builder<Schemas, ()> {
             // From name
             .new_field("notify.email.from-name")
             .typ(Type::Input)
-            .label("From Name")
+            .label("发件人名称")
             .placeholder("Alert subsystem")
             .help("The name of the sender")
             .input_check_if_eq("notify.email.enable", ["true"], [], [Validator::IsEmail])
@@ -590,7 +590,7 @@ impl Builder<Schemas, ()> {
             // Message subject
             .new_field("notify.email.subject")
             .typ(Type::Input)
-            .label("Subject")
+            .label("主题")
             .help("The subject of the email")
             .placeholder("Warning: metric has a value of %{metric_name}%")
             .input_check_if_eq("notify.email.enable", ["true"], [], [Validator::Required])
@@ -607,7 +607,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Forms
             .new_form_section()
-            .title("Alert configuration")
+            .title("告警配置")
             .fields(["_id", "enable", "condition"])
             .build()
             .new_form_section()

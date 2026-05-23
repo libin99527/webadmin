@@ -76,7 +76,7 @@ impl Builder<Schemas, ()> {
             .fields(["http.url"])
             .build()
             .new_form_section()
-            .title("HTTP Headers")
+            .title("HTTP 头部")
             .fields(["http.headers", "http.use-x-forwarded"])
             .build()
             .new_form_section()
@@ -219,7 +219,7 @@ impl Builder<Schemas, ()> {
             .default("Anonymous")
             .build()
             .new_field("form.rate-limit")
-            .label("Rate limit")
+            .label("速率限制")
             .help(concat!(
                 "Maximum number of contact form submissions that can be made ",
                 "in a timeframe by a given IP address."
@@ -228,7 +228,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Rate)
             .build()
             .new_field("form.max-size")
-            .label("Max Size")
+            .label("最大大小")
             .help("Maximum size of the contact form submission in bytes.")
             .typ(Type::Size)
             .default("102400")
@@ -259,7 +259,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Security")
+            .title("安全")
             .fields(["form.rate-limit", "form.max-size", "form.validate-domain"])
             .build()
             .new_form_section()

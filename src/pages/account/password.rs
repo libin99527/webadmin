@@ -60,15 +60,15 @@ pub fn ChangePassword() -> impl IntoView {
                 Ok(_) => {
                     show_totp.set(false);
 
-                    Alert::success("Password changed")
-                        .with_details("Your password has been changed successfully")
+                    Alert::success("密码已更改")
+                        .with_details("您的密码已成功更改")
                         .without_timeout()
                 }
                 Err(Error::Unauthorized) => {
                     show_totp.set(false);
 
-                    Alert::warning("Incorrect password")
-                        .with_details("The password you entered is incorrect")
+                    Alert::warning("密码错误")
+                        .with_details("您输入的密码不正确")
                 }
                 Err(Error::TotpRequired) => {
                     show_totp.set(true);

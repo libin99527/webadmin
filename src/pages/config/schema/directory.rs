@@ -20,7 +20,7 @@ impl Builder<Schemas, ()> {
             // Type
             .new_field("type")
             .readonly()
-            .label("Type")
+            .label("类型")
             .help("Type of directory")
             .default("internal")
             .typ(Type::Select {
@@ -89,25 +89,25 @@ impl Builder<Schemas, ()> {
             .build()
             // SQL column mappings
             .new_field("columns.class")
-            .label("Type")
+            .label("类型")
             .help("Column name for account type")
             .display_if_eq("type", ["sql"])
             .input_check([Transformer::Trim], [Validator::Required])
             .new_field("columns.description")
-            .label("Description")
+            .label("描述")
             .help("Column name for account full name or description")
             .new_field("columns.quota")
             .label("Quota")
             .help("Column name for account quota")
             .input_check([Transformer::Trim], [])
             .new_field("columns.email")
-            .label("E-mail")
+            .label("电子邮件")
             .help(concat!(
                 "Column name for e-mail address. ",
                 "Optional, you can use instead a query to obtain the account's addresses."
             ))
             .new_field("columns.secret")
-            .label("Password")
+            .label("密码")
             .help(concat!(
                 "Column name for the account password. ",
                 "Optional, you can use instead a query to obtain the account's secrets."
@@ -115,7 +115,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Host
             .new_field("host")
-            .label("Hostname")
+            .label("主机名")
             .help("Hostname of the remote server")
             .display_if_eq("type", ["imap", "smtp", "lmtp"])
             .typ(Type::Input)
@@ -126,7 +126,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Port
             .new_field("port")
-            .label("Port")
+            .label("端口")
             .help("Port of the remote server")
             .display_if_eq("type", ["imap", "smtp", "lmtp"])
             .default_if_eq("type", ["lmtp"], "11200")
@@ -140,13 +140,13 @@ impl Builder<Schemas, ()> {
             .build()
             // TLS
             .new_field("tls.enable")
-            .label("Enable TLS")
+            .label("启用 TLS")
             .help("Use TLS to connect to the remote server")
             .display_if_eq("type", ["imap", "smtp", "lmtp", "ldap"])
             .default("false")
             .typ(Type::Boolean)
             .new_field("tls.allow-invalid-certs")
-            .label("Allow Invalid Certs")
+            .label("允许无效证书")
             .help("Allow invalid TLS certificates when connecting to the server")
             .default("false")
             .build()
@@ -211,12 +211,12 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("limits.rcpt")
-            .label("Max Recipients")
+            .label("最大收件人数")
             .help("Maximum number of recipients to check per session")
             .default("5")
             .build()
             .new_field("timeout")
-            .label("Timeout")
+            .label("超时")
             .help("Connection timeout to the server")
             .typ(Type::Duration)
             .display_if_eq("type", ["ldap", "smtp", "lmtp", "imap", "oidc"])
@@ -249,7 +249,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Secret)
             .build()
             .new_field("bind.auth.method")
-            .label("Method")
+            .label("方法")
             .help("Method used for verifying credentials with the LDAP server")
             .typ(Type::Select {
                 source: Source::Static(&[
@@ -290,11 +290,11 @@ impl Builder<Schemas, ()> {
             .new_field("filter.name")
             .display_if_eq("type", ["ldap"])
             .input_check([Transformer::Trim], [Validator::Required])
-            .label("Name")
+            .label("名称")
             .default("(&(|(objectClass=posixAccount)(objectClass=posixGroup))(uid=?))")
             .help("Filter used to search for objects based on the account name")
             .new_field("filter.email")
-            .label("E-mail")
+            .label("电子邮件")
             .default(concat!(
                 "(&(|(objectClass=posixAccount)(objectClass=posixGroup))",
                 "(|(mail=?)(mailAlias=?)(mailList=?)))"
@@ -304,25 +304,25 @@ impl Builder<Schemas, ()> {
                 "addresses, alias or mailing lists address"
             ))
             .new_field("attributes.name")
-            .label("Name")
+            .label("名称")
             .help("LDAP attribute for the user's account name")
             .default("uid")
             .typ(Type::Array(ArrayType::Text))
             .new_field("attributes.class")
-            .label("Type")
+            .label("类型")
             .help("LDAP attribute for the user's account type, if missing defaults to individual.")
             .default("objectClass")
             .new_field("attributes.email")
-            .label("E-mail")
+            .label("电子邮件")
             .help("LDAP attribute for the user's primary email address")
             .default("mail")
             .new_field("attributes.description")
-            .label("Description")
+            .label("描述")
             .help("LDAP attributes used to store the user's description")
             .default("description")
             .new_field("attributes.secret")
             .input_check([Transformer::Trim], [])
-            .label("Secret")
+            .label("密钥")
             .help(concat!(
                 "LDAP attribute for the user's password hash. ",
                 "This setting is required when binding as a service user. ",
@@ -340,7 +340,7 @@ impl Builder<Schemas, ()> {
             ))
             .default("pwdChangeTime")
             .new_field("attributes.groups")
-            .label("Groups")
+            .label("群组")
             .help("LDAP attributes for the groups that a user belongs to")
             .default("memberOf")
             .new_field("attributes.email-alias")
@@ -366,7 +366,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
             .build()
             .new_field("endpoint.method")
-            .label("Type")
+            .label("类型")
             .help(concat!(
                 "Type of endpoint to use for user information. ",
                 "This is used to retrieve user information from the ",
@@ -417,7 +417,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("auth.method")
-            .label("Method")
+            .label("方法")
             .help(concat!(
                 "Type of endpoint to use for user information. ",
                 "This is used to retrieve user information from the ",
@@ -530,11 +530,11 @@ impl Builder<Schemas, ()> {
             .fields(["lookup.domains"])
             .build()
             .new_form_section()
-            .title("Caching")
+            .title("缓存")
             .fields(["cache.size", "cache.ttl.positive", "cache.ttl.negative"])
             .build()
             .new_form_section()
-            .title("Limits")
+            .title("限制")
             .display_if_eq("type", ["lmtp", "smtp"])
             .fields(["limits.auth-errors", "limits.rcpt"])
             .build()
