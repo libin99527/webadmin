@@ -799,7 +799,7 @@ impl LayoutBuilder {
                     Permission::SpamFilterUpdate,
                     Permission::WebadminUpdate,
                 ]))
-                .create("Sponsor")
+                .create("赞助")
                 .icon(view! { <components::icon::IconHeart></components::icon::IconHeart> })
                 .raw_route("https://github.com/sponsors/stalwartlabs")
                 .insert(true)
@@ -809,19 +809,19 @@ impl LayoutBuilder {
 
     pub fn account(permissions: &Permissions) -> Vec<MenuItem> {
         LayoutBuilder::new("/account")
-            .create("Encryption-at-rest")
+            .create("静态加密")
             .icon(view! { <IconLockClosed/> })
             .route("/crypto")
             .insert(permissions.has_access(Permission::ManageEncryption))
-            .create("Change Password")
+            .create("修改密码")
             .icon(view! { <IconKey/> })
             .route("/password")
             .insert(permissions.has_access(Permission::ManagePasswords))
-            .create("Two-factor Auth")
+            .create("双因素认证")
             .icon(view! { <IconShieldCheck/> })
             .route("/mfa")
             .insert(permissions.has_access(Permission::ManagePasswords))
-            .create("App Passwords")
+            .create("应用密码")
             .icon(view! { <IconSquare2x2/> })
             .route("/app-passwords")
             .insert(permissions.has_access(Permission::ManagePasswords))

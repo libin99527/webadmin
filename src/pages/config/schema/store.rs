@@ -36,7 +36,7 @@ impl Builder<Schemas, ()> {
             .suffix("type")
             // Id
             .new_id_field()
-            .label("Store Id")
+            .label("存储 ID")
             .help("Unique identifier for the store")
             .build()
             // Type
@@ -69,7 +69,7 @@ impl Builder<Schemas, ()> {
             // Compression
             .new_field("compression")
             .readonly()
-            .label("Compression")
+            .label("压缩")
             .help("Algorithm to use to compress large binary objects")
             .default("lz4")
             .typ(Type::Select {
@@ -80,7 +80,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Path
             .new_field("path")
-            .label("Path")
+            .label("路径")
             .help("Where to store the data in the server's filesystem")
             .display_if_eq("type", ["rocksdb", "sqlite", "fs"])
             .typ(Type::Input)
@@ -112,7 +112,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Database name
             .new_field("database")
-            .label("Database")
+            .label("数据库")
             .help("Name of the database")
             .default("stalwart")
             .display_if_eq("type", ["postgresql", "mysql"])
@@ -121,7 +121,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Redis type
             .new_field("redis-type")
-            .label("Server Type")
+            .label("服务器类型")
             .help("Type of Redis server")
             .display_if_eq("type", ["redis"])
             .default("single")
@@ -135,7 +135,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Redis protocol version
             .new_field("protocol-version")
-            .label("Protocol version")
+            .label("协议版本")
             .help("Protocol Version")
             .display_if_eq("redis-type", ["cluster"])
             .default("resp2")
@@ -180,7 +180,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Bearer Token
             .new_field("auth.token")
-            .label("Bearer Token")
+            .label("Bearer 令牌")
             .help("Bearer token to connect to the store")
             .display_if_eq("type", ["elasticsearch", "meilisearch"])
             .typ(Type::Secret)
@@ -195,7 +195,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Purge frequency
             .new_field("purge.frequency")
-            .label("Purge Frequency")
+            .label("清除频率")
             .help("How often to purge the database. Expects a cron expression")
             .display_if_ne("type", ["redis", "memory", "elasticsearch", "meilisearch"])
             .default("0 3 *")
@@ -204,7 +204,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Workers
             .new_field("pool.workers")
-            .label("Thread Pool Size")
+            .label("线程池大小")
             .help("Number of worker threads to use for the store, defaults to the number of cores")
             .display_if_eq("type", ["rocksdb", "sqlite"])
             .placeholder("8")
@@ -219,7 +219,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Number of connections
             .new_field("pool.max-connections")
-            .label("Max Connections")
+            .label("最大连接数")
             .help("Maximum number of connections to the store")
             .display_if_eq("type", ["postgresql", "mysql", "sqlite"])
             .default("10")
@@ -233,7 +233,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("pool.min-connections")
-            .label("Min Connections")
+            .label("最小连接数")
             .help("Minimum number of connections to the store")
             .display_if_eq("type", ["mysql"])
             .default("5")
@@ -295,14 +295,14 @@ impl Builder<Schemas, ()> {
             .build()
             // Key prefix (for blob stores)
             .new_field("key-prefix")
-            .label("Key Prefix")
+            .label("密钥前缀")
             .help("A prefix that will be added to the keys of all objects stored in the blob store")
             .display_if_eq("type", ["s3", "azure"])
             .input_check([Transformer::Trim], [])
             .build()
             // SQL directory specific
             .new_field("query.name")
-            .label("Account by Name")
+            .label("按名称查找账户")
             .help("Query to obtain the account details by login name")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
@@ -311,13 +311,13 @@ impl Builder<Schemas, ()> {
             .placeholder_if_eq("type", ["mysql"], MYSQL_NAME)
             .placeholder_if_eq("type", ["sqlite"], SQLITE_NAME)
             .new_field("query.members")
-            .label("Members by Name")
+            .label("按名称查找成员")
             .help("Query to obtain the members of a group by account name")
             .placeholder_if_eq("type", ["postgresql"], PGSQL_MEMBERS)
             .placeholder_if_eq("type", ["mysql"], MYSQL_MEMBERS)
             .placeholder_if_eq("type", ["sqlite"], SQLITE_MEMBERS)
             .new_field("query.recipients")
-            .label("Name by E-mail")
+            .label("按邮箱查找名称")
             .help(concat!(
                 "Query to obtain the account name ",
                 "associated with an e-mail address."
@@ -326,7 +326,7 @@ impl Builder<Schemas, ()> {
             .placeholder_if_eq("type", ["mysql"], MYSQL_RECIPIENTS)
             .placeholder_if_eq("type", ["sqlite"], SQLITE_RECIPIENTS)
             .new_field("query.emails")
-            .label("E-mails by Name")
+            .label("按名称查找邮箱")
             .help(concat!(
                 "Query to obtain the e-mail address(es) of an account. ",
                 "Optional, you may also obtain a single ",
@@ -336,7 +336,7 @@ impl Builder<Schemas, ()> {
             .placeholder_if_eq("type", ["mysql"], MYSQL_EMAILS)
             .placeholder_if_eq("type", ["sqlite"], SQLITE_EMAILS)
             .new_field("query.secrets")
-            .label("Passwords by Name")
+            .label("按名称查找密码")
             .help(concat!(
                 "Query to obtain all the account's secrets. ",
                 "Optional, you may also obtain a single secret ",
@@ -348,7 +348,7 @@ impl Builder<Schemas, ()> {
             .build()
             // RocksDB specific
             .new_field("settings.min-blob-size")
-            .label("Min blob size")
+            .label("最小 Blob 大小")
             .help(concat!(
                 "Minimum size of a blob to store in the blob store, ",
                 "smaller blobs are stored in the metadata store"
@@ -364,7 +364,7 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("settings.write-buffer-size")
-            .label("Write buffer size")
+            .label("写缓冲区大小")
             .help(concat!(
                 "Size of the write buffer in bytes, ",
                 "used to batch writes to the store"
@@ -381,7 +381,7 @@ impl Builder<Schemas, ()> {
             .build()
             // FoundationDB specific
             .new_field("cluster-file")
-            .label("Cluster file")
+            .label("集群文件")
             .help("Path to the cluster file for the FoundationDB cluster")
             .display_if_eq("type", ["foundationdb"])
             .placeholder("/etc/foundationdb/fdb.cluster")
@@ -393,7 +393,7 @@ impl Builder<Schemas, ()> {
             .placeholder("5s")
             .typ(Type::Duration)
             .new_field("transaction.max-retry-delay")
-            .label("Max Retry Delay")
+            .label("最大重试延迟")
             .help("Transaction maximum retry delay")
             .placeholder("1s")
             .typ(Type::Duration)
@@ -410,19 +410,19 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("ids.machine")
-            .label("Machine Id")
+            .label("机器 ID")
             .help("Machine ID in the FoundationDB cluster (optional)")
             .placeholder("my-server-id")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::IsId])
             .new_field("ids.datacenter")
-            .label("Data Center Id")
+            .label("数据中心 ID")
             .help("Data center ID (optional)")
             .placeholder("my-datacenter-id")
             .build()
             // mySQL specific
             .new_field("max-allowed-packet")
-            .label("Max Allowed Packet")
+            .label("最大允许数据包")
             .help("Maximum size of a packet in bytes")
             .display_if_eq("type", ["mysql"])
             .placeholder("1073741824")
@@ -439,7 +439,7 @@ impl Builder<Schemas, ()> {
             .new_field("index.shards")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
-            .label("Number of Shards")
+            .label("分片数")
             .help("Number of shards for the index")
             .default("3")
             .typ(Type::Input)
@@ -451,7 +451,7 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("index.replicas")
-            .label("Number of Replicas")
+            .label("副本数")
             .help("Number of replicas for the index")
             .default("0")
             .typ(Type::Input)
@@ -465,7 +465,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Meilisearch specific
             .new_field("task.poll-interval")
-            .label("Interval")
+            .label("间隔")
             .help("Interval between polling for task status")
             .display_if_eq("type", ["meilisearch"])
             .default("500ms")
@@ -489,7 +489,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Redis specific
             .new_field("urls")
-            .label("URL(s)")
+            .label("URL")
             .help("URL(s) of the Redis server(s)")
             .display_if_eq("type", ["redis"])
             .default("redis://127.0.0.1")
@@ -510,43 +510,43 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("retry.max-wait")
-            .label("Max Wait")
+            .label("最大等待时间")
             .help("Maximum time to wait between retries")
             .placeholder("1s")
             .typ(Type::Duration)
             .new_field("retry.min-wait")
-            .label("Min Wait")
+            .label("最小等待时间")
             .help("Minimum time to wait between retries")
             .placeholder("500ms")
             .build()
             .new_field("read-from-replicas")
-            .label("Read from replicas")
+            .label("从副本读取")
             .help("Whether to read from replicas")
             .default("true")
             .typ(Type::Boolean)
             .build()
             // Nats specific
             .new_field("address")
-            .label("Server Address")
+            .label("服务器地址")
             .help("Address of the NATS server")
             .display_if_eq("type", ["nats"])
             .default("127.0.0.1:4444")
             .typ(Type::Array(ArrayType::Text))
             .build()
             .new_field("no-echo")
-            .label("No Echo")
+            .label("禁止回显")
             .help("Disables delivering messages that were published from the same connection.")
             .display_if_eq("type", ["nats"])
             .default("true")
             .typ(Type::Boolean)
             .build()
             .new_field("max-reconnects")
-            .label("Max Reconnects")
+            .label("最大重连次数")
             .help("Maximum number of times to attempt to reconnect to the server")
             .display_if_eq("type", ["nats"])
             .build()
             .new_field("timeout.connection")
-            .label("Connection Timeout")
+            .label("连接超时")
             .help("Timeout for establishing a connection to the server")
             .display_if_eq("type", ["nats"])
             .default("5s")
@@ -554,7 +554,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("timeout.request")
-            .label("Request Timeout")
+            .label("请求超时")
             .help("Timeout for requests to the server")
             .display_if_eq("type", ["nats"])
             .default("10s")
@@ -562,7 +562,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("ping-interval")
-            .label("Ping Interval")
+            .label("Ping 间隔")
             .help("Interval between pings to the server")
             .display_if_eq("type", ["nats"])
             .default("60s")
@@ -570,13 +570,13 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("credentials")
-            .label("JWT Credentials")
+            .label("JWT 凭证")
             .help("String containing the JWT credentials")
             .display_if_eq("type", ["nats"])
             .typ(Type::Text)
             .build()
             .new_field("capacity.client")
-            .label("Client Capacity")
+            .label("客户端容量")
             .help(concat!(
                 "By default, Client dispatches op's to the Client onto the ",
                 "channel with capacity of 2048. This option enables overriding it"
@@ -587,7 +587,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("capacity.subscription")
-            .label("Subscription Capacity")
+            .label("订阅容量")
             .help(concat!(
                 "Sets the capacity for Subscribers. Exceeding it will ",
                 "trigger slow consumer error callback and drop messages."
@@ -598,7 +598,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("capacity.read-buffer")
-            .label("Read Buffer Capacity")
+            .label("读缓冲区容量")
             .help(concat!(
                 "Sets the initial capacity of the read buffer. Which ",
                 "is a buffer used to gather partial protocol messages."
@@ -617,7 +617,7 @@ impl Builder<Schemas, ()> {
             .placeholder("stalwart")
             .display_if_eq("type", ["s3"])
             .new_field("region")
-            .label("Region")
+            .label("区域")
             .help("The geographical region where the bucket resides")
             .placeholder("us-east-1")
             .new_field("endpoint")
@@ -629,17 +629,17 @@ impl Builder<Schemas, ()> {
             ))
             .label("端点")
             .new_field("access-key")
-            .label("Access Key")
+            .label("访问密钥")
             .help("Identifies the S3 account")
             .new_field("secret-key")
-            .label("Secret Key")
+            .label("密钥")
             .help("The secret key for the S3 account")
             .typ(Type::Secret)
             .new_field("security-token")
-            .label("Security Token")
+            .label("安全令牌")
             .input_check([Transformer::Trim], [])
             .new_field("profile")
-            .label("Profile")
+            .label("配置文件")
             .typ(Type::Input)
             .help(concat!(
                 "Used when retrieving credentials from a shared credentials file. If specified, ",
@@ -650,7 +650,7 @@ impl Builder<Schemas, ()> {
             // Azure specific
             .new_field("storage-account")
             .typ(Type::Input)
-            .label("Storage Account Name")
+            .label("存储账户名称")
             .help(concat!(
                 "The Azure Storage Account where blobs (e-mail messages, ",
                 "Sieve scripts, etc.) will be stored"
@@ -660,24 +660,24 @@ impl Builder<Schemas, ()> {
             .display_if_eq("type", ["azure"])
             .new_field("container")
             .typ(Type::Input)
-            .label("Container")
+            .label("容器")
             .help("The name of the container in the Storage Account")
             .input_check([Transformer::Trim], [Validator::Required])
             .placeholder("stalwart")
             .new_field("azure-access-key")
-            .label("Access Key")
+            .label("访问密钥")
             .help("The access key for the Azure Storage Account")
             .typ(Type::Secret)
             .input_check([Transformer::Trim], [])
             .new_field("sas-token")
-            .label("SAS Token")
+            .label("SAS 令牌")
             .help("SAS Token, when not using access-key based authentication")
             .typ(Type::Secret)
             .input_check([Transformer::Trim], [])
             .build()
             // FS specific
             .new_field("depth")
-            .label("Nested Depth")
+            .label("嵌套深度")
             .help("Maximum depth of nested directories")
             .display_if_eq("type", ["fs"])
             .default("2")
@@ -689,7 +689,7 @@ impl Builder<Schemas, ()> {
             .build()
             // SQL read replicas
             .new_field("primary")
-            .label("Primary SQL")
+            .label("主 SQL")
             .help("Primary SQL store where the data is written")
             .display_if_eq("type", ["sql-read-replica"])
             .typ(Type::Select {
@@ -703,7 +703,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("replicas")
-            .label("Read replicas")
+            .label("读副本")
             .help("The read replicas where the data is read from")
             .display_if_eq("type", ["sql-read-replica"])
             .typ(Type::Select {
@@ -718,7 +718,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Sharded blobs
             .new_field("stores")
-            .label("Blob stores")
+            .label("Blob 存储")
             .help("Blob stores to use for the sharded blob store")
             .display_if_eq("type", ["sharded-blob"])
             .typ(Type::Select {
@@ -733,7 +733,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Sharded In-memory
             .new_field("stores")
-            .label("In-memory stores")
+            .label("内存存储")
             .help("In-memory stores to use for the sharded in-memory store")
             .display_if_eq("type", ["sharded-in-memory"])
             .typ(Type::Select {
@@ -748,7 +748,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Form layouts
             .new_form_section()
-            .title("Configuration")
+            .title("配置")
             .fields([
                 "_id",
                 "type",
@@ -782,7 +782,7 @@ impl Builder<Schemas, ()> {
             .fields(["bucket", "key-prefix"])
             .build()
             .new_form_section()
-            .title("PubSub")
+            .title("发布订阅")
             .display_if_eq("type", ["nats"])
             .fields([
                 "capacity.client",
@@ -792,7 +792,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Storage Account")
+            .title("存储账户")
             .display_if_eq("type", ["azure"])
             .fields(["storage-account", "container", "key-prefix"])
             .build()
@@ -826,7 +826,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Storage settings")
+            .title("存储设置")
             .display_if_eq(
                 "type",
                 [
@@ -866,7 +866,7 @@ impl Builder<Schemas, ()> {
             .fields(["tls.enable", "tls.allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Pools")
+            .title("连接池")
             .display_if_eq("type", ["rocksdb", "sqlite", "postgresql", "mysql"])
             .fields([
                 "pool.workers",
@@ -890,7 +890,7 @@ impl Builder<Schemas, ()> {
             .fields(["ids.machine", "ids.datacenter"])
             .build()
             .new_form_section()
-            .title("Transaction Settings")
+            .title("事务设置")
             .display_if_eq("type", ["foundationdb"])
             .fields([
                 "transaction.timeout",
@@ -899,7 +899,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Directory Queries")
+            .title("目录查询")
             .display_if_eq("type", ["postgresql", "mysql", "sqlite"])
             .fields([
                 "query.name",
@@ -910,12 +910,12 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Index")
+            .title("索引")
             .display_if_eq("type", ["elasticsearch"])
             .fields(["index.shards", "index.replicas"])
             .build()
             .new_form_section()
-            .title("Task Polling")
+            .title("任务轮询")
             .display_if_eq("type", ["meilisearch"])
             .fields(["task.poll-interval", "task.poll-retries"])
             .build()
@@ -929,11 +929,11 @@ impl Builder<Schemas, ()> {
             .prefix("http-lookup")
             .suffix("url")
             .new_id_field()
-            .label("List ID")
+            .label("列表 ID")
             .help("Unique identifier for the HTTP list")
             .build()
             .new_field("enable")
-            .label("Enable list")
+            .label("启用列表")
             .help("Whether to enable this HTTP list")
             .default("true")
             .typ(Type::Boolean)
@@ -945,7 +945,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
             .build()
             .new_field("format")
-            .label("Format")
+            .label("格式")
             .help("Format of the list")
             .default("csv")
             .typ(Type::Select {
@@ -964,7 +964,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("format", ["csv"])
             .build()
             .new_field("index.key")
-            .label("Key Index")
+            .label("密钥索引")
             .help(concat!("The position of the key field in the HTTP List.",))
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
@@ -972,21 +972,21 @@ impl Builder<Schemas, ()> {
             .display_if_eq("format", ["csv"])
             .build()
             .new_field("index.value")
-            .label("Value Index")
+            .label("值索引")
             .help(concat!("The position of the value field in the HTTP List.",))
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .display_if_eq("format", ["csv"])
             .build()
             .new_field("skip-first")
-            .label("Skip header")
+            .label("跳过头部")
             .help("Whether to skip the first line of the list")
             .default("false")
             .typ(Type::Boolean)
             .display_if_eq("format", ["csv"])
             .build()
             .new_field("retry")
-            .label("Retry")
+            .label("重试")
             .help(concat!(
                 "How long to wait before retrying to download the list ",
                 "in case of failure."
@@ -1004,7 +1004,7 @@ impl Builder<Schemas, ()> {
             .default("30s")
             .build()
             .new_field("gzipped")
-            .label("Gzipped")
+            .label("Gzip 压缩")
             .help("Whether to use gzip compression when downloading the list")
             .default("false")
             .typ(Type::Boolean)
@@ -1027,7 +1027,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("limits.entries")
-            .label("Max entries")
+            .label("最大条目数")
             .help(concat!(
                 "Maximum number of entries allowed in the list. ",
                 "The list is truncated if it exceeds this limit."
@@ -1044,7 +1044,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("limits.entry-size")
-            .label("Entry length")
+            .label("条目长度")
             .help(concat!("Maximum length of an entry in the list. "))
             .default("512")
             .typ(Type::Size)
@@ -1058,7 +1058,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("HTTP List Settings")
+            .title("HTTP 列表设置")
             .fields(["_id", "url", "format", "gzipped", "enable"])
             .build()
             .new_form_section()
@@ -1067,7 +1067,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("format", ["csv"])
             .build()
             .new_form_section()
-            .title("Configuration")
+            .title("配置")
             .fields(["retry", "refresh", "timeout"])
             .build()
             .new_form_section()

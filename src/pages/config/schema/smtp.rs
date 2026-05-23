@@ -38,7 +38,7 @@ impl Builder<Schemas, ()> {
                 [Validator::Required, Validator::IsValidExpression(host_vars)],
             )
             .new_field("queue.strategy.schedule")
-            .label("Scheduling")
+            .label("调度")
             .help(concat!(
                 "An expression that returns the scheduling strategy to use ",
                 "when queueing messages"
@@ -80,7 +80,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("Outbound Strategies")
+            .title("出站策略")
             .fields([
                 "queue.strategy.route",
                 "queue.strategy.schedule",
@@ -92,7 +92,7 @@ impl Builder<Schemas, ()> {
             // Resolver
             .new_schema("smtp-out-resolver")
             .new_field("resolver.type")
-            .label("Resolver")
+            .label("解析器")
             .help(concat!("Resolver to use for DNS resolution"))
             .default("system")
             .typ(Type::Select {
@@ -110,7 +110,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("resolver.custom")
-            .label("DNS Servers")
+            .label("DNS 服务器")
             .help(concat!(
                 "List of custom DNS server URLs to use for resolution"
             ))
@@ -120,7 +120,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("resolver.type", ["custom"])
             .build()
             .new_field("resolver.preserve-intermediates")
-            .label("Preserve Intermediates")
+            .label("保留中间证书")
             .help(concat!(
                 "Whether to preserve the intermediate name servers in the ",
                 "DNS resolution results"
@@ -130,7 +130,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("resolver.edns")
-            .label("Enable EDNS")
+            .label("启用 EDNS")
             .help(concat!(
                 "Whether to enable EDNS (Extension Mechanisms for DNS) support"
             ))
@@ -139,7 +139,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("resolver.concurrency")
-            .label("Concurrent Requests")
+            .label("并发请求")
             .help(concat!(
                 "Number of concurrent resolution requests that can be made ",
                 "at the same time"
@@ -169,7 +169,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("resolver.try-tcp-on-error")
-            .label("Try TCP on Error")
+            .label("错误时尝试 TCP")
             .help(concat!(
                 "Whether to try using TCP for resolution requests if an error ",
                 "occurs during a UDP resolution request"
@@ -179,7 +179,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("DNS Resolver settings")
+            .title("DNS 解析器设置")
             .fields([
                 "resolver.type",
                 "resolver.custom",
@@ -226,7 +226,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("ip-lookup")
             .display_if_eq("type", ["mx"])
-            .label("IP Resolution")
+            .label("IP 解析")
             .help("IP resolution strategy for MX hosts")
             .default("ipv4_then_ipv6")
             .typ(Type::Select {
@@ -241,7 +241,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("limits.mx")
             .display_if_eq("type", ["mx"])
-            .label("MX Hosts")
+            .label("MX 主机")
             .help(concat!(
                 "Maximum number of MX hosts to try on each delivery attempt"
             ))
@@ -251,7 +251,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("limits.multihomed")
             .display_if_eq("type", ["mx"])
-            .label("Multi-homed IPs")
+            .label("多宿主 IP")
             .help(concat!(
                 "For multi-homed remote servers, it is the maximum number of ",
                 "IP addresses to try on each delivery attempt"
@@ -262,7 +262,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("address")
             .display_if_eq("type", ["relay"])
-            .label("Address")
+            .label("地址")
             .help(concat!(
                 "The address of the remote SMTP server, which can be an IP ",
                 "address or a domain name"
@@ -297,7 +297,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("tls.implicit")
             .display_if_eq("type", ["relay"])
-            .label("Implicit TLS")
+            .label("隐式 TLS")
             .help(concat!(
                 "Whether to use TLS encryption for all connections to the remote ",
                 "server"
@@ -331,16 +331,16 @@ impl Builder<Schemas, ()> {
             .typ(Type::Secret)
             .build()
             .new_form_section()
-            .title("Route Configuration")
+            .title("路由配置")
             .fields(["_id", "type", "description"])
             .build()
             .new_form_section()
-            .title("MX Resolution")
+            .title("MX 解析")
             .display_if_eq("type", ["mx"])
             .fields(["ip-lookup", "limits.mx", "limits.multihomed"])
             .build()
             .new_form_section()
-            .title("Server Details")
+            .title("服务器详情")
             .display_if_eq("type", ["relay"])
             .fields(["address", "port", "protocol"])
             .build()
@@ -376,7 +376,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("threads-per-node")
-            .label("Delivery Threads")
+            .label("投递线程数")
             .help(concat!(
                 "Maximum number of threads to use for  delivery ",
                 "on each node in the cluster"
@@ -395,7 +395,7 @@ impl Builder<Schemas, ()> {
             .placeholder("Queue description")
             .build()
             .new_form_section()
-            .title("Virtual Queue")
+            .title("虚拟队列")
             .fields(["_id", "description", "threads-per-node"])
             .build()
             .list_title("Virtual Queues")
@@ -412,7 +412,7 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the schedule")
             .build()
             .new_field("queue-name")
-            .label("Virtual Queue")
+            .label("虚拟队列")
             .help(concat!(
                 "The name of the virtual queue to use for this schedule"
             ))
@@ -436,21 +436,21 @@ impl Builder<Schemas, ()> {
             .placeholder("Schedule description")
             .build()
             .new_field("retry")
-            .label("Retry Intervals")
+            .label("重试间隔")
             .help(concat!("List of retry intervals for message delivery"))
             .default(&["2m", "5m", "10m", "15m", "30m", "1h", "2h"][..])
             .typ(Type::Array(ArrayType::Duration))
             .input_check([], [Validator::Required])
             .build()
             .new_field("notify")
-            .label("Notify Intervals")
+            .label("通知间隔")
             .help(concat!(
                 "List of delayed delivery DSN notification intervals"
             ))
             .typ(Type::Array(ArrayType::Duration))
             .build()
             .new_field("expire-type")
-            .label("Expiration Strategy")
+            .label("过期策略")
             .help(concat!(
                 "Whether to expire messages after a number of delivery ",
                 "attempts or after certain time (TTL)"
@@ -466,7 +466,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("expire")
             .display_if_eq("expire-type", ["ttl"])
-            .label("Time To Live")
+            .label("生存时间")
             .help(concat!(
                 "Time after which the message will be expired if it is not ",
                 "delivered"
@@ -487,19 +487,19 @@ impl Builder<Schemas, ()> {
             .default("5")
             .build()
             .new_form_section()
-            .title("Schedule Details")
+            .title("调度详情")
             .fields(["_id", "queue-name", "description"])
             .build()
             .new_form_section()
-            .title("Delivery Retry Intervals")
+            .title("投递重试间隔")
             .fields(["retry"])
             .build()
             .new_form_section()
-            .title("Delayed Delivery Notifications")
+            .title("延迟投递通知")
             .fields(["notify"])
             .build()
             .new_form_section()
-            .title("Message Expiration")
+            .title("消息过期")
             .fields(["expire-type", "expire", "max-attempts"])
             .build()
             .list_title("Schedules")
@@ -585,15 +585,15 @@ impl Builder<Schemas, ()> {
             .placeholder("TLS Strategy description")
             .build()
             .new_form_section()
-            .title("TLS Strategy")
+            .title("TLS 策略")
             .fields(["_id", "description"])
             .build()
             .new_form_section()
-            .title("Security Requirements")
+            .title("安全要求")
             .fields(["dane", "mta-sts", "starttls", "allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Timeouts")
+            .title("超时")
             .fields(["timeout.tls", "timeout.mta-sts"])
             .build()
             .list_title("TLS Strategies")
@@ -610,7 +610,7 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the connection strategy")
             .build()
             .new_field("source-ips")
-            .label("Source IPs")
+            .label("源 IP")
             .help(concat!(
                 "List of local IPv4 and IPv6 addresses to use when ",
                 "delivering emails to remote SMTP servers"
@@ -619,7 +619,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::IsIpOrMask])
             .build()
             .new_field("ehlo-hostname")
-            .label("EHLO Hostname")
+            .label("EHLO 主机名")
             .help(concat!(
                 "Overrides the EHLO hostname that will be used when ",
                 "connecting to remote SMTP servers"
@@ -629,7 +629,7 @@ impl Builder<Schemas, ()> {
             .placeholder("mail.example.com")
             .build()
             .new_field("timeout.connect")
-            .label("Connect")
+            .label("连接")
             .help(concat!(
                 "Maximum time to wait for the connection to be established"
             ))
@@ -638,7 +638,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("timeout.greeting")
-            .label("Greeting")
+            .label("问候语")
             .help(concat!(
                 "Maximum time to wait for the SMTP greeting message"
             ))
@@ -688,11 +688,11 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .build()
             .new_form_section()
-            .title("Connection Strategy")
+            .title("连接策略")
             .fields(["_id", "description", "ehlo-hostname"])
             .build()
             .new_form_section()
-            .title("Timeouts")
+            .title("超时")
             .fields([
                 "timeout.connect",
                 "timeout.greeting",
@@ -703,7 +703,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Source IP Addresses")
+            .title("源 IP 地址")
             .fields(["source-ips"])
             .build()
             .list_title("Connection Strategies")
@@ -716,7 +716,7 @@ impl Builder<Schemas, ()> {
             .names("throttle", "throttles")
             .suffix("enable")
             .new_id_field()
-            .label("Limiter ID")
+            .label("限制器 ID")
             .help("Unique identifier for the throttle")
             .build()
             .new_field("enable")
@@ -771,7 +771,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Rate)
             .build()
             .new_form_section()
-            .title("Outbound Rate Limiter")
+            .title("出站速率限制")
             .fields(["_id", "key", "rate", "match", "enable"])
             .build()
             .list_title("Outbound Rate Limits")
@@ -784,7 +784,7 @@ impl Builder<Schemas, ()> {
             .names("quota", "quotas")
             .suffix("enable")
             .new_id_field()
-            .label("Quota ID")
+            .label("配额 ID")
             .help("Unique identifier for the quota")
             .build()
             .new_field("enable")
@@ -828,7 +828,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("messages")
-            .label("Max Messages")
+            .label("最大消息数")
             .help(concat!(
                 "Maximum number of messages in the queue that ",
                 "this quota will allow"
@@ -845,7 +845,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Size)
             .build()
             .new_form_section()
-            .title("Quota")
+            .title("配额")
             .fields(["_id", "key", "messages", "size", "match", "enable"])
             .build()
             .list_title("Quota Queues")
@@ -868,11 +868,11 @@ impl Builder<Schemas, ()> {
             .help("Which Sieve script to run when a client connects")
             .input_check([], [Validator::IsValidExpression(has_conn_vars)])
             .new_field("session.connect.greeting")
-            .label("SMTP greeting")
+            .label("SMTP 问候语")
             .help("The greeting message sent by the SMTP/LMTP server")
             .default("config_get('server.hostname') + ' Stalwart ESMTP at your service'")
             .new_field("session.connect.hostname")
-            .label("Server hostname")
+            .label("服务器主机名")
             .help("The SMTP server hostname")
             .input_check(
                 [],
@@ -885,7 +885,7 @@ impl Builder<Schemas, ()> {
             .build()
             .new_field("auth.iprev.verify")
             .typ(Type::Expression)
-            .label("IPRev Verify")
+            .label("IPRev 验证")
             .help("How strict to be when verifying the reverse DNS of the client IP")
             .input_check(
                 [],
@@ -900,7 +900,7 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_form_section()
-            .title("Connect Stage")
+            .title("连接阶段")
             .fields([
                 "session.connect.hostname",
                 "session.connect.greeting",
@@ -912,7 +912,7 @@ impl Builder<Schemas, ()> {
             // EHLO stage
             .new_schema("smtp-in-ehlo")
             .new_field("session.ehlo.require")
-            .label("Require EHLO")
+            .label("要求 EHLO")
             .typ(Type::Expression)
             .input_check(
                 [],
@@ -928,7 +928,7 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_field("session.ehlo.reject-non-fqdn")
-            .label("Reject Non-FQDN")
+            .label("拒绝非 FQDN")
             .typ(Type::Expression)
             .input_check(
                 [],
@@ -950,7 +950,7 @@ impl Builder<Schemas, ()> {
             .help("Which Sieve script to run after the client sends an EHLO command")
             .build()
             .new_form_section()
-            .title("EHLO Stage")
+            .title("EHLO 阶段")
             .fields([
                 "session.ehlo.require",
                 "session.ehlo.reject-non-fqdn",
@@ -973,16 +973,16 @@ impl Builder<Schemas, ()> {
             .default("5m")
             .help("How long to wait for a client to send a command before timing out")
             .new_field("session.transfer-limit")
-            .label("Bytes Limit")
+            .label("字节限制")
             .default("262144000")
             .help("The maximum number of bytes that can be transferred per session")
             .new_field("session.duration")
-            .label("Duration")
+            .label("持续时间")
             .default("10m")
             .help("The maximum duration of a session")
             .build()
             .new_form_section()
-            .title("SMTP Session Limits")
+            .title("SMTP 会话限制")
             .fields([
                 "session.timeout",
                 "session.transfer-limit",
@@ -993,7 +993,7 @@ impl Builder<Schemas, ()> {
             // Extensions
             .new_schema("smtp-in-extensions")
             .new_field("session.extensions.pipelining")
-            .label("Pipelining")
+            .label("管道化")
             .typ(Type::Expression)
             .input_check(
                 [],
@@ -1009,7 +1009,7 @@ impl Builder<Schemas, ()> {
                 "between the client and server"
             ))
             .new_field("session.extensions.chunking")
-            .label("Chunking")
+            .label("分块")
             .help(concat!(
                 "Enables chunking (RFC 1830), an extension that allows large ",
                 "messages to be transferred in chunks which may reduce the load ",
@@ -1017,14 +1017,14 @@ impl Builder<Schemas, ()> {
             ))
             .default("true")
             .new_field("session.extensions.requiretls")
-            .label("Require TLS")
+            .label("要求 TLS")
             .help(concat!(
                 "Enables require TLS (RFC 8689), an extension that allows",
                 " clients to require TLS encryption for the SMTP session"
             ))
             .default("true")
             .new_field("session.extensions.no-soliciting")
-            .label("No-Soliciting")
+            .label("禁止推销")
             .help(concat!(
                 "Specifies the text to include in the NOSOLICITING (RFC 3865) ",
                 "message, which indicates that the server does not accept unsolicited ",
@@ -1067,7 +1067,7 @@ impl Builder<Schemas, ()> {
                 "false",
             ))
             .new_field("session.extensions.future-release")
-            .label("Future Release")
+            .label("延迟发送")
             .help(concat!(
                 "Specifies the maximum time that a message can be held for ",
                 "delivery using the FUTURERELEASE (RFC 4865) extension"
@@ -1077,7 +1077,7 @@ impl Builder<Schemas, ()> {
                 "false",
             ))
             .new_field("session.extensions.deliver-by")
-            .label("Deliver By")
+            .label("投递期限")
             .help(concat!(
                 "Specifies the maximum delivery time for a message using the ",
                 "DELIVERBY (RFC 2852) extension, which allows the sender to request ",
@@ -1088,7 +1088,7 @@ impl Builder<Schemas, ()> {
                 "false",
             ))
             .new_field("session.extensions.mt-priority")
-            .label("MT Priority")
+            .label("MT 优先级")
             .help(concat!(
                 "Specifies the priority assignment policy to advertise on the ",
                 "MT-PRIORITY (RFC 6710) extension, which allows the sender to specify ",
@@ -1112,7 +1112,7 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_form_section()
-            .title("SMTP Extensions")
+            .title("SMTP 扩展")
             .fields([
                 "session.extensions.pipelining",
                 "session.extensions.chunking",
@@ -1130,7 +1130,7 @@ impl Builder<Schemas, ()> {
             // AUTH stage
             .new_schema("smtp-in-auth")
             .new_field("session.auth.require")
-            .label("Require Authentication")
+            .label("要求认证")
             .help(concat!(
                 "Specifies whether authentication is necessary to send email messages"
             ))
@@ -1144,7 +1144,7 @@ impl Builder<Schemas, ()> {
             )
             .default(Expression::new([("local_port != 25", "true")], "false"))
             .new_field("session.auth.must-match-sender")
-            .label("Must match sender")
+            .label("必须匹配发件人")
             .help(concat!(
                 "Specifies whether the authenticated user or any of their associated ",
                 "e-mail addresses must match the sender of the email message"
@@ -1170,18 +1170,18 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("session.auth.errors.total")
-            .label("Max Errors")
+            .label("最大错误数")
             .help(concat!(
                 "Maximum number of authentication errors allowed before the session ",
                 "is disconnected"
             ))
             .default("3")
             .new_field("session.auth.errors.wait")
-            .label("Error wait")
+            .label("错误等待")
             .help("Time interval to wait after an authentication failure")
             .default("5s")
             .new_field("session.auth.mechanisms")
-            .label("Allowed Mechanisms")
+            .label("允许的认证机制")
             .help(concat!(
                 "A list of SASL authentication mechanisms offered to clients, or an ",
                 "empty list to disable authentication. Stalwart SMTP currently supports PLAIN, ",
@@ -1221,7 +1221,7 @@ impl Builder<Schemas, ()> {
             // MAIL stage
             .new_schema("smtp-in-mail")
             .new_field("session.mail.rewrite")
-            .label("Sender Rewriting")
+            .label("发件人重写")
             .help("Expression to rewrite the sender address")
             .typ(Type::Expression)
             .input_check(
@@ -1237,7 +1237,7 @@ impl Builder<Schemas, ()> {
             .help("Which Sieve script to run after the client sends a MAIL command")
             .input_check([], [Validator::IsValidExpression(has_sender_vars)])
             .new_field("session.mail.is-allowed")
-            .label("Sender is allowed")
+            .label("允许的发件人")
             .help("Expression that returns true when the sender is allowed to send")
             .input_check([], [Validator::IsValidExpression(has_sender_vars)])
             .default(Expression::new(
@@ -1246,7 +1246,7 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_form_section()
-            .title("MAIL FROM Stage")
+            .title("MAIL FROM 阶段")
             .fields([
                 "session.mail.rewrite",
                 "session.mail.is-allowed",
@@ -1269,7 +1269,7 @@ impl Builder<Schemas, ()> {
                 ],
             )
             .new_field("session.rcpt.relay")
-            .label("Allow Relaying")
+            .label("允许中继")
             .help("Whether to allow relaying for non-local recipients")
             .default(Expression::new(
                 [("!is_empty(authenticated_as)", "true")],
@@ -1280,18 +1280,18 @@ impl Builder<Schemas, ()> {
             .help("Maximum number of recipients per message")
             .default("100")
             .new_field("session.rcpt.rewrite")
-            .label("Recipient Rewriting")
+            .label("收件人重写")
             .help("Expression to rewrite the recipient address")
             .default("false")
             .new_field("session.rcpt.errors.total")
-            .label("Max Errors")
+            .label("最大错误数")
             .help(concat!(
                 "Maximum number of recipient errors before ",
                 "the session is disconnected"
             ))
             .default("5")
             .new_field("session.rcpt.errors.wait")
-            .label("Error wait")
+            .label("错误等待")
             .help("Amount of time to wait after a recipient error")
             .default("5s")
             .new_field("session.rcpt.script")
@@ -1300,18 +1300,18 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::IsValidExpression(has_rcpt_vars)])
             .build()
             .new_field("session.rcpt.catch-all")
-            .label("Catch-all")
+            .label("全部捕获")
             .help("Expression to enable catch-all address")
             .typ(Type::Expression)
             .input_check([], [Validator::IsValidExpression(has_rcpt_vars)])
             .default("true")
             .new_field("session.rcpt.sub-addressing")
-            .label("Sub-addressing")
+            .label("子地址")
             .help("Expression to enable sub-addressing")
             .default("true")
             .build()
             .new_form_section()
-            .title("RCPT TO Stage")
+            .title("RCPT TO 阶段")
             .fields([
                 "session.rcpt.directory",
                 "session.rcpt.relay",
@@ -1328,7 +1328,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Recipient Errors")
+            .title("收件人错误")
             .fields(["session.rcpt.errors.total", "session.rcpt.errors.wait"])
             .build()
             .build()
@@ -1340,7 +1340,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Expression)
             .input_check([], [Validator::IsValidExpression(has_rcpt_vars)])
             .new_field("session.data.spam-filter")
-            .label("Spam filtering")
+            .label("垃圾邮件过滤")
             .help("Whether to enable the spam filter for incoming messages")
             .default(Expression::new([], "true"))
             .typ(Type::Expression)
@@ -1368,7 +1368,7 @@ impl Builder<Schemas, ()> {
             ))
             .default("50")
             .new_field("session.data.add-headers.received")
-            .label("Received")
+            .label("已接收")
             .help("Whether to add a Received header to the message")
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .new_field("session.data.add-headers.received-spf")
@@ -1376,15 +1376,15 @@ impl Builder<Schemas, ()> {
             .help("Whether to add a Received-SPF header to the message")
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .new_field("session.data.add-headers.auth-results")
-            .label("Authentication-Results")
+            .label("认证结果")
             .help("Whether to add an Authentication-Results header to the message")
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .new_field("session.data.add-headers.message-id")
-            .label("Message-Id")
+            .label("消息 ID")
             .help("Whether to add a Message-Id header to the message")
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .new_field("session.data.add-headers.date")
-            .label("Date")
+            .label("日期")
             .help("Whether to add a Date header to the message")
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .new_field("session.data.add-headers.return-path")
@@ -1392,12 +1392,12 @@ impl Builder<Schemas, ()> {
             .help("Whether to add a Return-Path header to the message")
             .default(Expression::new([("local_port == 25", "true")], "false"))
             .new_field("session.data.add-headers.delivered-to")
-            .label("Delivered-To")
+            .label("投递至")
             .help("Whether to add a Delivered-To header to the message")
             .default(Expression::new([], "true"))
             .build()
             .new_form_section()
-            .title("DATA Stage")
+            .title("DATA 阶段")
             .fields(["session.data.spam-filter", "session.data.script"])
             .build()
             .new_form_section()
@@ -1427,7 +1427,7 @@ impl Builder<Schemas, ()> {
             .names("throttle", "throttles")
             .suffix("enable")
             .new_id_field()
-            .label("Limiter ID")
+            .label("限制器 ID")
             .help("Unique identifier for the throttle")
             .build()
             .new_field("enable")
@@ -1482,7 +1482,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Inbound Rate Limiter")
+            .title("入站速率限制")
             .fields(["_id", "key", "rate", "match", "enable"])
             .build()
             .list_title("Inbound Rate Limits")
@@ -1495,7 +1495,7 @@ impl Builder<Schemas, ()> {
             .suffix("hostname")
             .names("milter", "milters")
             .new_id_field()
-            .label("Milter Id")
+            .label("Milter ID")
             .help("Unique identifier for this milter")
             .build()
             .new_field("enable")
@@ -1565,7 +1565,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("timeout.command")
-            .label("Command")
+            .label("命令")
             .help(concat!(
                 "How long Stalwart SMTP will wait to send a command to the ",
                 "Milter server"
@@ -1596,7 +1596,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("options.max-response-size")
-            .label("Max Response")
+            .label("最大响应")
             .help(concat!(
                 "Maximum size, in bytes, of a response that Stalwart will accept",
                 " from this Milter server"
@@ -1606,7 +1606,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("options.version")
-            .label("Protocol Version")
+            .label("协议版本")
             .help(concat!(
                 "Version of the Milter protocol that Stalwart SMTP should use when",
                 " communicating with the Milter server"
@@ -1628,7 +1628,7 @@ impl Builder<Schemas, ()> {
             .default("data")
             .build()
             .new_form_section()
-            .title("Milter settings")
+            .title("Milter 设置")
             .fields([
                 "_id",
                 "hostname",
@@ -1639,7 +1639,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Options")
+            .title("选项")
             .fields([
                 "stages",
                 "options.max-response-size",
@@ -1648,7 +1648,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Timeouts")
+            .title("超时")
             .fields(["timeout.connect", "timeout.command", "timeout.data"])
             .build()
             .list_title("Milter filters")
@@ -1661,7 +1661,7 @@ impl Builder<Schemas, ()> {
             .suffix("url")
             .names("hook", "hooks")
             .new_id_field()
-            .label("Hook Id")
+            .label("Hook ID")
             .help("Unique identifier for this hook")
             .build()
             .new_field("enable")
@@ -1756,7 +1756,7 @@ impl Builder<Schemas, ()> {
             .default("data")
             .build()
             .new_form_section()
-            .title("MTA Hook settings")
+            .title("MTA Hook 设置")
             .fields(["_id", "url", "enable", "allow-invalid-certs"])
             .build()
             .new_form_section()
@@ -1764,11 +1764,11 @@ impl Builder<Schemas, ()> {
             .fields(["auth.username", "auth.secret"])
             .build()
             .new_form_section()
-            .title("Options")
+            .title("选项")
             .fields(["stages", "headers"])
             .build()
             .new_form_section()
-            .title("Response")
+            .title("响应")
             .fields([
                 "options.max-response-size",
                 "timeout",
@@ -1791,19 +1791,19 @@ impl Builder<Schemas, ()> {
                 ]),
             })
             .input_check([], [Validator::Required])
-            .label("Policy Application")
+            .label("策略应用")
             .help("Whether to enforce, test, or disable the MTA-STS policy")
             .default("testing")
             .build()
             .new_field("session.mta-sts.max-age")
-            .label("Max lifetime")
+            .label("最大生命周期")
             .typ(Type::Duration)
             .help("Maximum time to cache the MTA-STS policy")
             .default("7d")
             .input_check([], [Validator::Required])
             .build()
             .new_field("session.mta-sts.mx")
-            .label("MX Patterns (override)")
+            .label("MX 模式（覆盖）")
             .help(concat!(
                 "Override the allowed MX hosts for the MTA-STS policy domain. ",
                 "If empty, the MX hosts are determined from the available TLS certificates"
@@ -1812,7 +1812,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_form_section()
-            .title("MTA-STS Policy")
+            .title("MTA-STS 策略")
             .fields([
                 "session.mta-sts.mode",
                 "session.mta-sts.max-age",
@@ -1832,12 +1832,12 @@ impl Builder<Schemas, ()> {
                 ]),
             })
             .input_check([], [Validator::Required])
-            .label("ASN/Geo Source")
+            .label("ASN/地理位置来源")
             .help("Whether to obtain ASN and geolocation data from a URL or DNS lookup")
             .default("disable")
             .build()
             .new_field("asn.urls.asn")
-            .label("ASN URLs")
+            .label("ASN URL")
             .help(concat!(
                 "URLs to fetch CSV file containing the IP to ASN mappings.",
             ))
@@ -1846,7 +1846,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_field("asn.urls.geo")
-            .label("Geolocation URLs")
+            .label("地理位置 URL")
             .help(concat!(
                 "URLs to fetch CSV file containing the IP to country code mappings.",
             ))
@@ -1865,7 +1865,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_field("asn.expires")
-            .label("Expiry")
+            .label("过期")
             .help(concat!("How often to refresh the ASN/Geo data.",))
             .default("1d")
             .typ(Type::Duration)
@@ -1889,7 +1889,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_field("asn.zone.ipv4")
-            .label("IPv4 Zone")
+            .label("IPv4 区域")
             .help(concat!(
                 "The DNS zone to query for IPv4 ASN and geolocation data.",
             ))
@@ -1898,7 +1898,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["dns"])
             .build()
             .new_field("asn.zone.ipv6")
-            .label("IPv6 Zone")
+            .label("IPv6 区域")
             .help(concat!(
                 "The DNS zone to query for IPv6 ASN and geolocation data.",
             ))
@@ -1917,7 +1917,7 @@ impl Builder<Schemas, ()> {
             .default("|")
             .build()
             .new_field("asn.index.asn")
-            .label("ASN Index")
+            .label("ASN 索引")
             .help(concat!("The position of the ASN in the DNS TXT record.",))
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
@@ -1925,7 +1925,7 @@ impl Builder<Schemas, ()> {
             .default("0")
             .build()
             .new_field("asn.index.asn-name")
-            .label("ASN Name Index")
+            .label("ASN 名称索引")
             .help(concat!(
                 "The position of the ASN Name in the DNS TXT record.",
             ))
@@ -1934,7 +1934,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["dns"])
             .build()
             .new_field("asn.index.country")
-            .label("Country Index")
+            .label("国家索引")
             .help(concat!(
                 "The position of the country code in the DNS TXT record.",
             ))
@@ -1947,12 +1947,12 @@ impl Builder<Schemas, ()> {
             .fields(["asn.type"])
             .build()
             .new_form_section()
-            .title("URL Resources")
+            .title("URL 资源")
             .fields(["asn.urls.asn", "asn.urls.geo"])
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_form_section()
-            .title("Retrieval")
+            .title("检索")
             .fields(["asn.expires", "asn.timeout", "asn.max-size"])
             .display_if_eq("asn.type", ["resource"])
             .build()
@@ -1962,12 +1962,12 @@ impl Builder<Schemas, ()> {
             .display_if_eq("asn.type", ["resource"])
             .build()
             .new_form_section()
-            .title("DNS Zones")
+            .title("DNS 区域")
             .fields(["asn.zone.ipv4", "asn.zone.ipv6"])
             .display_if_eq("asn.type", ["dns"])
             .build()
             .new_form_section()
-            .title("TXT Record Format")
+            .title("TXT 记录格式")
             .fields([
                 "asn.separator",
                 "asn.index.asn",

@@ -24,7 +24,7 @@ impl Builder<Schemas, ()> {
             )
             // Max connections
             .new_field("server.max-connections")
-            .label("Max connections")
+            .label("最大连接数")
             .help("The maximum number of concurrent connections the server will accept")
             .typ(Type::Input)
             .input_check(
@@ -37,7 +37,7 @@ impl Builder<Schemas, ()> {
             .add_network_fields(false)
             // Forms
             .new_form_section()
-            .title("Network settings")
+            .title("网络设置")
             .fields([
                 "server.hostname",
                 "server.max-connections",
@@ -45,7 +45,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Socket options")
+            .title("套接字选项")
             .fields([
                 "server.socket.backlog",
                 "server.socket.ttl",
@@ -63,7 +63,7 @@ impl Builder<Schemas, ()> {
             .new_schema("system")
             // Local keys
             .new_field("config.local-keys")
-            .label("Local settings")
+            .label("本地设置")
             .help(concat!(
                 "List of glob expressions for local configuration keys",
                 " that should be stored locally in the configuration file.",
@@ -95,7 +95,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Thread pool
             .new_field("global.thread-pool")
-            .label("Pool size")
+            .label("连接池大小")
             .help(concat!(
                 "The number of threads in the global thread pool for ",
                 "CPU intensive tasks. Defaults to the number ",
@@ -106,62 +106,62 @@ impl Builder<Schemas, ()> {
             .placeholder("8")
             .build()
             .new_form_section()
-            .title("Local configuration keys")
+            .title("本地配置键")
             .fields(["config.local-keys"])
             .build()
             .new_form_section()
-            .title("Thread pool")
+            .title("线程池")
             .fields(["global.thread-pool"])
             .build()
             .build()
             // Caching
             .new_schema("cache")
             .new_field("cache.dns.txt.size")
-            .label("TXT Records")
+            .label("TXT 记录")
             .help(concat!("Maximum size of the TXT record cache"))
             .default("5242880")
             .typ(Type::Size)
             .input_check([], [Validator::Required, Validator::MinValue(2048.into())])
             .new_field("cache.dns.mx.size")
-            .label("MX Records")
+            .label("MX 记录")
             .help(concat!("Maximum size of the MX record cache"))
             .default("5242880")
             .new_field("cache.dns.ipv4.size")
-            .label("IPv4 Records")
+            .label("IPv4 记录")
             .help(concat!("Maximum size of the IPv4 record cache"))
             .default("5242880")
             .new_field("cache.dns.ipv6.size")
-            .label("IPv6 Records")
+            .label("IPv6 记录")
             .help(concat!("Maximum size of the IPv6 record cache"))
             .default("5242880")
             .new_field("cache.dns.ptr.size")
-            .label("PTR Records")
+            .label("PTR 记录")
             .help(concat!("Maximum size of the PTR record cache"))
             .default("1048576")
             .new_field("cache.dns.tlsa.size")
-            .label("TLSA Records")
+            .label("TLSA 记录")
             .help(concat!("Maximum size of the TLSA record cache"))
             .default("1048576")
             .new_field("cache.dns.mta-sts.size")
-            .label("MTA-STS Records")
+            .label("MTA-STS 记录")
             .help(concat!("Maximum size of the MTA-STS record cache"))
             .default("1048576")
             .new_field("cache.dns.rbl.size")
-            .label("RBL Records")
+            .label("RBL 记录")
             .help(concat!("Maximum size of the DNSBl record cache"))
             .default("5242880")
             .new_field("cache.access-token.size")
-            .label("Access Tokens")
+            .label("访问令牌")
             .help(concat!("Maximum size of the access tokens cache"))
             .default("10485760")
             .new_field("cache.http-auth.size")
-            .label("HTTP Authorization")
+            .label("HTTP 授权")
             .help(concat!(
                 "Maximum size of the HTTP authorization headers cache"
             ))
             .default("1048576")
             .new_field("cache.permission.size")
-            .label("Permissions")
+            .label("权限")
             .help(concat!("Maximum size of the effective permissions cache"))
             .default("5242880")
             .new_field("cache.message.size")
@@ -169,7 +169,7 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum size of the e-mail data cache"))
             .default("52428800")
             .new_field("cache.files.size")
-            .label("Files")
+            .label("文件")
             .help(concat!("Maximum size of the file storage data cache"))
             .default("10485760")
             .new_field("cache.events.size")
@@ -177,14 +177,14 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum size of the calendar and events cache"))
             .default("10485760")
             .new_field("cache.contacts.size")
-            .label("Contacts")
+            .label("联系人")
             .help(concat!(
                 "Maximum size of the address books and contacts cache"
             ))
             .default("10485760")
             .build()
             .new_form_section()
-            .title("Data Cache")
+            .title("数据缓存")
             .fields([
                 "cache.message.size",
                 "cache.events.size",
@@ -201,11 +201,11 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Spam Filter Cache")
+            .title("垃圾邮件过滤缓存")
             .fields(["cache.dns.rbl.size"])
             .build()
             .new_form_section()
-            .title("DNS Record Cache")
+            .title("DNS 记录缓存")
             .fields([
                 "cache.dns.txt.size",
                 "cache.dns.mx.size",
@@ -223,7 +223,7 @@ impl Builder<Schemas, ()> {
             .names("address", "addresses")
             .prefix("server.blocked-ip")
             .new_id_field()
-            .label("IP Address(es)")
+            .label("IP 地址")
             .help("The IP address or mask to block")
             .input_check(
                 [Transformer::Trim],
@@ -244,7 +244,7 @@ impl Builder<Schemas, ()> {
             .names("address", "addresses")
             .prefix("server.allowed-ip")
             .new_id_field()
-            .label("IP Address(es)")
+            .label("IP 地址")
             .help("The IP address or mask to allow")
             .input_check(
                 [Transformer::Trim],
@@ -262,13 +262,13 @@ impl Builder<Schemas, ()> {
             // Auto-ban settings
             .new_schema("auto-ban")
             .new_field("server.auto-ban.auth.rate")
-            .label("Auth failures")
+            .label("认证失败")
             .help("The maximum number of failed login attempts before the IP is banned")
             .typ(Type::Rate)
             .default("100/1d")
             .build()
             .new_field("server.auto-ban.scan.rate")
-            .label("Scanning attempts")
+            .label("扫描尝试")
             .help(concat!(
                 "The maximum number of port scanning attempts before the IP is banned"
             ))
@@ -276,7 +276,7 @@ impl Builder<Schemas, ()> {
             .default("30/1d")
             .build()
             .new_field("server.auto-ban.abuse.rate")
-            .label("Abuse attempts")
+            .label("滥用尝试")
             .help(concat!(
                 "The maximum number of abuse attempts (relaying or failed ",
                 "RCPT TO attempts) before the IP is banned"
@@ -285,13 +285,13 @@ impl Builder<Schemas, ()> {
             .default("35/1d")
             .build()
             .new_field("server.auto-ban.loiter.rate")
-            .label("Loitering")
+            .label("逗留")
             .help("The maximum number of loitering disconnections before the IP is banned")
             .typ(Type::Rate)
             .default("150/1d")
             .build()
             .new_field("server.auto-ban.scan.paths")
-            .label("HTTP banned paths")
+            .label("HTTP 禁止路径")
             .help(concat!(
                 "The paths that will trigger an immediate ban if accessed. ",
                 "Each path should be a glob expression"
@@ -324,7 +324,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Port scanning ban")
+            .title("端口扫描封禁")
             .fields(["server.auto-ban.scan.rate", "server.auto-ban.scan.paths"])
             .build()
             .build()
@@ -332,7 +332,7 @@ impl Builder<Schemas, ()> {
             .new_schema("cluster")
             // Cluster node ID
             .new_field("cluster.node-id")
-            .label("Node ID")
+            .label("节点 ID")
             .help(concat!("Unique identifier for this node in the cluster"))
             .default("1")
             .typ(Type::Input)
@@ -343,7 +343,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Pubsub
             .new_field("cluster.coordinator")
-            .label("Coordinator")
+            .label("协调器")
             .help(concat!(
                 "The id of the coordinator backend to use for distributing events",
                 " in the cluster. Leave blank to disable."
@@ -360,29 +360,29 @@ impl Builder<Schemas, ()> {
             .build()
             // Roles
             .new_field("cluster.roles.purge.stores")
-            .label("Purge Stores")
+            .label("清除存储")
             .help(concat!(
                 "List of node ids that are responsible for purging stores"
             ))
             .typ(Type::Array(ArrayType::Text))
             .input_check([Transformer::Trim], [])
             .new_field("cluster.roles.purge.accounts")
-            .label("Purge Accounts")
+            .label("清除账户")
             .help(concat!(
                 "List of node ids that are responsible for purging accounts"
             ))
             .new_field("cluster.roles.acme.renew")
-            .label("Renew ACME")
+            .label("续期 ACME")
             .help(concat!(
                 "List of node ids that are responsible for renewing ACME certificates"
             ))
             .new_field("cluster.roles.metrics.calculate")
-            .label("Calculate Metrics")
+            .label("计算指标")
             .help(concat!(
                 "List of node ids that are responsible for calculating metrics"
             ))
             .new_field("cluster.roles.metrics.push")
-            .label("Push Metrics")
+            .label("推送指标")
             .help(concat!(
                 "List of node ids that are responsible for pushing metrics"
             ))
@@ -392,33 +392,33 @@ impl Builder<Schemas, ()> {
                 "List of node ids that are responsible for sending push notifications"
             ))
             .new_field("cluster.roles.fts-indexing")
-            .label("FTS Indexing")
+            .label("全文搜索索引")
             .help(concat!(
                 "List of node ids that are responsible for full-text search indexing"
             ))
             .new_field("cluster.roles.spam-training")
-            .label("Spam Classifier Training")
+            .label("垃圾邮件分类器训练")
             .help(concat!(
                 "The node id that is responsible for training the spam classifier model"
             ))
             .new_field("cluster.roles.imip-processing")
-            .label("iMIP Processing")
+            .label("iMIP 处理")
             .help(concat!(
                 "List of node ids that are responsible for processing iMIP calendar messages"
             ))
             .new_field("cluster.roles.calendar-alerts")
-            .label("Calendar Alerts")
+            .label("日历提醒")
             .help(concat!(
                 "List of node ids that are responsible for sending calendar alerts"
             ))
             .build()
             // Forms
             .new_form_section()
-            .title("Cluster settings")
+            .title("集群设置")
             .fields(["cluster.node-id", "cluster.coordinator"])
             .build()
             .new_form_section()
-            .title("Node Roles")
+            .title("节点角色")
             .fields([
                 "cluster.roles.purge.stores",
                 "cluster.roles.purge.accounts",
@@ -439,7 +439,7 @@ impl Builder<Schemas, ()> {
             .suffix("url")
             .names("webhook", "webhooks")
             .new_id_field()
-            .label("Webhook Id")
+            .label("Webhook ID")
             .help("Unique identifier for this webhook")
             .build()
             .new_field("url")
@@ -508,7 +508,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Secret)
             .build()
             .new_field("events")
-            .label("Events")
+            .label("事件")
             .help("Which events should trigger this webhook")
             .typ(Type::Select {
                 typ: SelectType::ManyWithSearch,
@@ -516,7 +516,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_form_section()
-            .title("Webhook settings")
+            .title("Webhook 设置")
             .fields(["_id", "url", "signature-key", "allow-invalid-certs"])
             .build()
             .new_form_section()
@@ -524,11 +524,11 @@ impl Builder<Schemas, ()> {
             .fields(["auth.username", "auth.secret"])
             .build()
             .new_form_section()
-            .title("Triggers")
+            .title("触发器")
             .fields(["events"])
             .build()
             .new_form_section()
-            .title("Options")
+            .title("选项")
             .fields(["throttle", "timeout", "headers"])
             .build()
             .list_title("Webhooks")
@@ -539,7 +539,7 @@ impl Builder<Schemas, ()> {
             .new_schema("enterprise")
             // License key
             .new_field("enterprise.license-key")
-            .label("License Key")
+            .label("许可证密钥")
             .help(concat!(
                 "Upgrade to the enterprise version of Stalwart by ",
                 "entering your license key here. Obtain your license at ",
@@ -549,7 +549,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("enterprise.api-key")
-            .label("API Key")
+            .label("API 密钥")
             .help(concat!(
                 "API key for license retrieval and automatic renewals. ",
                 "Obtain your API key at https://license.stalw.art.",
@@ -558,7 +558,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("enterprise.logo-url")
-            .label("Default logo URL")
+            .label("默认 Logo URL")
             .help(concat!(
                 "URL to the default logo to use in the Webadmin interface. ",
                 "(Enterprise feature)"
@@ -568,7 +568,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_form_section()
-            .title("Licensing")
+            .title("许可证")
             .fields(["enterprise.license-key", "enterprise.api-key"])
             .build()
             .new_form_section()
@@ -582,7 +582,7 @@ impl Builder<Schemas, ()> {
             .suffix("url")
             .names("model", "models")
             .new_id_field()
-            .label("Model Id")
+            .label("模型 ID")
             .help("Unique identifier for this AI model")
             .enterprise_feature()
             .build()
@@ -617,7 +617,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("auth.token")
-            .label("API token")
+            .label("API 令牌")
             .help(concat!(
                 "The API token used to authenticate with the AI model endpoint"
             ))
@@ -678,7 +678,7 @@ impl Builder<Schemas, ()> {
             .fields(["auth.token"])
             .build()
             .new_form_section()
-            .title("Options")
+            .title("选项")
             .fields(["timeout", "headers"])
             .build()
             .list_title("AI Models")
@@ -699,7 +699,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.proxy.trusted-networks"
         })
-        .label("Proxy networks")
+        .label("代理网络")
         .help("Enable proxy protocol for connections from these networks")
         .typ(Type::Array(ArrayType::Text))
         .input_check([Transformer::Trim], [Validator::IsIpOrMask])
@@ -712,7 +712,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.backlog"
         })
-        .label("Backlog")
+        .label("积压")
         .help(concat!(
             "The maximum number of incoming connections ",
             "that can be pending in the backlog queue"
@@ -743,7 +743,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.linger"
         })
-        .label("Linger")
+        .label("延迟关闭")
         .help(concat!(
             "The time to wait before closing a socket when ",
             "there is still unsent data"
@@ -757,7 +757,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.tos"
         })
-        .label("Type of Service")
+        .label("服务类型")
         .help(concat!(
             "The type of service (TOS) value for the socket, ",
             "which determines the priority of the traffic sent through the socket"
@@ -772,7 +772,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.send-buffer-size"
         })
-        .label("Send buffer")
+        .label("发送缓冲区")
         .help("The size of the buffer used for sending data")
         .typ(Type::Input)
         .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
@@ -784,7 +784,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.recv-buffer-size"
         })
-        .label("Receive buffer")
+        .label("接收缓冲区")
         .help("The size of the buffer used for receiving data")
         .default("")
         .typ(Type::Input)
@@ -797,7 +797,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.nodelay"
         })
-        .label("No delay")
+        .label("无延迟")
         .help("Whether the Nagle algorithm should be disabled for the socket")
         .default("true")
         .typ(Type::Boolean)
@@ -810,7 +810,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.reuse-addr"
         })
-        .label("Reuse Address")
+        .label("地址复用")
         .help(concat!(
             "Whether the socket can be bound to an address that ",
             "is already in use by another socket"
@@ -826,7 +826,7 @@ impl Builder<Schemas, Schema> {
         } else {
             "server.socket.reuse-port"
         })
-        .label("Reuse port")
+        .label("端口复用")
         .help("Whether multiple sockets can be bound to the same address and port")
         .default("true")
         .typ(Type::Boolean)

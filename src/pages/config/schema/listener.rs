@@ -14,7 +14,7 @@ impl Builder<Schemas, ()> {
             .suffix("protocol")
             // Id
             .new_id_field()
-            .label("Listener Id")
+            .label("监听器 ID")
             .help("Unique identifier for the listener")
             .build()
             // Type
@@ -37,7 +37,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Bind addresses
             .new_field("bind")
-            .label("Bind addresses")
+            .label("绑定地址")
             .help("The addresses the listener will bind to")
             .typ(Type::Array(ArrayType::Text))
             .input_check(
@@ -47,27 +47,27 @@ impl Builder<Schemas, ()> {
             .build()
             // Override proxy protocol
             .new_field("proxy.override")
-            .label("Override proxy networks")
+            .label("覆盖代理网络")
             .help("Override the default proxy protocol networks")
             .typ(Type::Boolean)
             .default("false")
             .build()
             // Override socket options
             .new_field("socket.override")
-            .label("Override socket options")
+            .label("覆盖套接字选项")
             .help("Override the default socket options")
             .typ(Type::Boolean)
             .default("false")
             .build()
             // Override TLS options
             .new_field("tls.override")
-            .label("Override TLS options")
+            .label("覆盖 TLS 选项")
             .help("Override the default TLS options")
             .typ(Type::Boolean)
             .default("false")
             .build()
             .new_field("tls.implicit")
-            .label("Implicit TLS")
+            .label("隐式 TLS")
             .help("Whether to use implicit TLS")
             .typ(Type::Boolean)
             .default("false")
@@ -77,11 +77,11 @@ impl Builder<Schemas, ()> {
             .add_tls_fields(true)
             // Forms
             .new_form_section()
-            .title("Listener settings")
+            .title("监听器设置")
             .fields(["_id", "protocol", "bind"])
             .build()
             .new_form_section()
-            .title("TLS options")
+            .title("TLS 选项")
             .fields([
                 "tls.implicit",
                 "tls.override",
@@ -92,11 +92,11 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Proxy protocol")
+            .title("代理协议")
             .fields(["proxy.override", "proxy.trusted-networks"])
             .build()
             .new_form_section()
-            .title("Socket options")
+            .title("套接字选项")
             .fields([
                 "socket.override",
                 "socket.backlog",

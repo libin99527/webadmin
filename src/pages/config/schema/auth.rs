@@ -135,7 +135,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_form_section()
-            .title("DKIM Signature")
+            .title("DKIM 签名")
             .fields([
                 "_id",
                 "algorithm",
@@ -146,11 +146,11 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Key")
+            .title("密钥")
             .fields(["private-key"])
             .build()
             .new_form_section()
-            .title("Options")
+            .title("选项")
             .fields([
                 "expire",
                 "third-party",
@@ -208,11 +208,11 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_form_section()
-            .title("DKIM Verification")
+            .title("DKIM 验证")
             .fields(["auth.dkim.verify", "auth.dkim.strict"])
             .build()
             .new_form_section()
-            .title("DKIM Signing")
+            .title("DKIM 签名")
             .fields(["auth.dkim.sign"])
             .build()
             .build()
@@ -280,7 +280,7 @@ impl Builder<Schemas, ()> {
             ))
             .build()
             .new_form_section()
-            .title("SPF Verification")
+            .title("SPF 验证")
             .fields(["auth.spf.verify.ehlo", "auth.spf.verify.mail-from"])
             .build()
             .build()
@@ -305,7 +305,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("DMARC Verification")
+            .title("DMARC 验证")
             .fields(["auth.dmarc.verify"])
             .build()
             .build()
@@ -339,7 +339,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Duration)
             .build()
             .new_form_section()
-            .title("Inbound Report Analysis")
+            .title("入站报告分析")
             .fields([
                 "report.analysis.addresses",
                 "report.analysis.store",
@@ -375,7 +375,7 @@ impl Builder<Schemas, ()> {
             .default("config_get('server.hostname')")
             .build()
             .new_form_section()
-            .title("Outbound Report Settings")
+            .title("出站报告设置")
             .fields(["report.domain", "report.submitter"])
             .build()
             .build()
@@ -414,7 +414,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("Delivery Status Notifications (DSN)")
+            .title("投递状态通知（DSN）")
             .fields([
                 "report.dsn.from-name",
                 "report.dsn.from-address",
@@ -491,7 +491,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("TLS Aggregate Reporting")
+            .title("TLS 聚合报告")
             .fields([
                 "report.tls.aggregate.from-name",
                 "report.tls.aggregate.from-address",
@@ -550,7 +550,7 @@ impl Builder<Schemas, ()> {
             .default("[1, 1d]")
             .build()
             .new_form_section()
-            .title("DKIM Reporting")
+            .title("DKIM 报告")
             .fields([
                 "report.dkim.from-name",
                 "report.dkim.from-address",
@@ -608,7 +608,7 @@ impl Builder<Schemas, ()> {
             .default("[1, 1d]")
             .build()
             .new_form_section()
-            .title("SPF Authentication Failure Reporting")
+            .title("SPF 认证失败报告")
             .fields([
                 "report.spf.from-name",
                 "report.spf.from-address",
@@ -733,7 +733,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("DMARC Authentication Failure Reporting")
+            .title("DMARC 认证失败报告")
             .fields([
                 "report.dmarc.from-name",
                 "report.dmarc.from-address",
@@ -743,7 +743,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("DMARC Aggregate Reporting")
+            .title("DMARC 聚合报告")
             .fields([
                 "report.dmarc.aggregate.from-name",
                 "report.dmarc.aggregate.from-address",

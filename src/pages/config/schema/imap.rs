@@ -10,14 +10,14 @@ impl Builder<Schemas, ()> {
     pub fn build_imap(self) -> Self {
         self.new_schema("imap-settings")
             .new_field("imap.request.max-size")
-            .label("Request Size")
+            .label("请求大小")
             .help("Maximum size of an IMAP request that the server will accept")
             .default("52428800")
             .typ(Type::Size)
             .input_check([], [Validator::Required])
             .build()
             .new_field("imap.timeout.authenticated")
-            .label("Authenticated")
+            .label("已认证")
             .help(concat!(
                 "Time an authenticated session can remain idle before the server ",
                 "terminates it"
@@ -27,7 +27,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("imap.timeout.anonymous")
-            .label("Anonymous")
+            .label("匿名")
             .help(concat!(
                 "Time an unauthenticated session can stay inactive before being ",
                 "ended by the server"
@@ -37,7 +37,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("imap.timeout.idle")
-            .label("Idle")
+            .label("空闲")
             .help(concat!(
                 "Time a connection can stay idle in the IMAP IDLE state before ",
                 "the server breaks the connection"
@@ -48,13 +48,13 @@ impl Builder<Schemas, ()> {
             .build()
             // Rate limiting
             .new_field("imap.rate-limit.requests")
-            .label("Requests")
+            .label("请求数")
             .help("The maximum number of requests per minute")
             .default("2000/1m")
             .typ(Type::Rate)
             .build()
             .new_field("imap.rate-limit.concurrent")
-            .label("Concurrent")
+            .label("并发")
             .help("The maximum number of concurrent connections")
             .default("6")
             .typ(Type::Input)
@@ -62,7 +62,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Authentication
             .new_field("imap.auth.max-failures")
-            .label("Max Failures")
+            .label("最大失败数")
             .help(concat!(
                 "Number of authentication attempts a user can make before being ",
                 "disconnected by the server"
@@ -75,7 +75,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("imap.auth.allow-plain-text")
-            .label("Allow plain text authentication")
+            .label("允许明文认证")
             .help("Whether to allow plain text authentication on unencrypted connections")
             .default("false")
             .typ(Type::Boolean)
@@ -85,11 +85,11 @@ impl Builder<Schemas, ()> {
             .fields(["imap.auth.max-failures", "imap.auth.allow-plain-text"])
             .build()
             .new_form_section()
-            .title("Request Limits")
+            .title("请求限制")
             .fields(["imap.request.max-size"])
             .build()
             .new_form_section()
-            .title("Timeouts")
+            .title("超时")
             .fields([
                 "imap.timeout.authenticated",
                 "imap.timeout.anonymous",
@@ -97,7 +97,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Rate Limiting")
+            .title("速率限制")
             .fields(["imap.rate-limit.requests", "imap.rate-limit.concurrent"])
             .build()
             .build()
@@ -225,7 +225,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_form_section()
-            .title("Inbox")
+            .title("收件箱")
             .fields([
                 "email.folders.inbox.name",
                 "email.folders.inbox.create",
@@ -233,7 +233,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Trash")
+            .title("回收站")
             .fields([
                 "email.folders.trash.name",
                 "email.folders.trash.create",
@@ -241,7 +241,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Junk")
+            .title("垃圾邮件")
             .fields([
                 "email.folders.junk.name",
                 "email.folders.junk.create",
@@ -249,7 +249,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Drafts")
+            .title("草稿")
             .fields([
                 "email.folders.drafts.name",
                 "email.folders.drafts.create",
@@ -257,7 +257,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Sent")
+            .title("已发送")
             .fields([
                 "email.folders.sent.name",
                 "email.folders.sent.create",
@@ -273,7 +273,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Shared Folders")
+            .title("共享文件夹")
             .fields(["email.folders.shared.name"])
             .build()
             .build()

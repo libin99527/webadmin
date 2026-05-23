@@ -11,7 +11,7 @@ impl Builder<Schemas, ()> {
     pub fn build_jmap(self) -> Self {
         self.new_schema("jmap-limits")
             .new_field("jmap.protocol.get.max-objects")
-            .label("Get")
+            .label("获取")
             .help(concat!(
                 "Determines the maximum number of objects that can be fetched in a ",
                 "single method call"
@@ -23,14 +23,14 @@ impl Builder<Schemas, ()> {
                 [Validator::Required, Validator::MinValue(1.into())],
             )
             .new_field("jmap.protocol.set.max-objects")
-            .label("Set")
+            .label("设置")
             .help(concat!(
                 "Establishes the maximum number of objects that can be modified in ",
                 "a single method call"
             ))
             .default("500")
             .new_field("jmap.protocol.request.max-concurrent")
-            .label("Concurrent")
+            .label("并发")
             .help(concat!(
                 "Restricts the number of concurrent requests a user can make to the ",
                 "JMAP server"
@@ -44,14 +44,14 @@ impl Builder<Schemas, ()> {
             ))
             .default("10000000")
             .new_field("jmap.protocol.request.max-calls")
-            .label("Method Calls")
+            .label("方法调用")
             .help(concat!(
                 "Limits the maximum number of method calls that can be included in",
                 " a single request"
             ))
             .default("16")
             .new_field("jmap.protocol.query.max-results")
-            .label("Query")
+            .label("查询")
             .help(concat!(
                 "Sets the maximum number of results that a Query method can return"
             ))
@@ -63,51 +63,51 @@ impl Builder<Schemas, ()> {
             ))
             .default("50000000")
             .new_field("jmap.protocol.upload.max-concurrent")
-            .label("Max Concurrent")
+            .label("最大并发")
             .help(concat!(
                 "Restricts the number of concurrent file uploads a user can perform"
             ))
             .default("4")
             .new_field("jmap.protocol.upload.quota.files")
-            .label("Total Files")
+            .label("文件总数")
             .help(concat!(
                 "Specifies the maximum number of files that a user can upload within ",
                 "a certain period"
             ))
             .default("1000")
             .new_field("jmap.protocol.upload.quota.size")
-            .label("Total Size")
+            .label("总大小")
             .default("50000000")
             .help(concat!(
                 "Defines the total size of files that a user can upload within a ",
                 "certain period"
             ))
             .new_field("jmap.protocol.changes.max-results")
-            .label("Changes")
+            .label("变更")
             .help(concat!(
                 "Determines the maximum number of change objects that a Changes",
                 " method can return"
             ))
             .default("5000")
             .new_field("jmap.mailbox.max-depth")
-            .label("Max Depth")
+            .label("最大深度")
             .help(concat!(
                 "Restricts the maximum depth of nested mailboxes a user can ",
                 "create"
             ))
             .default("10")
             .new_field("jmap.mailbox.max-name-length")
-            .label("Name Length")
+            .label("名称长度")
             .help(concat!("Establishes the maximum length of a mailbox name"))
             .default("255")
             .new_field("jmap.email.max-attachment-size")
-            .label("Attachment Size")
+            .label("附件大小")
             .help(concat!(
                 "Specifies the maximum size for an email attachment"
             ))
             .default("50000000")
             .new_field("jmap.email.max-size")
-            .label("E-mail Size")
+            .label("邮件大小")
             .help(concat!("Determines the maximum size for an email message"))
             .default("75000000")
             .new_field("jmap.email.parse.max-items")
@@ -125,7 +125,7 @@ impl Builder<Schemas, ()> {
             ))
             .default("10")
             .new_field("jmap.contact.parse.max-items")
-            .label("Contacts")
+            .label("联系人")
             .help(concat!(
                 "Limits the maximum number of vCard items that can be parsed in ",
                 "a single request"
@@ -133,7 +133,7 @@ impl Builder<Schemas, ()> {
             .default("10")
             .build()
             .new_field("jmap.protocol.upload.ttl")
-            .label("Expire after")
+            .label("过期时间")
             .help(concat!(
                 "Specifies the Time-To-Live (TTL) for each uploaded file, after ",
                 "which the file is deleted from temporary storage"
@@ -143,7 +143,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Request Limits")
+            .title("请求限制")
             .fields([
                 "jmap.protocol.request.max-concurrent",
                 "jmap.protocol.request.max-size",
@@ -151,21 +151,21 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Max Objects")
+            .title("最大对象数")
             .fields([
                 "jmap.protocol.get.max-objects",
                 "jmap.protocol.set.max-objects",
             ])
             .build()
             .new_form_section()
-            .title("Max Results")
+            .title("最大结果数")
             .fields([
                 "jmap.protocol.query.max-results",
                 "jmap.protocol.changes.max-results",
             ])
             .build()
             .new_form_section()
-            .title("Upload Limits")
+            .title("上传限制")
             .fields([
                 "jmap.protocol.upload.max-size",
                 "jmap.protocol.upload.max-concurrent",
@@ -175,15 +175,15 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Mailbox Limits")
+            .title("邮箱限制")
             .fields(["jmap.mailbox.max-depth", "jmap.mailbox.max-name-length"])
             .build()
             .new_form_section()
-            .title("Email Limits")
+            .title("邮件限制")
             .fields(["jmap.email.max-attachment-size", "jmap.email.max-size"])
             .build()
             .new_form_section()
-            .title("Parsing Limits")
+            .title("解析限制")
             .fields([
                 "jmap.email.parse.max-items",
                 "jmap.calendar.parse.max-items",
@@ -201,7 +201,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.push.attempts.interval")
-            .label("Attempt Interval")
+            .label("尝试间隔")
             .help("Time to wait between push attempts")
             .default("1m")
             .typ(Type::Duration)
@@ -218,21 +218,21 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("jmap.push.retry.interval")
-            .label("Retry Interval")
+            .label("重试间隔")
             .help("Time to wait between retry attempts")
             .default("1s")
             .typ(Type::Duration)
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.push.timeout.request")
-            .label("Request")
+            .label("请求")
             .help("Time before a connection with a push service URL times out")
             .default("10s")
             .typ(Type::Duration)
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.push.timeout.verify")
-            .label("Verify")
+            .label("验证")
             .help("Time to wait for the push service to verify a subscription")
             .default("1s")
             .typ(Type::Duration)
@@ -246,7 +246,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Push Subscriptions")
+            .title("推送订阅")
             .fields([
                 "jmap.push.throttle",
                 "jmap.push.attempts.interval",
@@ -255,11 +255,11 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Push Timeouts")
+            .title("推送超时")
             .fields(["jmap.push.timeout.request", "jmap.push.timeout.verify"])
             .build()
             .new_form_section()
-            .title("Event Source")
+            .title("事件源")
             .fields(["jmap.event-source.throttle"])
             .build()
             .build()
@@ -280,14 +280,14 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("jmap.web-sockets.heartbeat")
-            .label("Heartbeat")
+            .label("心跳")
             .help("Time to wait before sending a new heartbeat to the WebSocket client")
             .default("1m")
             .typ(Type::Duration)
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("JMAP over WebSocket")
+            .title("JMAP WebSocket")
             .fields([
                 "jmap.web-sockets.throttle",
                 "jmap.web-sockets.timeout",

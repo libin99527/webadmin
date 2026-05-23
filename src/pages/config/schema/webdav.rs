@@ -12,7 +12,7 @@ impl Builder<Schemas, ()> {
         // WebDAV
         self.new_schema("webdav")
             .new_field("dav.request.max-size")
-            .label("Max Request Size")
+            .label("最大请求大小")
             .help(concat!(
                 "Determines the maximum XML size of a WebDAV ",
                 "request that the server will accept"
@@ -21,21 +21,21 @@ impl Builder<Schemas, ()> {
             .typ(Type::Size)
             .input_check([], [Validator::Required])
             .new_field("file-storage.max-size")
-            .label("Max File Size")
+            .label("最大文件大小")
             .help(concat!(
                 "Specifies the maximum size of a file that ",
                 "can be uploaded to the server"
             ))
             .default("26214400")
             .new_field("dav.property.max-size.live")
-            .label("Live Property")
+            .label("活动属性")
             .help(concat!(
                 "Specifies the maximum size of a WebDAV live ",
                 "property value that the server will accept"
             ))
             .default("250")
             .new_field("dav.property.max-size.dead")
-            .label("Dead Property")
+            .label("死属性")
             .default("1024")
             .help(concat!(
                 "Specifies the maximum size of a WebDAV dead ",
@@ -44,7 +44,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [])
             .build()
             .new_field("dav.lock.max-timeout")
-            .label("Max Lock Timeout")
+            .label("最大锁超时")
             .default("1h")
             .help(concat!(
                 "Specifies the maximum duration for which a ",
@@ -54,7 +54,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("dav.locks.max-per-user")
-            .label("Max Locks Per User")
+            .label("每用户最大锁数")
             .help(concat!(
                 "Specifies the maximum number of locks that ",
                 "a user can create on a resource"
@@ -63,7 +63,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
             .new_field("dav.response.max-results")
-            .label("Max Results")
+            .label("最大结果数")
             .help(concat!(
                 "Specifies the maximum number of results ",
                 "that a WebDAV query can return"
@@ -71,7 +71,7 @@ impl Builder<Schemas, ()> {
             .default("2000")
             .build()
             .new_field("dav.collection.assisted-discovery")
-            .label("Assisted Discovery")
+            .label("辅助发现")
             .help(concat!(
                 "Enables assisted discovery of WebDAV shared collections by ",
                 "modifying PROPFIND requests to the root collection. Requests ",
@@ -84,7 +84,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("WebDAV Settings")
+            .title("WebDAV 设置")
             .fields([
                 "dav.request.max-size",
                 "dav.response.max-results",
@@ -92,22 +92,22 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Property Limits")
+            .title("属性限制")
             .fields(["dav.property.max-size.live", "dav.property.max-size.dead"])
             .build()
             .new_form_section()
-            .title("Locking")
+            .title("锁定")
             .fields(["dav.lock.max-timeout", "dav.locks.max-per-user"])
             .build()
             .new_form_section()
-            .title("File Storage")
+            .title("文件存储")
             .fields(["file-storage.max-size"])
             .build()
             .build()
             // Calendar
             .new_schema("calendar")
             .new_field("calendar.max-size")
-            .label("Max iCal Size")
+            .label("最大 iCal 大小")
             .help(concat!(
                 "Specifies the maximum size of an iCalendar ",
                 "file that can be uploaded to the server"
@@ -116,7 +116,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Size)
             .input_check([], [Validator::Required])
             .new_field("calendar.max-recurrence-expansions")
-            .label("Max iCal Instances")
+            .label("最大 iCal 实例数")
             .help(concat!(
                 "Specifies the maximum number of instances that ",
                 "can be generated from a recurring iCalendar event"
@@ -125,7 +125,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
             .new_field("calendar.max-attendees-per-instance")
-            .label("Max iCal Attendees")
+            .label("最大 iCal 参与者数")
             .help(concat!(
                 "Specifies the maximum number of attendees that ",
                 "can be included in a single iCalendar instance"
@@ -133,7 +133,7 @@ impl Builder<Schemas, ()> {
             .default("20")
             .typ(Type::Input)
             .new_field("calendar.default.href-name")
-            .label("Default Href Name")
+            .label("默认链接名称")
             .help(concat!(
                 "Specifies the default href name for a calendar when it is created"
             ))
@@ -141,7 +141,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .new_field("calendar.default.display-name")
-            .label("Default Display Name")
+            .label("默认显示名称")
             .help(concat!(
                 "Specifies the default display name for a calendar when it is created"
             ))
@@ -158,7 +158,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Default Names")
+            .title("默认名称")
             .fields([
                 "calendar.default.href-name",
                 "calendar.default.display-name",
@@ -168,7 +168,7 @@ impl Builder<Schemas, ()> {
             // Contacts
             .new_schema("contacts")
             .new_field("contacts.max-size")
-            .label("Max vCard Size")
+            .label("最大 vCard 大小")
             .help(concat!(
                 "Specifies the maximum size of a vCard file ",
                 "that can be uploaded to the server"
@@ -177,7 +177,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Size)
             .input_check([], [Validator::Required])
             .new_field("contacts.default.href-name")
-            .label("Default Href Name")
+            .label("默认链接名称")
             .help(concat!(
                 "Specifies the default href name for a contact when it is created"
             ))
@@ -185,7 +185,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .new_field("contacts.default.display-name")
-            .label("Default Display Name")
+            .label("默认显示名称")
             .help(concat!(
                 "Specifies the default display name for a contact when it is created"
             ))
@@ -194,7 +194,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Contacts Settings")
+            .title("联系人设置")
             .fields([
                 "contacts.max-size",
                 "contacts.default.href-name",
@@ -205,7 +205,7 @@ impl Builder<Schemas, ()> {
             // Scheduling
             .new_schema("scheduling")
             .new_field("calendar.scheduling.enable")
-            .label("Enable Scheduling")
+            .label("启用调度")
             .help(concat!(
                 "Enables the scheduling features for calendar events, ",
                 "allowing users to send and receive invitations"
@@ -215,7 +215,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.scheduling.inbound.auto-add")
-            .label("Automatically Add Invitations")
+            .label("自动添加邀请")
             .help(concat!(
                 "Automatically adds incoming ",
                 "invitations to the user's calendar."
@@ -225,7 +225,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.scheduling.inbound.max-size")
-            .label("Max iTIP Size")
+            .label("最大 iTIP 大小")
             .help(concat!(
                 "Sets the maximum iCalendar ",
                 "object size for ",
@@ -249,7 +249,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("calendar.scheduling.inbox.auto-expunge")
-            .label("Inbox Auto-Expunge")
+            .label("收件箱自动清除")
             .help(concat!(
                 "Sets the duration after which the iTIP inbox ",
                 "will automatically expunge old messages."
@@ -259,7 +259,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.scheduling.http-rsvp.enable")
-            .label("Enable HTTP RSVP")
+            .label("启用 HTTP RSVP")
             .help(concat!(
                 "Enables the HTTP RSVP feature for calendar invitations, ",
                 "allowing users to respond via a web interface."
@@ -278,7 +278,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::IsUrl])
             .build()
             .new_field("calendar.scheduling.http-rsvp.expiration")
-            .label("HTTP RSVP Expiration")
+            .label("HTTP RSVP 过期时间")
             .help(concat!(
                 "Sets the expiration duration for HTTP RSVP links, ",
                 "after which they will no longer be valid."
@@ -288,7 +288,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.scheduling.template.email")
-            .label("iMIP Template")
+            .label("iMIP 模板")
             .help(concat!(
                 "Specifies the HTML template used ",
                 "for rendering iMIP invitations."
@@ -297,7 +297,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Text)
             .build()
             .new_field("calendar.scheduling.template.web")
-            .label("RSVP Template")
+            .label("RSVP 模板")
             .help(concat!(
                 "Specifies the HTML template used ",
                 "for rendering HTTP RSVP confirmations."
@@ -315,7 +315,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Outbound iMIP")
+            .title("出站 iMIP")
             .fields([
                 "calendar.scheduling.outbound.max-recipients",
                 "calendar.scheduling.template.email",
@@ -334,7 +334,7 @@ impl Builder<Schemas, ()> {
             // Sharing
             .new_schema("sharing")
             .new_field("sharing.max-shares-per-item")
-            .label("Max Shares")
+            .label("最大共享数")
             .help(concat!(
                 "Specifies the maximum number of sharees that can be added to a single ",
                 "shared item (calendar, address book or file)"
@@ -344,7 +344,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required, Validator::MinValue(1.into())])
             .build()
             .new_field("sharing.max-history")
-            .label("Sharing History")
+            .label("共享历史")
             .help(concat!(
                 "Specifies the duration for which the JMAP share notification history is retained ",
                 "before it is automatically purged."
@@ -354,13 +354,13 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("sharing.allow-directory-query")
-            .label("Allow Directory Queries")
+            .label("允许目录查询")
             .help("Whether authenticated users can query the directory via WebDAV and JMAP")
             .typ(Type::Boolean)
             .default("false")
             .build()
             .new_form_section()
-            .title("Sharing Settings")
+            .title("共享设置")
             .fields([
                 "sharing.max-shares-per-item",
                 "sharing.max-history",
@@ -371,7 +371,7 @@ impl Builder<Schemas, ()> {
             // Alarms
             .new_schema("alarms")
             .new_field("calendar.alarms.enabled")
-            .label("Enable E-mail Alarms")
+            .label("启用邮件提醒")
             .help(concat!(
                 "Enables the calendar alarms feature, allowing users to set alarms for events ",
                 "and receive notifications via e-mail"
@@ -381,7 +381,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.alarms.minimum-interval")
-            .label("Minimum Alarm Interval")
+            .label("最小提醒间隔")
             .help(concat!(
                 "Specifies the minimum interval for calendar alarms, ",
                 "ensuring that alarms are not triggered too frequently"
@@ -391,7 +391,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("calendar.alarms.allow-external-recipients")
-            .label("Allow External Recipients")
+            .label("允许外部收件人")
             .help(concat!(
                 "Allows calendar alarms to be sent to external recipients, ",
                 "enabling notifications to users outside the server"
@@ -412,7 +412,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("calendar.alarms.from.email")
-            .label("From E-mail")
+            .label("发件邮箱")
             .help(concat!(
                 "Specifies the e-mail address that will appear in the 'From' ",
                 "field of calendar alarm e-mails, ",
@@ -422,7 +422,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::IsEmail])
             .build()
             .new_field("calendar.alarms.template")
-            .label("Alarm Template")
+            .label("提醒模板")
             .help(concat!(
                 "Specifies the HTML template used for rendering calendar alarm e-mails, ",
                 "allowing customization of the alarm notification format"
@@ -440,7 +440,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Notification E-mail")
+            .title("通知邮件")
             .fields([
                 "calendar.alarms.from.name",
                 "calendar.alarms.from.email",

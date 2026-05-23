@@ -22,18 +22,18 @@ impl Builder<Schemas, ()> {
         // Anti-SPAM settings
         self.new_schema("spam-settings")
             .new_field("spam-filter.enable")
-            .label("Enable spam filtering")
+            .label("启用垃圾邮件过滤")
             .help("Whether to enable the spam filter")
             .default("true")
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.auto-update")
-            .label("Automatically update spam filter rules")
+            .label("自动更新垃圾邮件过滤规则")
             .help("Whether to automatically update the spam filter rules")
             .default("false")
             .typ(Type::Boolean)
             .new_field("spam-filter.card-is-ham.enable")
-            .label("Do not classify emails from contacts as spam")
+            .label("不将联系人邮件归为垃圾邮件")
             .help(concat!(
                 "Never classify messages as spam if they are sent ",
                 "from addresses present in the user's address book.",
@@ -42,7 +42,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.trusted-reply.enable")
-            .label("Do not classify trusted email replies as spam")
+            .label("不将可信回复归为垃圾邮件")
             .help(concat!(
                 "Never classify messages as spam if they are replies ",
                 "to messages sent by the recipient.",
@@ -51,7 +51,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.resource")
-            .label("Rules URL")
+            .label("规则 URL")
             .help(concat!(
                 "Override the URL to download spam filter rules from. ",
                 "By default spam filter rules are downloaded from ",
@@ -61,7 +61,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("spam-filter.score.spam")
-            .label("Spam threshold")
+            .label("垃圾邮件阈值")
             .help("Mark as Spam messages with a score above this threshold")
             .default("5.0")
             .typ(Type::Input)
@@ -75,7 +75,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.score.discard")
-            .label("Discard threshold")
+            .label("丢弃阈值")
             .help("Discard messages with a score above this threshold")
             .default("0")
             .typ(Type::Input)
@@ -89,7 +89,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.score.reject")
-            .label("Reject threshold")
+            .label("拒绝阈值")
             .help("Reject messages with a score above this threshold")
             .default("0")
             .typ(Type::Input)
@@ -103,7 +103,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.grey-list.duration")
-            .label("Duration")
+            .label("持续时间")
             .help(concat!(
                 "Time to keep an IP address in the grey list. ",
                 "The grey list is used to delay messages from unknown senders."
@@ -112,7 +112,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [])
             .build()
             .new_field("spam-filter.dnsbl.max-check.ip")
-            .label("IP Checks")
+            .label("IP 检查")
             .help("Maximum number of DNSBL checks for IP addresses")
             .default("50")
             .typ(Type::Input)
@@ -122,7 +122,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.dnsbl.max-check.domain")
-            .label("Domain Checks")
+            .label("域名检查")
             .help("Maximum number of DNSBL checks for domain names")
             .default("50")
             .typ(Type::Input)
@@ -132,7 +132,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.dnsbl.max-check.email")
-            .label("E-mail Checks")
+            .label("邮箱检查")
             .help("Maximum number of DNSBL checks for E-mail addresses")
             .default("50")
             .typ(Type::Input)
@@ -142,7 +142,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.dnsbl.max-check.url")
-            .label("URL Checks")
+            .label("URL 检查")
             .help("Maximum number of DNSBL checks for URLs")
             .default("50")
             .typ(Type::Input)
@@ -152,7 +152,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("Spam Filter Settings")
+            .title("垃圾邮件过滤设置")
             .fields([
                 "spam-filter.score.spam",
                 "spam-filter.score.discard",
@@ -161,18 +161,18 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Spam Filter Overrides")
+            .title("垃圾邮件过滤覆盖")
             .fields([
                 "spam-filter.card-is-ham.enable",
                 "spam-filter.trusted-reply.enable",
             ])
             .build()
             .new_form_section()
-            .title("Greylisting")
+            .title("灰名单")
             .fields(["spam-filter.grey-list.duration"])
             .build()
             .new_form_section()
-            .title("DNSBL Limits")
+            .title("DNSBL 限制")
             .fields([
                 "spam-filter.dnsbl.max-check.ip",
                 "spam-filter.dnsbl.max-check.domain",
@@ -181,7 +181,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("External Rules")
+            .title("外部规则")
             .fields(["spam-filter.resource", "spam-filter.auto-update"])
             .build()
             .build()
@@ -201,7 +201,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("spam-filter.classifier.samples.reservoir-capacity")
-            .label("Capacity")
+            .label("容量")
             .help("The capacity of the training sample reservoir")
             .default("1024")
             .typ(Type::Input)
@@ -215,13 +215,13 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.auto-learn.spam-trap")
-            .label("Learn spam from spam traps")
+            .label("从垃圾邮件陷阱学习垃圾邮件")
             .help("Train as spam messages sent to spam trap addresses")
             .default("true")
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.classifier.auto-learn.spam-rbl-count")
-            .label("RBL hits")
+            .label("RBL 命中")
             .help("Number of DNSBL servers that list the sender to auto-learn as spam")
             .default("2")
             .typ(Type::Input)
@@ -235,14 +235,14 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.samples.hold-for")
-            .label("Hold samples for")
+            .label("样本保留时间")
             .help("Duration to hold training samples for")
             .typ(Type::Duration)
             .default("180d")
             .input_check([], [Validator::Required])
             .build()
             .new_field("spam-filter.classifier.samples.min-ham")
-            .label("Min. Ham samples")
+            .label("最小正常邮件样本数")
             .help("Minimum number of ham samples required for training")
             .default("100")
             .typ(Type::Input)
@@ -256,7 +256,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.samples.min-spam")
-            .label("Min. Spam samples")
+            .label("最小垃圾邮件样本数")
             .help("Minimum number of spam samples required for training")
             .default("100")
             .typ(Type::Input)
@@ -270,25 +270,25 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.features.log-scale")
-            .label("Sublinear term frequency scaling (log1p)")
+            .label("次线性词频缩放（log1p）")
             .help("Whether to apply sublinear scaling to feature values in the spam classifier")
             .default("true")
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.classifier.features.l2-normalize")
-            .label("L2 (euclidean) normalization")
+            .label("L2（欧几里得）归一化")
             .help("Whether to L2-normalize feature values in the spam classifier")
             .default("true")
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.classifier.training.frequency")
-            .label("Training frequency")
+            .label("训练频率")
             .help("Frequency to train the spam classifier")
             .typ(Type::Duration)
             .default("12h")
             .build()
             .new_field("spam-filter.card-is-ham.learn")
-            .label("Learn ham from address books")
+            .label("从通讯录学习正常邮件")
             .help(concat!(
                 "Whether to automatically learn ham messages ",
                 "from senders in the user's address book.",
@@ -297,7 +297,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.trusted-reply.learn")
-            .label("Learn ham from trusted replies")
+            .label("从可信回复学习正常邮件")
             .help(concat!(
                 "Whether to automatically learn ham messages ",
                 "that are replies to messages sent by the recipient.",
@@ -306,7 +306,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.classifier.parameters.features")
-            .label("Parameters")
+            .label("参数")
             .help("The number of model parameters (2^n)")
             .default("20")
             .typ(Type::Select {
@@ -335,7 +335,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.parameters.l1")
-            .label("L1 Ratio")
+            .label("L1 比率")
             .help("The L1 regularization parameter for the FTRL-Proximal algorithm")
             .default("0.001")
             .typ(Type::Input)
@@ -345,7 +345,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.parameters.l2")
-            .label("L2 Ratio")
+            .label("L2 比率")
             .help("The L2 regularization parameter for the FTRL-Proximal algorithm")
             .default("0.0001")
             .typ(Type::Input)
@@ -355,7 +355,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.classifier.parameters.ccfh.features")
-            .label("Parameters")
+            .label("参数")
             .help("The number of indicator parameters (2^n)")
             .default("18")
             .typ(Type::Select {
@@ -387,7 +387,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("spam-filter.classifier.model", ["ftrl-ccfh"])
             .build()
             .new_field("spam-filter.classifier.parameters.ccfh.l1")
-            .label("L1 Ratio")
+            .label("L1 比率")
             .help("The L1 regularization parameter for the FTRL-Proximal algorithm")
             .default("0.001")
             .typ(Type::Input)
@@ -398,7 +398,7 @@ impl Builder<Schemas, ()> {
             .display_if_eq("spam-filter.classifier.model", ["ftrl-ccfh"])
             .build()
             .new_field("spam-filter.classifier.parameters.ccfh.l2")
-            .label("L2 Ratio")
+            .label("L2 比率")
             .help("The L2 regularization parameter for the FTRL-Proximal algorithm")
             .default("0.0001")
             .typ(Type::Input)
@@ -409,11 +409,11 @@ impl Builder<Schemas, ()> {
             .display_if_eq("spam-filter.classifier.model", ["ftrl-ccfh"])
             .build()
             .new_form_section()
-            .title("Spam Classifier")
+            .title("垃圾邮件分类器")
             .fields(["spam-filter.classifier.model"])
             .build()
             .new_form_section()
-            .title("Hyperparameters")
+            .title("超参数")
             .display_if_eq("spam-filter.classifier.model", ["ftrl-fh", "ftrl-ccfh"])
             .fields([
                 "spam-filter.classifier.parameters.features",
@@ -426,7 +426,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Hyperparameters (CCFH)")
+            .title("超参数（CCFH）")
             .display_if_eq("spam-filter.classifier.model", ["ftrl-ccfh"])
             .fields([
                 "spam-filter.classifier.parameters.ccfh.features",
@@ -437,7 +437,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Training")
+            .title("训练")
             .display_if_eq("spam-filter.classifier.model", ["ftrl-fh", "ftrl-ccfh"])
             .fields([
                 "spam-filter.classifier.samples.min-ham",
@@ -447,7 +447,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Reservoir Sampling")
+            .title("蓄水池采样")
             .display_if_eq("spam-filter.classifier.model", ["ftrl-fh", "ftrl-ccfh"])
             .fields(["spam-filter.classifier.samples.reservoir-capacity"])
             .build()
@@ -465,7 +465,7 @@ impl Builder<Schemas, ()> {
             // Pyzor settings
             .new_schema("spam-pyzor")
             .new_field("spam-filter.pyzor.enable")
-            .label("Enable Pyzor classifier")
+            .label("启用 Pyzor 分类器")
             .help(concat!(
                 "Whether to enable the Pyzor classifier. ",
                 "Pyzor is a collaborative, networked system to detect and report spam."
@@ -474,7 +474,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("spam-filter.pyzor.port")
-            .label("Enable Pyzor")
+            .label("启用 Pyzor")
             .help("Whether to enable the Pyzor filter")
             .default("false")
             .typ(Type::Boolean)
@@ -511,7 +511,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("spam-filter.pyzor.count")
-            .label("Count")
+            .label("数量")
             .help("The number of times the hash appears in the Pyzor blocklist")
             .default("5")
             .typ(Type::Input)
@@ -525,7 +525,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.pyzor.wl-count")
-            .label("WL Count")
+            .label("白名单计数")
             .help("The number of times the hash appears in the Pyzor allowlist")
             .default("10")
             .typ(Type::Input)
@@ -539,7 +539,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("spam-filter.pyzor.ratio")
-            .label("Ratio")
+            .label("比率")
             .help(concat!(
                 "The ratio of the number of times the hash appears ",
                 "in the Pyzor allowlist to the blocklist"
@@ -556,7 +556,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_form_section()
-            .title("Pyzor Settings")
+            .title("Pyzor 设置")
             .fields([
                 "spam-filter.pyzor.host",
                 "spam-filter.pyzor.port",
@@ -576,7 +576,7 @@ impl Builder<Schemas, ()> {
             // LLM settings
             .new_schema("spam-llm")
             .new_field("spam-filter.llm.enable")
-            .label("Enable LLM classifier")
+            .label("启用 LLM 分类器")
             .help("Whether to add a header containing the LLM response to messages")
             .default("false")
             .typ(Type::Boolean)
@@ -611,7 +611,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.prompt")
-            .label("Prompt")
+            .label("提示词")
             .help("The prompt to use for the LLM classifier")
             .typ(Type::Text)
             .enterprise_feature()
@@ -627,7 +627,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.index.category")
-            .label("Category Index")
+            .label("分类索引")
             .help(concat!(
                 "The position of the category field in the LLM response.",
             ))
@@ -637,7 +637,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.index.confidence")
-            .label("Confidence Index")
+            .label("置信度索引")
             .help(concat!(
                 "The position of the confidence field in the LLM response.",
             ))
@@ -646,7 +646,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("spam-filter.llm.index.explanation")
-            .label("Explanation Index")
+            .label("解释索引")
             .help(concat!(
                 "The position of the explanation field in the LLM response.",
             ))
@@ -658,17 +658,17 @@ impl Builder<Schemas, ()> {
             .typ(Type::Array(ArrayType::Text))
             .input_check([], [Validator::Required])
             .enterprise_feature()
-            .label("Categories")
+            .label("分类")
             .help("The expected categories in the LLM response")
             .build()
             .new_field("spam-filter.llm.confidence")
             .typ(Type::Array(ArrayType::Text))
             .enterprise_feature()
-            .label("Confidence")
+            .label("置信度")
             .help("The expected confidence levels in the LLM response")
             .build()
             .new_form_section()
-            .title("LLM Classifier")
+            .title("LLM 分类器")
             .fields([
                 "spam-filter.llm.model",
                 "spam-filter.llm.temperature",
@@ -677,7 +677,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Response Format")
+            .title("响应格式")
             .fields([
                 "spam-filter.llm.separator",
                 "spam-filter.llm.index.category",
@@ -698,7 +698,7 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the rule")
             .build()
             .new_field("enable")
-            .label("Enable rule")
+            .label("启用规则")
             .help("Whether to enable this rule")
             .default("true")
             .typ(Type::Boolean)
@@ -718,7 +718,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("priority")
-            .label("Priority")
+            .label("优先级")
             .help("The priority of the rule")
             .default("500")
             .typ(Type::Input)
@@ -740,7 +740,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_form_section()
-            .title("Rule Configuration")
+            .title("规则配置")
             .fields(["_id", "condition", "priority", "scope", "enable"])
             .build()
             .list_title("Rules")
@@ -757,13 +757,13 @@ impl Builder<Schemas, ()> {
             .help("Unique identifier for the DNSBL server")
             .build()
             .new_field("enable")
-            .label("Enable the DNSBL server")
+            .label("启用 DNSBL 服务器")
             .help("Whether to enable this DNSBL server")
             .default("true")
             .typ(Type::Boolean)
             .build()
             .new_field("zone")
-            .label("Zone")
+            .label("区域")
             .help(concat!("Expression that returns the DNS zone to query.",))
             .typ(Type::Expression)
             .input_check(
@@ -775,7 +775,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("tag")
-            .label("Tag")
+            .label("标签")
             .help(concat!(
                 "Expression that returns the tag to assign to the message.",
             ))
@@ -798,7 +798,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_form_section()
-            .title("DNSBl Configuration")
+            .title("DNSBL 配置")
             .fields(["_id", "zone", "tag", "scope", "enable"])
             .build()
             .list_title("DNSBl Servers")
@@ -865,7 +865,7 @@ impl Builder<Schemas, ()> {
             .names("address", "addresses")
             .prefix("lookup.spam-traps")
             .new_id_field()
-            .label("E-mail Address")
+            .label("邮箱地址")
             .help("The e-mail address to be added to the SPAM trap list")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
@@ -882,7 +882,7 @@ impl Builder<Schemas, ()> {
             .names("score", "scores")
             .prefix("spam-filter.list.scores")
             .new_id_field()
-            .label("Tag name")
+            .label("标签名称")
             .help("The spam tag name")
             .input_check(
                 [Transformer::RemoveSpaces, Transformer::Uppercase],
@@ -890,7 +890,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_value_field()
-            .label("Score or action")
+            .label("评分或动作")
             .help("The score for the tag or action to perform (reject or discard)")
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
@@ -907,7 +907,7 @@ impl Builder<Schemas, ()> {
             .names("type", "types")
             .prefix("spam-filter.list.file-extensions")
             .new_id_field()
-            .label("Extension")
+            .label("扩展")
             .help("The file name extension")
             .input_check(
                 [Transformer::RemoveSpaces],

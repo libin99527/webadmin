@@ -16,7 +16,7 @@ impl Builder<Schemas, ()> {
         self.new_schema("http-settings")
             // HTTP base URL
             .new_field("http.url")
-            .label("Base URL")
+            .label("基础 URL")
             .help("The base URL for the HTTP server")
             .typ(Type::Expression)
             .input_check(
@@ -27,7 +27,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Use X-Forwarded-For
             .new_field("http.use-x-forwarded")
-            .label("Obtain remote IP from Forwarded header")
+            .label("从 Forwarded 头获取远程 IP")
             .help(concat!(
                 "Specifies whether to use the Forwarded or X-Forwarded-For header to ",
                 "determine the client's IP address"
@@ -37,7 +37,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Webadmin auto-update
             .new_field("webadmin.auto-update")
-            .label("Auto-update webadmin")
+            .label("自动更新管理面板")
             .help(concat!(
                 "Whether to automatically update the webadmin interface ",
                 "when a new version is available."
@@ -46,7 +46,7 @@ impl Builder<Schemas, ()> {
             .default("false")
             .build()
             .new_field("webadmin.path")
-            .label("Unpack path")
+            .label("解压路径")
             .help(concat!(
                 "The local path to unpack the webadmin bundle to. ",
                 "If left empty, the webadmin will be unpacked to /tmp."
@@ -55,7 +55,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("webadmin.resource")
-            .label("Update URL")
+            .label("更新 URL")
             .help(concat!(
                 "Override the URL to download webadmin updates from. ",
                 "By default webadmin updates are downloaded from ",
@@ -66,13 +66,13 @@ impl Builder<Schemas, ()> {
             .build()
             // HTTP headers
             .new_field("http.headers")
-            .label("Response headers")
+            .label("响应头")
             .help("Additional headers to include in HTTP responses")
             .typ(Type::Array(ArrayType::Text))
             .input_check([Transformer::Trim], [])
             .build()
             .new_form_section()
-            .title("HTTP Base URL")
+            .title("HTTP 基础 URL")
             .fields(["http.url"])
             .build()
             .new_form_section()
@@ -80,7 +80,7 @@ impl Builder<Schemas, ()> {
             .fields(["http.headers", "http.use-x-forwarded"])
             .build()
             .new_form_section()
-            .title("Web-based Admin")
+            .title("Web 管理面板")
             .fields(["webadmin.path", "webadmin.resource", "webadmin.auto-update"])
             .build()
             .build()
@@ -88,7 +88,7 @@ impl Builder<Schemas, ()> {
             .new_schema("http-security")
             // HTTP endpoint security
             .new_field("http.allowed-endpoint")
-            .label("Allowed endpoints")
+            .label("允许的端点")
             .help(concat!(
                 "An expression that determines whether access to an endpoint is allowed. ",
                 "The expression should an HTTP status code (200, 403, etc.)"
@@ -102,7 +102,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Permissive CORS
             .new_field("http.permissive-cors")
-            .label("Permissive CORS policy")
+            .label("宽松 CORS 策略")
             .help(concat!(
                 "Specifies whether to allow all origins in the CORS policy ",
                 "for the HTTP server"
@@ -112,7 +112,7 @@ impl Builder<Schemas, ()> {
             .build()
             // HTTPS Strict Transport Security
             .new_field("http.hsts")
-            .label("Enable HTTP Strict Transport Security")
+            .label("启用 HTTP 严格传输安全")
             .help(concat!(
                 "Specifies whether to enable HTTP Strict Transport Security ",
                 "for the HTTP server."
@@ -121,39 +121,39 @@ impl Builder<Schemas, ()> {
             .default("false")
             .build()
             .new_form_section()
-            .title("HTTP Security")
+            .title("HTTP 安全")
             .fields(["http.allowed-endpoint", "http.hsts", "http.permissive-cors"])
             .build()
             .build()
             // Rate limit
             .new_schema("http-rate-limit")
             .new_field("http.rate-limit.account")
-            .label("Authenticated")
+            .label("已认证")
             .help("Specifies the request rate limit for authenticated users")
             .default("1000/1m")
             .typ(Type::Rate)
             .build()
             .new_field("http.rate-limit.anonymous")
-            .label("Anonymous")
+            .label("匿名")
             .help("Specifies the request rate limit for unauthenticated users")
             .default("100/1m")
             .typ(Type::Rate)
             .build()
             .new_form_section()
-            .title("Rate Limit")
+            .title("速率限制")
             .fields(["http.rate-limit.account", "http.rate-limit.anonymous"])
             .build()
             .build()
             // Contact form settings
             .new_schema("http-form")
             .new_field("form.deliver-to")
-            .label("Recipients")
+            .label("收件人")
             .help("List of local e-mail addresses to deliver the contact form to.")
             .typ(Type::Array(ArrayType::Text))
             .input_check([Transformer::Trim], [Validator::IsEmail])
             .build()
             .new_field("form.email.field")
-            .label("E-mail field")
+            .label("邮箱字段")
             .help(concat!(
                 "The name of the field in the contact form that contains the ",
                 "e-mail address of the sender."
@@ -162,7 +162,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::IsEmail])
             .build()
             .new_field("form.name.field")
-            .label("Name field")
+            .label("名称字段")
             .help(concat!(
                 "The name of the field in the contact form that contains the ",
                 "name of the sender."
@@ -171,7 +171,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("form.subject.field")
-            .label("Subject field")
+            .label("主题字段")
             .help(concat!(
                 "The name of the field in the contact form that contains the ",
                 "subject of the message."
@@ -180,7 +180,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("form.honey-pot.field")
-            .label("Honey Pot field")
+            .label("蜜罐字段")
             .help(concat!(
                 "The name of the field in the contact form that is used as a ",
                 "honey pot to catch spam bots."
@@ -189,7 +189,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("form.email.default")
-            .label("E-mail default")
+            .label("邮箱默认值")
             .help(concat!(
                 "The default e-mail address to use when the sender does not ",
                 "provide one."
@@ -199,7 +199,7 @@ impl Builder<Schemas, ()> {
             .default("postmaster@localhost")
             .build()
             .new_field("form.subject.default")
-            .label("Subject default")
+            .label("主题默认值")
             .help(concat!(
                 "The default subject to use when the sender does not ",
                 "provide one."
@@ -209,7 +209,7 @@ impl Builder<Schemas, ()> {
             .default("Contact form submission")
             .build()
             .new_field("form.name.default")
-            .label("Name default")
+            .label("名称默认值")
             .help(concat!(
                 "The default name to use when the sender does not ",
                 "provide one."
@@ -234,23 +234,23 @@ impl Builder<Schemas, ()> {
             .default("102400")
             .build()
             .new_field("form.enable")
-            .label("Enable form submissions")
+            .label("启用表单提交")
             .help("Whether to enable contact form submissions.")
             .typ(Type::Boolean)
             .default("false")
             .build()
             .new_field("form.validate-domain")
-            .label("Validate email domain")
+            .label("验证邮箱域名")
             .help("Whether to validate the domain of the sender's email address.")
             .typ(Type::Boolean)
             .default("true")
             .build()
             .new_form_section()
-            .title("Form submission settings")
+            .title("表单提交设置")
             .fields(["form.deliver-to", "form.enable"])
             .build()
             .new_form_section()
-            .title("Fields")
+            .title("字段")
             .fields([
                 "form.email.field",
                 "form.name.field",
@@ -263,7 +263,7 @@ impl Builder<Schemas, ()> {
             .fields(["form.rate-limit", "form.max-size", "form.validate-domain"])
             .build()
             .new_form_section()
-            .title("Defaults")
+            .title("默认值")
             .fields([
                 "form.email.default",
                 "form.name.default",

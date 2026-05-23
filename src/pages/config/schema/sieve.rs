@@ -15,7 +15,7 @@ impl Builder<Schemas, ()> {
 
         self.new_schema("sieve-settings")
             .new_field("sieve.untrusted.disable-capabilities")
-            .label("Disable Capabilities")
+            .label("禁用功能")
             .help(concat!(
                 "List of capabilities to disable in the untrusted interpreter"
             ))
@@ -23,14 +23,14 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("sieve.untrusted.notification-uris")
-            .label("Notification URIs")
+            .label("通知 URI")
             .help(concat!("List of allowed URIs for the notify extension"))
             .default("mailto")
             .typ(Type::Array(ArrayType::Text))
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("sieve.untrusted.protected-headers")
-            .label("Protected Headers")
+            .label("受保护头部")
             .help(concat!(
                 "List of headers that cannot be deleted or added using the editheader extension"
             ))
@@ -46,20 +46,20 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("sieve.untrusted.vacation.default-subject")
-            .label("Default Subject")
+            .label("默认主题")
             .help(concat!("Default subject of vacation responses"))
             .default("Automated reply")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("sieve.untrusted.vacation.subject-prefix")
-            .label("Default Prefix")
+            .label("默认前缀")
             .help(concat!("Default subject prefix of vacation responses"))
             .default("Auto: ")
             .typ(Type::Input)
             .build()
             .new_field("sieve.untrusted.default-expiry.vacation")
-            .label("Default Expiry")
+            .label("默认过期时间")
             .help(concat!(
                 "Default expiration time for IDs stored by the vacation ",
                 "extension"
@@ -69,7 +69,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("sieve.untrusted.default-expiry.duplicate")
-            .label("Untrusted Expiry")
+            .label("不可信过期时间")
             .help(concat!(
                 "Default expiration time for IDs stored by the duplicate ",
                 "extension from untrusted scripts"
@@ -98,14 +98,14 @@ impl Builder<Schemas, ()> {
             ))
             .default("'MAILER-DAEMON@' + config_get('report.domain')")
             .new_field("sieve.trusted.return-path")
-            .label("Return Path")
+            .label("返回路径")
             .help(concat!(
                 "Default return path to use in email notifications sent from ",
                 "a Sieve script"
             ))
             .default("")
             .new_field("sieve.trusted.sign")
-            .label("DKIM Signatures")
+            .label("DKIM 签名")
             .help(concat!(
                 "DKIM signatures to add to email notifications sent from ",
                 "a Sieve script"
@@ -124,7 +124,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("sieve.trusted.no-capability-check")
-            .label("Allow undeclared capabilities")
+            .label("允许未声明的功能")
             .help(concat!(
                 "If enabled, language extensions can be used without being ",
                 "explicitly declared using the require statement"
@@ -133,7 +133,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("sieve.trusted.limits.duplicate-expiry")
-            .label("Trusted Expiry")
+            .label("可信过期时间")
             .help(concat!(
                 "Default expiration time for IDs stored by the duplicate ",
                 "extension from trusted scripts"
@@ -143,7 +143,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Untrusted Interpreter")
+            .title("不可信解释器")
             .fields([
                 "sieve.untrusted.notification-uris",
                 "sieve.untrusted.protected-headers",
@@ -151,7 +151,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Trusted Interpreter")
+            .title("可信解释器")
             .fields([
                 "sieve.trusted.from-name",
                 "sieve.trusted.from-addr",
@@ -162,7 +162,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Vacation Extension")
+            .title("假期扩展")
             .fields([
                 "sieve.untrusted.vacation.default-subject",
                 "sieve.untrusted.vacation.subject-prefix",
@@ -170,7 +170,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Duplicate Extension")
+            .title("重复扩展")
             .fields([
                 "sieve.untrusted.default-expiry.duplicate",
                 "sieve.trusted.limits.duplicate-expiry",
@@ -180,59 +180,59 @@ impl Builder<Schemas, ()> {
             // Limits
             .new_schema("sieve-limits")
             .new_field("sieve.untrusted.limits.name-length")
-            .label("Name Length")
+            .label("名称长度")
             .help(concat!("Maximum length of a script name"))
             .default("512")
             .typ(Type::Input)
             .input_check([], [Validator::Required, Validator::MinValue(1.into())])
             .new_field("sieve.untrusted.limits.script-size")
-            .label("Script Size")
+            .label("脚本大小")
             .help(concat!("Maximum size of a script"))
             .default("102400")
             .typ(Type::Size)
             .new_field("sieve.untrusted.limits.string-length")
-            .label("String Length")
+            .label("字符串长度")
             .help(concat!("Maximum length of a string"))
             .default("4096")
             .typ(Type::Input)
             .new_field("sieve.untrusted.limits.variable-name-length")
-            .label("Variable Name Length")
+            .label("变量名长度")
             .help(concat!("Maximum length of a variable name"))
             .default("32")
             .new_field("sieve.untrusted.limits.variable-size")
-            .label("Variable Size")
+            .label("变量大小")
             .help(concat!("Maximum size of a variable"))
             .default("4096")
             .new_field("sieve.untrusted.limits.nested-blocks")
-            .label("Nested Blocks")
+            .label("嵌套块")
             .help(concat!("Maximum number of nested blocks"))
             .default("15")
             .new_field("sieve.untrusted.limits.nested-tests")
-            .label("Nested Tests")
+            .label("嵌套测试")
             .help(concat!("Maximum number of nested tests"))
             .default("15")
             .new_field("sieve.untrusted.limits.nested-foreverypart")
-            .label("Nested Foreach")
+            .label("嵌套循环")
             .help(concat!("Maximum number of nested foreach blocks"))
             .default("3")
             .new_field("sieve.untrusted.limits.match-variables")
-            .label("Match Variables")
+            .label("匹配变量")
             .help(concat!("Maximum number of match variables"))
             .default("30")
             .new_field("sieve.untrusted.limits.local-variables")
-            .label("Local Variables")
+            .label("本地变量")
             .help(concat!("Maximum number of local variables"))
             .default("128")
             .new_field("sieve.untrusted.limits.header-size")
-            .label("Header Size")
+            .label("头部大小")
             .help(concat!("Maximum size of a header"))
             .default("1024")
             .new_field("sieve.untrusted.limits.includes")
-            .label("Includes")
+            .label("包含")
             .help(concat!("Maximum number of includes"))
             .default("3")
             .new_field("sieve.untrusted.limits.nested-includes")
-            .label("Nested Includes")
+            .label("嵌套包含")
             .help(concat!("Maximum number of nested includes"))
             .default("3")
             .new_field("sieve.untrusted.limits.cpu")
@@ -244,20 +244,20 @@ impl Builder<Schemas, ()> {
             .help(concat!("Maximum number of received headers"))
             .default("10")
             .new_field("sieve.untrusted.limits.redirects")
-            .label("Redirects")
+            .label("重定向")
             .help(concat!("Maximum number of redirects"))
             .default("1")
             .input_check([], [Validator::Required, Validator::MinValue(0.into())])
             .new_field("sieve.untrusted.limits.outgoing-messages")
-            .label("Outgoing Messages")
+            .label("外发消息")
             .help(concat!("Maximum number of outgoing messages"))
             .default("3")
             .new_field("sieve.trusted.limits.redirects")
-            .label("Redirects")
+            .label("重定向")
             .help(concat!("Maximum number of redirects"))
             .default("3")
             .new_field("sieve.trusted.limits.out-messages")
-            .label("Outgoing Messages")
+            .label("外发消息")
             .help(concat!("Maximum number of outgoing messages"))
             .default("5")
             .new_field("sieve.trusted.limits.received-headers")
@@ -271,12 +271,12 @@ impl Builder<Schemas, ()> {
             .default("1048576")
             .typ(Type::Input)
             .new_field("sieve.trusted.limits.nested-includes")
-            .label("Nested Includes")
+            .label("嵌套包含")
             .help(concat!("Maximum number of nested includes"))
             .default("5")
             .build()
             .new_form_section()
-            .title("Untrusted Limits")
+            .title("不可信限制")
             .fields([
                 "sieve.untrusted.limits.name-length",
                 "sieve.untrusted.limits.script-size",
@@ -298,7 +298,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Trusted Limits")
+            .title("可信限制")
             .fields([
                 "sieve.trusted.limits.redirects",
                 "sieve.trusted.limits.out-messages",
@@ -324,13 +324,13 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("contents")
-            .label("Contents")
+            .label("内容")
             .help("Contents of the trusted Sieve script")
             .typ(Type::Text)
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Trusted Sieve Script")
+            .title("可信 Sieve 脚本")
             .fields(["_id", "name", "contents"])
             .build()
             .list_title("System Sieve scripts")
@@ -353,13 +353,13 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("contents")
-            .label("Contents")
+            .label("内容")
             .help("Contents of the Sieve script")
             .typ(Type::Text)
             .input_check([], [Validator::Required])
             .build()
             .new_form_section()
-            .title("Untrusted Sieve Script")
+            .title("不可信 Sieve 脚本")
             .fields(["_id", "name", "contents"])
             .build()
             .list_title("User Sieve scripts")

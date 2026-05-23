@@ -14,7 +14,7 @@ impl Builder<Schemas, ()> {
             .suffix("type")
             // Id
             .new_id_field()
-            .label("Directory Id")
+            .label("目录 ID")
             .help("Unique identifier for the directory")
             .build()
             // Type
@@ -38,7 +38,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Internal store
             .new_field("store")
-            .label("Storage backend")
+            .label("存储后端")
             .help("Storage backend where accounts, groups and lists are stored")
             .display_if_eq("type", ["internal", "sql"])
             .typ(Type::Select {
@@ -63,7 +63,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Caches
             .new_field("cache.size")
-            .label("Cache size")
+            .label("缓存大小")
             .help("Maximum cache size in bytes")
             .default("1048576")
             .typ(Type::Size)
@@ -76,13 +76,13 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("cache.ttl.positive")
-            .label("Positive TTL")
+            .label("正缓存 TTL")
             .help("Time-to-live for positive cache entries")
             .typ(Type::Duration)
             .default("1h")
             .build()
             .new_field("cache.ttl.negative")
-            .label("Negative TTL")
+            .label("负缓存 TTL")
             .help("Time-to-live for negative cache entries")
             .typ(Type::Duration)
             .default("10m")
@@ -97,7 +97,7 @@ impl Builder<Schemas, ()> {
             .label("描述")
             .help("Column name for account full name or description")
             .new_field("columns.quota")
-            .label("Quota")
+            .label("配额")
             .help("Column name for account quota")
             .input_check([Transformer::Trim], [])
             .new_field("columns.email")
@@ -152,7 +152,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Connection pools
             .new_field("pool.max-connections")
-            .label("Max Connections")
+            .label("最大连接数")
             .help(concat!(
                 "Maximum number of connections that can be ",
                 "maintained simultaneously in the connection pool"
@@ -169,21 +169,21 @@ impl Builder<Schemas, ()> {
             )
             .new_field("pool.timeout.create")
             .typ(Type::Duration)
-            .label("Create Timeout")
+            .label("创建超时")
             .help(concat!(
                 "Maximum amount of time that the connection pool ",
                 "will wait for a new connection to be created"
             ))
             .placeholder("30s")
             .new_field("pool.timeout.wait")
-            .label("Wait Timeout")
+            .label("等待超时")
             .help(concat!(
                 "Maximum amount of time that the connection pool ",
                 "will wait for a connection to become available"
             ))
             .placeholder("30s")
             .new_field("pool.timeout.recycle")
-            .label("Recycle Timeout")
+            .label("回收超时")
             .help(concat!(
                 "Maximum amount of time that the connection pool ",
                 "manager will wait for a connection to be recycled"
@@ -191,7 +191,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Local domains
             .new_field("lookup.domains")
-            .label("Local Domains")
+            .label("本地域名")
             .help("List of local domains")
             .typ(Type::Array(ArrayType::Text))
             .input_check([Transformer::Trim], [Validator::IsHost])
@@ -199,7 +199,7 @@ impl Builder<Schemas, ()> {
             .build()
             // LMTP/SMTP limits
             .new_field("limits.auth-errors")
-            .label("Max Auth Errors")
+            .label("最大认证错误数")
             .help("Maximum number of authentication errors before disconnecting")
             .default("3")
             .display_if_eq("type", ["lmtp", "smtp"])
@@ -231,13 +231,13 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required, Validator::IsUrl])
             .new_field("base-dn")
-            .label("Base DN")
+            .label("基础 DN")
             .help("The base distinguished name (DN) from where searches should begin")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::Required])
             .placeholder("dc=example,dc=org")
             .new_field("bind.dn")
-            .label("Bind DN")
+            .label("绑定 DN")
             .help(concat!(
                 "The distinguished name of the user account that the ",
                 "server will bind as to connect to the LDAP directory"
@@ -245,7 +245,7 @@ impl Builder<Schemas, ()> {
             .placeholder("cn=serviceuser,ou=svcaccts,dc=example,dc=org")
             .input_check([Transformer::Trim], [])
             .new_field("bind.secret")
-            .label("Bind Secret")
+            .label("绑定密钥")
             .typ(Type::Secret)
             .build()
             .new_field("bind.auth.method")
@@ -262,7 +262,7 @@ impl Builder<Schemas, ()> {
             .default("default")
             .build()
             .new_field("bind.auth.template")
-            .label("Bind DN template")
+            .label("绑定 DN 模板")
             .help(concat!(
                 "The distinguished name (DN) template used for binding to the ",
                 "LDAP server. The {username} in the DN template is a placeholder that ",
@@ -277,7 +277,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("bind.auth.search")
-            .label("Reuse bind auth connection for search")
+            .label("复用绑定认证连接进行搜索")
             .help(concat!(
                 "Weather to perform LDAP searches with the bind auth DN connection. ",
                 "If disabled, LDAP searches will be done using a separate connection ",
@@ -331,7 +331,7 @@ impl Builder<Schemas, ()> {
             ))
             .default("userPassword")
             .new_field("attributes.secret-changed")
-            .label("Secret Changed")
+            .label("密钥已更改")
             .help(concat!(
                 "LDAP attribute that provides a password change hash or a timestamp ",
                 "indicating when the password was last changed. ",
@@ -344,11 +344,11 @@ impl Builder<Schemas, ()> {
             .help("LDAP attributes for the groups that a user belongs to")
             .default("memberOf")
             .new_field("attributes.email-alias")
-            .label("E-mail Aliases")
+            .label("邮箱别名")
             .help("LDAP attribute for the user's email alias(es)")
             .default("mailAlias")
             .new_field("attributes.quota")
-            .label("Disk Quota")
+            .label("磁盘配额")
             .help("DAP attribute for the user's disk quota")
             .default("diskQuota")
             .build()
@@ -383,7 +383,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("fields.email")
-            .label("E-mail field")
+            .label("邮箱字段")
             .help(concat!(
                 "Field name in the OpenID Connect provider response ",
                 "that contains the user's email address."
@@ -394,7 +394,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("fields.username")
-            .label("Username field")
+            .label("用户名字段")
             .help(concat!(
                 "Field name in the OpenID Connect provider response ",
                 "that contains the user's username. If not provided, ",
@@ -406,7 +406,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [])
             .build()
             .new_field("fields.full-name")
-            .label("Name field")
+            .label("名称字段")
             .help(concat!(
                 "Field name in the OpenID Connect provider response ",
                 "that contains the user's full name."
@@ -436,26 +436,26 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_field("auth.token")
-            .label("Auth token")
+            .label("认证令牌")
             .typ(Type::Secret)
             .help("Bearer token used to authenticate with the OAuth introspect endpoint.")
             .display_if_eq("auth.method", ["token"])
             .build()
             .new_field("auth.username")
-            .label("Auth username")
+            .label("认证用户名")
             .help("Username used to authenticate with the OAuth introspect endpoint.")
             .typ(Type::Input)
             .display_if_eq("auth.method", ["basic"])
             .build()
             .new_field("auth.secret")
-            .label("Auth secret")
+            .label("认证密钥")
             .help("Password used to authenticate with the OAuth introspect endpoint.")
             .typ(Type::Secret)
             .display_if_eq("auth.method", ["basic"])
             .build()
             // Form layouts
             .new_form_section()
-            .title("Configuration")
+            .title("配置")
             .fields([
                 "_id",
                 "type",
@@ -469,12 +469,12 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("LDAP Binding")
+            .title("LDAP 绑定")
             .display_if_eq("type", ["ldap"])
             .fields(["bind.dn", "bind.secret"])
             .build()
             .new_form_section()
-            .title("LDAP Authentication Method")
+            .title("LDAP 认证方法")
             .display_if_eq("type", ["ldap"])
             .fields(["bind.auth.method", "bind.auth.template", "bind.auth.search"])
             .build()
@@ -484,17 +484,17 @@ impl Builder<Schemas, ()> {
             .fields(["tls.enable", "tls.allow-invalid-certs"])
             .build()
             .new_form_section()
-            .title("Endpoint Authentication")
+            .title("端点认证")
             .display_if_eq("endpoint.method", ["introspect"])
             .fields(["auth.method", "auth.token", "auth.username", "auth.secret"])
             .build()
             .new_form_section()
-            .title("Field Mappings")
+            .title("字段映射")
             .display_if_eq("type", ["oidc"])
             .fields(["fields.email", "fields.username", "fields.full-name"])
             .build()
             .new_form_section()
-            .title("Column Mappings")
+            .title("列映射")
             .display_if_eq("type", ["sql"])
             .fields([
                 "columns.class",
@@ -505,12 +505,12 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("LDAP Filters")
+            .title("LDAP 过滤器")
             .display_if_eq("type", ["ldap"])
             .fields(["base-dn", "filter.name", "filter.email"])
             .build()
             .new_form_section()
-            .title("Object Attributes")
+            .title("对象属性")
             .display_if_eq("type", ["ldap"])
             .fields([
                 "attributes.name",
@@ -525,7 +525,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Local Domains")
+            .title("本地域名")
             .display_if_eq("type", ["lmtp", "smtp", "imap"])
             .fields(["lookup.domains"])
             .build()
@@ -539,7 +539,7 @@ impl Builder<Schemas, ()> {
             .fields(["limits.auth-errors", "limits.rcpt"])
             .build()
             .new_form_section()
-            .title("Connection Pools")
+            .title("连接池")
             .display_if_eq("type", ["imap", "smtp", "lmtp", "ldap"])
             .fields([
                 "pool.max-connections",

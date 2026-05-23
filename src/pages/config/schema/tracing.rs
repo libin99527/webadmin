@@ -15,7 +15,7 @@ impl Builder<Schemas, ()> {
             .suffix("type")
             // Id
             .new_id_field()
-            .label("Tracer Id")
+            .label("追踪器 ID")
             .help("Unique identifier for the tracer")
             .build()
             // Type
@@ -52,7 +52,7 @@ impl Builder<Schemas, ()> {
                     ),
                 ]),
             })
-            .label("Logging level")
+            .label("日志级别")
             .help("The logging level for this tracer")
             .input_check([], [Validator::Required])
             .default("info")
@@ -60,14 +60,14 @@ impl Builder<Schemas, ()> {
             // Enable
             .new_field("enable")
             .typ(Type::Boolean)
-            .label("Enable this tracer")
+            .label("启用此追踪器")
             .help("Enable or disable the tracer")
             .default("true")
             .build()
             // ANSI
             .new_field("ansi")
             .typ(Type::Boolean)
-            .label("Use ANSI colors")
+            .label("使用 ANSI 颜色")
             .help("Whether to use ANSI colors in logs")
             .display_if_eq("type", ["log", "stdout"])
             .default("false")
@@ -75,7 +75,7 @@ impl Builder<Schemas, ()> {
             // Multiline
             .new_field("multiline")
             .typ(Type::Boolean)
-            .label("Multiline entries")
+            .label("多行条目")
             .help("Whether to write log entries as a single line or multiline")
             .display_if_eq("type", ["log", "stdout"])
             .default("false")
@@ -83,7 +83,7 @@ impl Builder<Schemas, ()> {
             // Buffered
             .new_field("buffered")
             .typ(Type::Boolean)
-            .label("Buffered writes")
+            .label("缓冲写入")
             .help("Whether to buffer log entries before writing to console")
             .display_if_eq("type", ["stdout"])
             .default("true")
@@ -91,13 +91,13 @@ impl Builder<Schemas, ()> {
             // Lossy
             .new_field("lossy")
             .typ(Type::Boolean)
-            .label("Lossy mode")
+            .label("有损模式")
             .help("Whether to drop log entries if there is backlog")
             .default("false")
             .build()
             // Disabled events
             .new_field("disabled-events")
-            .label("Disabled Events")
+            .label("禁用的事件")
             .help("Which events to disable for this tracer")
             .typ(Type::Select {
                 typ: SelectType::ManyWithSearch,
@@ -107,7 +107,7 @@ impl Builder<Schemas, ()> {
             // Log Path
             .new_field("path")
             .typ(Type::Input)
-            .label("Path")
+            .label("路径")
             .help("The path to the log file")
             .placeholder("/var/log")
             .input_check([Transformer::Trim], [Validator::Required])
@@ -116,7 +116,7 @@ impl Builder<Schemas, ()> {
             // Log Prefix
             .new_field("prefix")
             .typ(Type::Input)
-            .label("Prefix")
+            .label("前缀")
             .help("The prefix for the log file")
             .placeholder("stalwart.log")
             .input_check([Transformer::Trim], [Validator::Required])
@@ -133,7 +133,7 @@ impl Builder<Schemas, ()> {
                     ("never", "Never"),
                 ]),
             })
-            .label("Rotate frequency")
+            .label("轮换频率")
             .help("The frequency to rotate the log file")
             .input_check([], [Validator::Required])
             .default("daily")
@@ -194,7 +194,7 @@ impl Builder<Schemas, ()> {
             // OT Export Logs
             .new_field("enable.log-exporter")
             .typ(Type::Boolean)
-            .label("Export logs")
+            .label("导出日志")
             .help("Whether to export logs to OpenTelemetry")
             .display_if_eq("type", ["open-telemetry"])
             .default("true")
@@ -202,18 +202,18 @@ impl Builder<Schemas, ()> {
             // OT Export Spans
             .new_field("enable.span-exporter")
             .typ(Type::Boolean)
-            .label("Export spans")
+            .label("导出跨度")
             .help("Whether to export spans to OpenTelemetry")
             .display_if_eq("type", ["open-telemetry"])
             .default("true")
             .build()
             // Forms
             .new_form_section()
-            .title("Tracer configuration")
+            .title("追踪器配置")
             .fields(["_id", "type", "level", "enable"])
             .build()
             .new_form_section()
-            .title("Options")
+            .title("选项")
             .fields([
                 "path",
                 "prefix",
@@ -232,7 +232,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Override events")
+            .title("覆盖事件")
             .fields(["disabled-events"])
             .build()
             .list_title("Logging & tracing methods")
@@ -246,7 +246,7 @@ impl Builder<Schemas, ()> {
             // Id
             .new_field("_id")
             .readonly()
-            .label("Event Id")
+            .label("事件 ID")
             .help("Unique identifier of the event")
             .typ(Type::Select {
                 typ: SelectType::Single,
@@ -266,7 +266,7 @@ impl Builder<Schemas, ()> {
                     ("trace", "Trace"),
                 ]),
             })
-            .label("Level")
+            .label("级别")
             .help("The logging level for this event")
             .input_check([], [Validator::Required])
             .default("info")
@@ -325,7 +325,7 @@ impl Builder<Schemas, ()> {
             .build()
             // OT Throttle
             .new_field("metrics.open-telemetry.interval")
-            .label("Push interval")
+            .label("推送间隔")
             .help(concat!(
                 "The minimum amount of time that must pass between ",
                 "each push request to the OpenTelemetry endpoint"
@@ -338,7 +338,7 @@ impl Builder<Schemas, ()> {
             // Prometheus auth
             .new_field("metrics.prometheus.enable")
             .typ(Type::Boolean)
-            .label("Enable endpoint")
+            .label("启用端点")
             .help("Enable the Prometheus metrics endpoint")
             .default("false")
             .build()
@@ -359,7 +359,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Disabled events
             .new_field("metrics.disabled-events")
-            .label("Disabled Metrics")
+            .label("禁用的指标")
             .help("Which events to disable for metrics")
             .typ(Type::Select {
                 typ: SelectType::ManyWithSearch,
@@ -367,7 +367,7 @@ impl Builder<Schemas, ()> {
             })
             .build()
             .new_form_section()
-            .title("OpenTelemetry Push Metrics")
+            .title("OpenTelemetry 推送指标")
             .fields([
                 "metrics.open-telemetry.transport",
                 "metrics.open-telemetry.endpoint",
@@ -377,7 +377,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Prometheus Pull Metrics")
+            .title("Prometheus 拉取指标")
             .fields([
                 "metrics.prometheus.auth.username",
                 "metrics.prometheus.auth.secret",
@@ -385,13 +385,13 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Override metrics")
+            .title("覆盖指标")
             .fields(["metrics.disabled-events"])
             .build()
             .build()
             .new_schema("telemetry-history")
             .new_field("tracing.history.store")
-            .label("Tracing Store")
+            .label("追踪存储")
             .help(concat!(
                 "Which database to use for storing the message delivery history. (Enterprise feature)"
             ))
@@ -424,7 +424,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Duration)
             .enterprise_feature()
             .new_field("tracing.history.enable")
-            .label("Enable tracing history")
+            .label("启用追踪历史")
             .help(concat!(
                 "Whether to keep a history of message delivery events.",
             ))
@@ -433,7 +433,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("metrics.history.store")
-            .label("Metrics Store")
+            .label("指标存储")
             .help(concat!(
                 "Which database to use for storing metrics history. (Enterprise feature)"
             ))
@@ -466,7 +466,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Duration)
             .enterprise_feature()
             .new_field("metrics.history.enable")
-            .label("Enable metrics history")
+            .label("启用指标历史")
             .help(concat!(
                 "Whether to keep a metrics history.",
             ))
@@ -475,7 +475,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_field("metrics.history.interval")
-            .label("Collect frequency")
+            .label("采集频率")
             .help(concat!(
                 "Specifies how often to collect metrics history.",
             ))
@@ -485,7 +485,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_form_section()
-            .title("Tracing History")
+            .title("追踪历史")
             .fields([
                 "tracing.history.store",
                 "tracing.history.retention",
@@ -493,7 +493,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Metrics History")
+            .title("指标历史")
             .fields([
                 "metrics.history.store",
                 "metrics.history.interval",
@@ -509,7 +509,7 @@ impl Builder<Schemas, ()> {
             .suffix("condition")
             // Id
             .new_id_field()
-            .label("Alert Id")
+            .label("告警 ID")
             .help("Unique identifier for the alert")
             .build()
             // Enable
@@ -522,7 +522,7 @@ impl Builder<Schemas, ()> {
             .build()
             // Condition
             .new_field("condition")
-            .label("Alert condition")
+            .label("告警条件")
             .help(concat!(
                 "The condition that triggers the alert.",
             ))
@@ -539,7 +539,7 @@ impl Builder<Schemas, ()> {
             // Event enable
             .new_field("notify.event.enable")
             .typ(Type::Boolean)
-            .label("Trigger an event")
+            .label("触发事件")
             .help("Whether to trigger an event when the alert is triggered")
             .default("false")
             .enterprise_feature()
@@ -547,7 +547,7 @@ impl Builder<Schemas, ()> {
             // Event message
             .new_field("notify.event.message")
             .typ(Type::Text)
-            .label("Message")
+            .label("消息")
             .placeholder("The value of 'metric_name' is %{metric_name}%")
             .input_check([], [Validator::Required])
             .enterprise_feature()
@@ -555,7 +555,7 @@ impl Builder<Schemas, ()> {
             // Message enable
             .new_field("notify.email.enable")
             .typ(Type::Boolean)
-            .label("Send an email")
+            .label("发送邮件")
             .help("Whether to send an email when the alert is triggered")
             .default("false")
             .enterprise_feature()
@@ -572,7 +572,7 @@ impl Builder<Schemas, ()> {
             // From address
             .new_field("notify.email.from-addr")
             .typ(Type::Input)
-            .label("From")
+            .label("发件人")
             .help("The email address of the sender")
             .placeholder("alert@example.com")
             .input_check_if_eq("notify.email.enable", ["true"], [], [Validator::Required, Validator::IsEmail])
@@ -581,7 +581,7 @@ impl Builder<Schemas, ()> {
             // To
             .new_field("notify.email.to")
             .typ(Type::Array(ArrayType::Text))
-            .label("To")
+            .label("收件人")
             .help("The email address of the recipient(s)")
             .placeholder("recipient@example.com")
             .input_check_if_eq("notify.email.enable", ["true"], [], [Validator::Required, Validator::IsEmail])
@@ -599,7 +599,7 @@ impl Builder<Schemas, ()> {
             // Message body
             .new_field("notify.email.body")
             .typ(Type::Text)
-            .label("Body")
+            .label("正文")
             .help("The body of the email")
             .placeholder("The value of 'metric_name' is %{metric_name}%")
             .input_check_if_eq("notify.email.enable", ["true"], [], [Validator::Required])
@@ -611,7 +611,7 @@ impl Builder<Schemas, ()> {
             .fields(["_id", "enable", "condition"])
             .build()
             .new_form_section()
-            .title("E-mail notification")
+            .title("邮件通知")
             .fields([
                 "notify.email.from-name",
                 "notify.email.from-addr",
@@ -622,7 +622,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("Event notification")
+            .title("事件通知")
             .fields(["notify.event.message", "notify.event.enable"])
             .build()
             .list_title("Alerts")

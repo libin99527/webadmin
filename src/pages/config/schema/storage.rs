@@ -116,7 +116,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("email.encryption.enable")
-            .label("Enable encryption at rest")
+            .label("启用静态加密")
             .help(concat!(
                 "Allow users to configure encryption at rest for their data"
             ))
@@ -124,7 +124,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("email.encryption.append")
-            .label("Encrypt on append")
+            .label("追加时加密")
             .help(concat!(
                 "Encrypt messages that are manually appended by the user using ",
                 "JMAP or IMAP"
@@ -133,7 +133,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .build()
             .new_field("storage.search-index.default-language")
-            .label("Default Language")
+            .label("默认语言")
             .help(concat!(
                 "Default language to use when language detection is not possible"
             ))
@@ -142,7 +142,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::Required])
             .build()
             .new_field("storage.search-index.batch-size")
-            .label("Indexing Batch Size")
+            .label("索引批量大小")
             .help(concat!(
                 "Number of items to process in each batch during indexing operations"
             ))
@@ -154,7 +154,7 @@ impl Builder<Schemas, ()> {
             )
             .build()
             .new_field("storage.search-index.email.enable")
-            .label("Enable Email Searching")
+            .label("启用邮件搜索")
             .help(concat!(
                 "Enable full-text search indexing for email content and metadata"
             ))
@@ -162,19 +162,19 @@ impl Builder<Schemas, ()> {
             .typ(Type::Boolean)
             .default("true")
             .new_field("storage.search-index.calendar.enable")
-            .label("Enable Calendar Searching")
+            .label("启用日历搜索")
             .help(concat!(
                 "Enable full-text search indexing for calendar data"
             ))
             .default("true")
             .new_field("storage.search-index.contacts.enable")
-            .label("Enable Contacts Searching")
+            .label("启用联系人搜索")
             .help(concat!(
                 "Enable full-text search indexing for contacts data"
             ))
             .default("true")
             .new_field("storage.search-index.tracing.enable")
-            .label("Enable Tracing Searching")
+            .label("启用追踪搜索")
             .help(concat!("Enable full-text search indexing for tracing data"))
             .default("true")
             .enterprise_feature()
@@ -190,7 +190,7 @@ impl Builder<Schemas, ()> {
             .input_check([], [Validator::Required])
             .build()
             .new_field("changes.max-history")
-            .label("Changes history")
+            .label("变更历史")
             .help(concat!(
                 "How many changes to keep in the history for each account. ",
                 "This is used to determine the changes that have occurred ",
@@ -200,7 +200,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Input)
             .build()
             .new_field("email.auto-expunge")
-            .label("Trash auto-expunge")
+            .label("回收站自动清除")
             .help(concat!(
                 "How long to keep messages in the Trash and Junk Mail folders ",
                 "before auto-expunging"
@@ -209,7 +209,7 @@ impl Builder<Schemas, ()> {
             .typ(Type::Duration)
             .build()
             .new_field("storage.undelete.retention")
-            .label("Un-delete period")
+            .label("恢复期限")
             .help(concat!(
                 "How long to keep deleted emails before they are permanently ",
                 "removed from the system. (Enterprise feature)"
@@ -219,7 +219,7 @@ impl Builder<Schemas, ()> {
             .enterprise_feature()
             .build()
             .new_form_section()
-            .title("Data Store")
+            .title("数据存储")
             .fields([
                 "storage.data",
                 "email.encryption.enable",
@@ -231,7 +231,7 @@ impl Builder<Schemas, ()> {
             .fields(["storage.blob", "storage.undelete.retention"])
             .build()
             .new_form_section()
-            .title("Search Store")
+            .title("搜索存储")
             .fields([
                 "storage.fts",
                 "storage.search-index.default-language",
@@ -243,7 +243,7 @@ impl Builder<Schemas, ()> {
             ])
             .build()
             .new_form_section()
-            .title("In-Memory Store")
+            .title("内存存储")
             .fields(["storage.lookup"])
             .build()
             .new_form_section()
@@ -258,7 +258,7 @@ impl Builder<Schemas, ()> {
             // E-mail Storage Quotas
             .new_schema("email-storage-quota")
             .new_field("object-quota.push-subscription")
-            .label("Push Subscriptions")
+            .label("推送订阅")
             .help("The default maximum number of push subscriptions a user can create")
             .default("15")
             .typ(Type::Input)
@@ -271,21 +271,21 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.mailbox")
-            .label("Mailboxes")
+            .label("邮箱")
             .help("The default maximum number of mailboxes a user can create")
             .default("250")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.identity")
-            .label("Email Identities")
+            .label("邮件身份")
             .help("The default maximum number of identities a user can create")
             .default("20")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.email-submission")
-            .label("Email Submissions")
+            .label("邮件提交")
             .help("The default maximum number of email submissions a user can create")
             .default("500")
             .typ(Type::Input)
@@ -299,7 +299,7 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_form_section()
-            .title("Default Object Quotas")
+            .title("默认对象配额")
             .fields([
                 "object-quota.mailbox",
                 "object-quota.email",
@@ -320,32 +320,32 @@ impl Builder<Schemas, ()> {
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.calendar-event")
-            .label("Calendar Events")
+            .label("日历事件")
             .help("The default maximum number of calendar events a user can create")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.address-book")
-            .label("Address Books")
+            .label("通讯录")
             .help("The default maximum number of address books a user can create")
             .default("250")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.contact-card")
-            .label("Contact Cards")
+            .label("联系人卡片")
             .help("The default maximum number of contact cards a user can create")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_field("object-quota.file-node")
-            .label("File Nodes")
+            .label("文件节点")
             .help("The default maximum number of file nodes a user can create")
             .typ(Type::Input)
             .input_check([Transformer::Trim], [Validator::MinValue(1.into())])
             .build()
             .new_form_section()
-            .title("Default Object Quotas")
+            .title("默认对象配额")
             .fields([
                 "object-quota.calendar",
                 "object-quota.calendar-event",
